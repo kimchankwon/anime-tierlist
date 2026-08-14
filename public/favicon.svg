@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="6" fill="#15161a"/>
+  <rect x="4" y="6" width="7" height="20" rx="1" fill="#ff7f7f"/>
+  <text x="7.5" y="20" text-anchor="middle" font-size="10" font-family="Segoe UI,Arial" font-weight="700" fill="#15161a">S</text>
+  <rect x="13" y="8" width="6" height="6" fill="#3b6ef5"/>
+  <rect x="20" y="8" width="6" height="6" fill="#e8a33d"/>
+  <rect x="13" y="16" width="6" height="6" fill="#6dce8a"/>
+  <rect x="20" y="16" width="6" height="6" fill="#ffbf7f"/>
+</svg>
