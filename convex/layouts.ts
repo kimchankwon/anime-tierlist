@@ -53,6 +53,14 @@ function mergeLayout(
   return { labels, tiers: nextTiers, pool: nextPool };
 }
 
+function unranked(catalog: { key: string }[]) {
+  return {
+    labels: [...DEFAULT_LABELS],
+    tiers: DEFAULT_LABELS.map(() => [] as string[]),
+    pool: catalog.map((c) => c.key),
+  };
+}
+
 function autofill(catalog: { key: string; avg: number }[]) {
   const tiers: string[][] = DEFAULT_LABELS.map(() => []);
   for (const row of catalog) {
@@ -74,7 +82,7 @@ async function getOrCreateLayout(
     .unique();
   const catalog = await catalogKeys(ctx, kind);
   if (!existing) {
-    const fresh = autofill(catalog);
+    const fresh = unranked(catalog);
     const id = await ctx.db.insert("layouts", {
       userId,
       listKind: kind,
@@ -179,7 +187,7 @@ export const get = query({
       .unique();
     const catalog = await catalogKeys(ctx, kind);
     if (!existing) {
-      return { ...autofill(catalog), exists: false };
+      return { ...unranked(catalog), exists: false };
     }
     return { ...mergeLayout(existing.labels, existing.tiers, existing.pool, catalog), exists: true };
   },

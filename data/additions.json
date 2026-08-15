@@ -1,0 +1,131 @@
+{
+  "notes": "New shared-series characters and extra arc leads. Scores are the franchise average from both AniList lists.",
+  "characters": [
+    { "listKind": "protagonist", "name": "Momo Ayase", "search": "Momo Ayase", "anime": "DAN DA DAN", "xScore": "8.5", "pScore": "8.0", "avg": 8.25, "soft": true },
+    { "listKind": "protagonist", "name": "Ken Takakura", "search": "Ken Takakura Okarun", "anime": "DAN DA DAN", "xScore": "8.5", "pScore": "8.0", "avg": 8.25, "soft": true },
+    { "listKind": "antagonist", "name": "Turbo Granny", "search": "Turbo Granny", "anime": "DAN DA DAN", "xScore": "8.5", "pScore": "8.0", "avg": 8.25, "soft": false },
+    { "listKind": "antagonist", "name": "Evil Eye", "search": "Evil Eye Dandadan", "anime": "DAN DA DAN", "xScore": "8.5", "pScore": "8.0", "avg": 8.25, "soft": false },
+    { "listKind": "antagonist", "name": "Count Saint-Germain", "search": "Count Saint-Germain Dandadan", "anime": "DAN DA DAN", "xScore": "8.5", "pScore": "8.0", "avg": 8.25, "soft": false },
+
+    { "listKind": "protagonist", "name": "Yuji Itadori", "search": "Yuji Itadori", "anime": "Jujutsu Kaisen", "xScore": "9.0", "pScore": "8.0", "avg": 8.5, "soft": false },
+    { "listKind": "protagonist", "name": "Satoru Gojo", "search": "Satoru Gojo", "anime": "Jujutsu Kaisen", "xScore": "9.0", "pScore": "8.0", "avg": 8.5, "soft": true },
+    { "listKind": "antagonist", "name": "Ryomen Sukuna", "search": "Ryomen Sukuna", "anime": "Jujutsu Kaisen", "xScore": "9.0", "pScore": "8.0", "avg": 8.5, "soft": false },
+    { "listKind": "antagonist", "name": "Mahito", "search": "Mahito Jujutsu", "anime": "Jujutsu Kaisen", "xScore": "9.0", "pScore": "8.0", "avg": 8.5, "soft": false },
+    { "listKind": "antagonist", "name": "Kenjaku", "search": "Kenjaku", "anime": "Jujutsu Kaisen", "xScore": "9.0", "pScore": "8.0", "avg": 8.5, "soft": false },
+    { "listKind": "antagonist", "name": "Toji Fushiguro", "search": "Toji Fushiguro", "anime": "Jujutsu Kaisen", "xScore": "9.0", "pScore": "8.0", "avg": 8.5, "soft": false },
+
+    { "listKind": "protagonist", "name": "Jotaro Kujo", "search": "Jotaro Kujo", "anime": "JoJo's Bizarre Adventure", "xScore": "9.5", "pScore": "7.5", "avg": 8.5, "soft": false },
+    { "listKind": "protagonist", "name": "Joseph Joestar", "search": "Joseph Joestar", "anime": "JoJo's Bizarre Adventure", "xScore": "9.5", "pScore": "7.5", "avg": 8.5, "soft": false },
+    { "listKind": "protagonist", "name": "Giorno Giovanna", "search": "Giorno Giovanna", "anime": "JoJo's Bizarre Adventure", "xScore": "9.5", "pScore": "7.5", "avg": 8.5, "soft": false },
+    { "listKind": "protagonist", "name": "Josuke Higashikata", "search": "Josuke Higashikata", "anime": "JoJo's Bizarre Adventure", "xScore": "9.5", "pScore": "7.5", "avg": 8.5, "soft": false },
+    { "listKind": "antagonist", "name": "Dio Brando", "search": "Dio Brando", "anime": "JoJo's Bizarre Adventure", "xScore": "9.5", "pScore": "7.5", "avg": 8.5, "soft": false },
+    { "listKind": "antagonist", "name": "Kars", "search": "Kars JoJo", "anime": "JoJo's Bizarre Adventure", "xScore": "9.5", "pScore": "7.5", "avg": 8.5, "soft": false },
+    { "listKind": "antagonist", "name": "Yoshikage Kira", "search": "Yoshikage Kira", "anime": "JoJo's Bizarre Adventure", "xScore": "9.5", "pScore": "7.5", "avg": 8.5, "soft": false },
+    { "listKind": "antagonist", "name": "Diavolo", "search": "Diavolo JoJo", "anime": "JoJo's Bizarre Adventure", "xScore": "9.5", "pScore": "7.5", "avg": 8.5, "soft": false },
+    { "listKind": "antagonist", "name": "Enrico Pucci", "search": "Enrico Pucci", "anime": "JoJo's Bizarre Adventure", "xScore": "9.5", "pScore": "7.5", "avg": 8.5, "soft": false },
+
+    { "listKind": "protagonist", "name": "Koyomi Araragi", "search": "Koyomi Araragi", "anime": "Monogatari Series", "xScore": "8.5", "pScore": "9.0", "avg": 8.75, "soft": false },
+    { "listKind": "protagonist", "name": "Hitagi Senjougahara", "search": "Hitagi Senjougahara", "anime": "Monogatari Series", "xScore": "8.5", "pScore": "9.0", "avg": 8.75, "soft": true },
+    { "listKind": "antagonist", "name": "Kiss-shot Acerola-orion Heart-under-blade", "search": "Shinobu Oshino", "anime": "Monogatari Series", "xScore": "8.5", "pScore": "9.0", "avg": 8.75, "soft": true },
+    { "listKind": "antagonist", "name": "Ougi Oshino", "search": "Ougi Oshino", "anime": "Monogatari Series", "xScore": "8.5", "pScore": "9.0", "avg": 8.75, "soft": false },
+    { "listKind": "antagonist", "name": "Deishuu Kaiki", "search": "Deishuu Kaiki", "anime": "Monogatari Series", "xScore": "8.5", "pScore": "9.0", "avg": 8.75, "soft": false },
+
+    { "listKind": "protagonist", "name": "Shigeo Kageyama", "search": "Shigeo Kageyama", "anime": "Mob Psycho 100", "xScore": "7.0", "pScore": "7.5", "avg": 7.25, "soft": false },
+    { "listKind": "protagonist", "name": "Reigen Arataka", "search": "Reigen Arataka", "anime": "Mob Psycho 100", "xScore": "7.0", "pScore": "7.5", "avg": 7.25, "soft": true },
+    { "listKind": "antagonist", "name": "Toichiro Suzuki", "search": "Toichiro Suzuki", "anime": "Mob Psycho 100", "xScore": "7.0", "pScore": "7.5", "avg": 7.25, "soft": false },
+    { "listKind": "antagonist", "name": "Keiji Mogami", "search": "Keiji Mogami", "anime": "Mob Psycho 100", "xScore": "7.0", "pScore": "7.5", "avg": 7.25, "soft": false },
+
+    { "listKind": "protagonist", "name": "Riko", "search": "Riko Made in Abyss", "anime": "Made in Abyss", "xScore": "6.0", "pScore": "8.0", "avg": 7.0, "soft": false },
+    { "listKind": "protagonist", "name": "Reg", "search": "Reg Made in Abyss", "anime": "Made in Abyss", "xScore": "6.0", "pScore": "8.0", "avg": 7.0, "soft": true },
+    { "listKind": "antagonist", "name": "Bondrewd", "search": "Bondrewd", "anime": "Made in Abyss", "xScore": "6.0", "pScore": "8.0", "avg": 7.0, "soft": false },
+    { "listKind": "antagonist", "name": "Wazukyan", "search": "Wazukyan", "anime": "Made in Abyss", "xScore": "6.0", "pScore": "8.0", "avg": 7.0, "soft": false },
+
+    { "listKind": "protagonist", "name": "Shoyo Hinata", "search": "Shoyo Hinata", "anime": "Haikyu!!", "xScore": "8.0", "pScore": "7.0", "avg": 7.5, "soft": true },
+    { "listKind": "protagonist", "name": "Tobio Kageyama", "search": "Tobio Kageyama", "anime": "Haikyu!!", "xScore": "8.0", "pScore": "7.0", "avg": 7.5, "soft": true },
+    { "listKind": "antagonist", "name": "Tooru Oikawa", "search": "Tooru Oikawa", "anime": "Haikyu!!", "xScore": "8.0", "pScore": "7.0", "avg": 7.5, "soft": true },
+    { "listKind": "antagonist", "name": "Wakatoshi Ushijima", "search": "Wakatoshi Ushijima", "anime": "Haikyu!!", "xScore": "8.0", "pScore": "7.0", "avg": 7.5, "soft": true },
+
+    { "listKind": "protagonist", "name": "Rei Kiriyama", "search": "Rei Kiriyama", "anime": "March Comes in Like a Lion", "xScore": "5.0", "pScore": "10.0", "avg": 7.5, "soft": false },
+
+    { "listKind": "protagonist", "name": "Shirou Emiya", "search": "Shirou Emiya", "anime": "Fate/stay night: Unlimited Blade Works", "xScore": "6.0", "pScore": "7.5", "avg": 6.75, "soft": false },
+    { "listKind": "protagonist", "name": "Rin Tohsaka", "search": "Rin Tohsaka", "anime": "Fate/stay night: Unlimited Blade Works", "xScore": "6.0", "pScore": "7.5", "avg": 6.75, "soft": true },
+    { "listKind": "antagonist", "name": "Gilgamesh", "search": "Gilgamesh Fate", "anime": "Fate/stay night: Unlimited Blade Works", "xScore": "6.0", "pScore": "7.5", "avg": 6.75, "soft": false },
+    { "listKind": "antagonist", "name": "Kirei Kotomine", "search": "Kirei Kotomine", "anime": "Fate/stay night: Unlimited Blade Works", "xScore": "6.0", "pScore": "7.5", "avg": 6.75, "soft": false },
+
+    { "listKind": "protagonist", "name": "Yuusuke Tani", "search": "Yuusuke Tani", "anime": "You and I Are Polar Opposites", "xScore": "6.5", "pScore": "7.0", "avg": 6.75, "soft": true },
+    { "listKind": "protagonist", "name": "Miyu Suzuki", "search": "Miyu Suzuki Polar Opposites", "anime": "You and I Are Polar Opposites", "xScore": "6.5", "pScore": "7.0", "avg": 6.75, "soft": true },
+
+    { "listKind": "protagonist", "name": "Nagisa Shiota", "search": "Nagisa Shiota", "anime": "Assassination Classroom", "xScore": "6.0", "pScore": "6.5", "avg": 6.25, "soft": false },
+    { "listKind": "protagonist", "name": "Korosensei", "search": "Korosensei", "anime": "Assassination Classroom", "xScore": "6.0", "pScore": "6.5", "avg": 6.25, "soft": true },
+    { "listKind": "antagonist", "name": "The Reaper", "search": "The Reaper Assassination Classroom", "anime": "Assassination Classroom", "xScore": "6.0", "pScore": "6.5", "avg": 6.25, "soft": false },
+    { "listKind": "antagonist", "name": "Kotaro Yanagisawa", "search": "Kotaro Yanagisawa", "anime": "Assassination Classroom", "xScore": "6.0", "pScore": "6.5", "avg": 6.25, "soft": false },
+
+    { "listKind": "protagonist", "name": "Kazuma Satou", "search": "Kazuma Satou", "anime": "KonoSuba", "xScore": "7.0", "pScore": "5.0", "avg": 6.0, "soft": false },
+    { "listKind": "antagonist", "name": "Sylvia", "search": "Sylvia KonoSuba", "anime": "KonoSuba", "xScore": "7.0", "pScore": "5.0", "avg": 6.0, "soft": false },
+    { "listKind": "antagonist", "name": "Verdia", "search": "Verdia", "anime": "KonoSuba", "xScore": "7.0", "pScore": "5.0", "avg": 6.0, "soft": false },
+
+    { "listKind": "protagonist", "name": "Raku Ichijou", "search": "Raku Ichijou", "anime": "Nisekoi", "xScore": "5.5", "pScore": "5.5", "avg": 5.5, "soft": false },
+
+    { "listKind": "protagonist", "name": "Izuku Midoriya", "search": "Izuku Midoriya", "anime": "My Hero Academia", "xScore": "5.0", "pScore": "5.5", "avg": 5.25, "soft": false },
+    { "listKind": "antagonist", "name": "All For One", "search": "All For One", "anime": "My Hero Academia", "xScore": "5.0", "pScore": "5.5", "avg": 5.25, "soft": false },
+    { "listKind": "antagonist", "name": "Tomura Shigaraki", "search": "Tomura Shigaraki", "anime": "My Hero Academia", "xScore": "5.0", "pScore": "5.5", "avg": 5.25, "soft": false },
+    { "listKind": "antagonist", "name": "Stain", "search": "Stain My Hero Academia", "anime": "My Hero Academia", "xScore": "5.0", "pScore": "5.5", "avg": 5.25, "soft": false },
+    { "listKind": "antagonist", "name": "Kai Chisaki", "search": "Kai Chisaki Overhaul", "anime": "My Hero Academia", "xScore": "5.0", "pScore": "5.5", "avg": 5.25, "soft": false },
+
+    { "listKind": "protagonist", "name": "Aoba Suzukaze", "search": "Aoba Suzukaze", "anime": "NEW GAME!", "xScore": "5.5", "pScore": "5.0", "avg": 5.25, "soft": false },
+
+    { "listKind": "protagonist", "name": "Tetsuya Kuroko", "search": "Tetsuya Kuroko", "anime": "Kuroko's Basketball", "xScore": "4.0", "pScore": "4.0", "avg": 4.0, "soft": false },
+    { "listKind": "antagonist", "name": "Seijuro Akashi", "search": "Seijuro Akashi", "anime": "Kuroko's Basketball", "xScore": "4.0", "pScore": "4.0", "avg": 4.0, "soft": true },
+
+    { "listKind": "protagonist", "name": "Kyousuke Kousaka", "search": "Kyousuke Kousaka", "anime": "Oreimo", "xScore": "2.0", "pScore": "4.0", "avg": 3.0, "soft": false },
+    { "listKind": "protagonist", "name": "Twoearle", "search": "Twoearle", "anime": "Gonna be the Twin-Tail!!", "xScore": "2.0", "pScore": "3.0", "avg": 2.5, "soft": false },
+    { "listKind": "antagonist", "name": "Kaiser Muscle", "search": "Kaiser Muscle", "anime": "Gonna be the Twin-Tail!!", "xScore": "2.0", "pScore": "3.0", "avg": 2.5, "soft": false },
+    { "listKind": "protagonist", "name": "Utsutsu Hasegawa", "search": "Utsutsu Hasegawa", "anime": "Pupa", "xScore": "1.0", "pScore": "1.0", "avg": 1.0, "soft": false },
+    { "listKind": "antagonist", "name": "Yume Hasegawa", "search": "Yume Hasegawa", "anime": "Pupa", "xScore": "1.0", "pScore": "1.0", "avg": 1.0, "soft": true },
+    { "listKind": "protagonist", "name": "Takeru Hinata", "search": "Takeru Hinata", "anime": "Mars of Destruction", "xScore": "1.0", "pScore": "0.5", "avg": 0.75, "soft": false },
+
+    { "listKind": "protagonist", "name": "Killua Zoldyck", "search": "Killua Zoldyck", "anime": "Hunter x Hunter (2011)", "xScore": "10.0", "pScore": "10.0", "avg": 10.0, "soft": true },
+    { "listKind": "antagonist", "name": "Hisoka Morow", "search": "Hisoka Morow", "anime": "Hunter x Hunter (2011)", "xScore": "10.0", "pScore": "10.0", "avg": 10.0, "soft": false },
+    { "listKind": "antagonist", "name": "Chrollo Lucilfer", "search": "Chrollo Lucilfer", "anime": "Hunter x Hunter (2011)", "xScore": "10.0", "pScore": "10.0", "avg": 10.0, "soft": false },
+    { "listKind": "antagonist", "name": "Genthru", "search": "Genthru", "anime": "Hunter x Hunter (2011)", "xScore": "10.0", "pScore": "10.0", "avg": 10.0, "soft": false },
+    { "listKind": "antagonist", "name": "Neferpitou", "search": "Neferpitou", "anime": "Hunter x Hunter (2011)", "xScore": "10.0", "pScore": "10.0", "avg": 10.0, "soft": false },
+
+    { "listKind": "antagonist", "name": "Near", "search": "Near Death Note", "anime": "Death Note", "xScore": "9.5", "pScore": "7.0", "avg": 8.25, "soft": false },
+    { "listKind": "antagonist", "name": "Mello", "search": "Mello Death Note", "anime": "Death Note", "xScore": "9.5", "pScore": "7.0", "avg": 8.25, "soft": false },
+
+    { "listKind": "protagonist", "name": "Alphonse Elric", "search": "Alphonse Elric", "anime": "Fullmetal Alchemist: Brotherhood", "xScore": "8.0", "pScore": "8.5", "avg": 8.25, "soft": true },
+    { "listKind": "antagonist", "name": "King Bradley", "search": "King Bradley", "anime": "Fullmetal Alchemist: Brotherhood", "xScore": "8.0", "pScore": "8.5", "avg": 8.25, "soft": false },
+    { "listKind": "antagonist", "name": "Envy", "search": "Envy FMA", "anime": "Fullmetal Alchemist: Brotherhood", "xScore": "8.0", "pScore": "8.5", "avg": 8.25, "soft": false },
+
+    { "listKind": "protagonist", "name": "Haruhi Suzumiya", "search": "Haruhi Suzumiya", "anime": "The Disappearance of Haruhi Suzumiya", "xScore": "9.0", "pScore": "9.5", "avg": 9.25, "soft": true },
+    { "listKind": "protagonist", "name": "Shouko Nishimiya", "search": "Shouko Nishimiya", "anime": "A Silent Voice", "xScore": "9.0", "pScore": "9.0", "avg": 9.0, "soft": true },
+
+    { "listKind": "antagonist", "name": "Reiner Braun", "search": "Reiner Braun", "anime": "Attack on Titan", "xScore": "6.0", "pScore": "5.0", "avg": 5.5, "soft": false },
+    { "listKind": "antagonist", "name": "Zeke Yeager", "search": "Zeke Yeager", "anime": "Attack on Titan", "xScore": "6.0", "pScore": "5.0", "avg": 5.5, "soft": false },
+    { "listKind": "antagonist", "name": "Eren Yeager", "search": "Eren Yeager", "anime": "Attack on Titan", "xScore": "6.0", "pScore": "5.0", "avg": 5.5, "soft": true },
+
+    { "listKind": "antagonist", "name": "Elsa Granhiert", "search": "Elsa Granhiert", "anime": "Re:ZERO", "xScore": "7.0", "pScore": "5.0", "avg": 6.0, "soft": false },
+    { "listKind": "antagonist", "name": "Regulus Corneas", "search": "Regulus Corneas", "anime": "Re:ZERO", "xScore": "7.0", "pScore": "5.0", "avg": 6.0, "soft": false },
+    { "listKind": "antagonist", "name": "Satella", "search": "Satella", "anime": "Re:ZERO", "xScore": "7.0", "pScore": "5.0", "avg": 6.0, "soft": false },
+
+    { "listKind": "antagonist", "name": "Nui Harime", "search": "Nui Harime", "anime": "Kill la Kill", "xScore": "6.5", "pScore": "7.5", "avg": 7.0, "soft": false },
+    { "listKind": "antagonist", "name": "Lordgenome", "search": "Lordgenome", "anime": "Gurren Lagann", "xScore": "5.5", "pScore": "7.5", "avg": 6.5, "soft": false },
+    { "listKind": "antagonist", "name": "Garou", "search": "Garou One Punch Man", "anime": "One-Punch Man", "xScore": "6.0", "pScore": "7.0", "avg": 6.5, "soft": true },
+    { "listKind": "antagonist", "name": "Deep Sea King", "search": "Deep Sea King", "anime": "One-Punch Man", "xScore": "6.0", "pScore": "7.0", "avg": 6.5, "soft": false },
+    { "listKind": "antagonist", "name": "Muzan Kibutsuji", "search": "Muzan Kibutsuji", "anime": "Demon Slayer", "xScore": "5.5", "pScore": "3.0", "avg": 4.25, "soft": false },
+    { "listKind": "antagonist", "name": "Akaza", "search": "Akaza", "anime": "Demon Slayer", "xScore": "5.5", "pScore": "3.0", "avg": 4.25, "soft": false },
+    { "listKind": "antagonist", "name": "Akihiko Kayaba", "search": "Akihiko Kayaba", "anime": "Sword Art Online", "xScore": "5.5", "pScore": "2.0", "avg": 3.75, "soft": false },
+    { "listKind": "antagonist", "name": "Nobuyuki Sugou", "search": "Nobuyuki Sugou", "anime": "Sword Art Online", "xScore": "5.5", "pScore": "2.0", "avg": 3.75, "soft": false },
+    { "listKind": "antagonist", "name": "Charles zi Britannia", "search": "Charles zi Britannia", "anime": "Code Geass", "xScore": "8.0", "pScore": "3.0", "avg": 5.5, "soft": false },
+    { "listKind": "antagonist", "name": "Schneizel el Britannia", "search": "Schneizel el Britannia", "anime": "Code Geass", "xScore": "8.0", "pScore": "3.0", "avg": 5.5, "soft": false },
+    { "listKind": "antagonist", "name": "Esdeath", "search": "Esdeath", "anime": "Akame ga Kill!", "xScore": "3.0", "pScore": "2.0", "avg": 2.5, "soft": false },
+    { "listKind": "antagonist", "name": "Yuno Gasai", "search": "Yuno Gasai", "anime": "The Future Diary", "xScore": "5.5", "pScore": "2.0", "avg": 3.75, "soft": true },
+    { "listKind": "antagonist", "name": "Yamori", "search": "Yakumo Oomori", "anime": "Tokyo Ghoul", "xScore": "5.5", "pScore": "3.0", "avg": 4.25, "soft": false },
+    { "listKind": "antagonist", "name": "Nimura Furuta", "search": "Nimura Furuta", "anime": "Tokyo Ghoul", "xScore": "5.5", "pScore": "3.0", "avg": 4.25, "soft": false },
+    { "listKind": "antagonist", "name": "Gun Devil", "search": "Gun Devil", "anime": "Chainsaw Man", "xScore": "5.5", "pScore": "7.0", "avg": 6.25, "soft": false },
+    { "listKind": "antagonist", "name": "Darkness Devil", "search": "Darkness Devil", "anime": "Chainsaw Man", "xScore": "5.5", "pScore": "7.0", "avg": 6.25, "soft": false },
+    { "listKind": "antagonist", "name": "Keel Lorenz", "search": "Keel Lorenz", "anime": "The End of Evangelion", "xScore": "7.0", "pScore": "9.0", "avg": 8.0, "soft": false },
+    { "listKind": "antagonist", "name": "No-Face", "search": "No-Face Spirited Away", "anime": "Spirited Away", "xScore": "6.5", "pScore": "8.0", "avg": 7.25, "soft": false },
+    { "listKind": "antagonist", "name": "The Winged Lion", "search": "Winged Lion Dungeon Meshi", "anime": "Delicious in Dungeon", "xScore": "7.0", "pScore": "7.5", "avg": 7.25, "soft": false }
+  ]
+}

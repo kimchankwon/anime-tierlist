@@ -31,7 +31,14 @@ npm run dev
 ```
 
 Sign in at http://localhost:5173. Each Google account gets its own saved
-protagonist and antagonist lists.
+protagonist and antagonist lists. New boards start **unranked**; use
+Auto-fill by score only if you want that.
+
+The catalog is the intersection of
+[xtectra](https://anilist.co/user/xtectra/animelist) and
+[Prowtar](https://anilist.co/user/Prowtar/animelist), with seasons collapsed
+into one franchise. Several leads and arc antagonists can come from the same
+show (for example Near as Death Note's second antagonist).
 
 ## Deploy
 
