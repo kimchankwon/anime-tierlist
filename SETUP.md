@@ -1,7 +1,7 @@
 # Setup
 
 This app uses **Vite + React**, **Convex** (database, file storage, and auth),
-and **Convex Auth with Google**. The frontend deploys to **Netlify**.
+and **Convex Auth with Google**. The frontend deploys to **GitHub Pages**.
 
 Auth follows the same pattern as `kimchankwon/relationship-app`:
 `convexAuth({ providers: [Google] })`, HTTP routes on `convex/http.ts`, and
@@ -45,7 +45,7 @@ to that client (or a new Web client) in Google Cloud Console:
 - `http://localhost:5173`
 - `https://uncommon-pika-420.convex.site` (dev)
 - `https://watchful-platypus-235.convex.site` (prod)
-- your Netlify origin, once you have it (e.g. `https://anime-tierlist.netlify.app`)
+- `https://kimchankwon.github.io`
 
 **Authorized redirect URIs**
 
@@ -81,19 +81,14 @@ npm run dev
 
 Open http://localhost:5173 and sign in with Google.
 
-## Deploy to Netlify
+## Deploy to GitHub Pages
 
-1. Push this repo to GitHub.
-2. Import it in Netlify. Build command and publish directory are already in
-   `netlify.toml`.
-3. Add Netlify env vars:
-   - `CONVEX_DEPLOY_KEY` (Convex production deploy key)
-   - `VITE_CONVEX_URL` (production Convex URL, `https://<prod>.convex.cloud`)
-4. After the first production deploy, set Convex **prod** env:
-   - `SITE_URL` = your Netlify URL
-   - `JWT_PRIVATE_KEY`, `JWKS`, `AUTH_GOOGLE_ID`, `AUTH_GOOGLE_SECRET`, `SEED_SECRET`
-5. Add the Netlify origin and
-   `https://<prod>.convex.site/api/auth/callback/google` to the Google OAuth
-   client.
-6. Seed production once: point `VITE_CONVEX_URL` at prod (or use a prod env
-   file) and run `npm run seed`.
+Pushes to `main` run `.github/workflows/pages.yml` and publish
+https://kimchankwon.github.io/anime-tierlist/
+
+1. Vite `base` is `/anime-tierlist/` so asset URLs work on the project site.
+2. The workflow bakes in the production Convex URL
+   `https://watchful-platypus-235.convex.cloud`.
+3. Prod `SITE_URL` must be `https://kimchankwon.github.io/anime-tierlist`
+   so Google sign-in returns to the app, not the github.io root.
+4. Add `https://kimchankwon.github.io` as a Google OAuth JavaScript origin.

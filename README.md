@@ -10,9 +10,11 @@ The source boards are the shared-list HTML exports in Downloads:
 - Protagonist Tier List (Top 100 Shared)
 - Antagonist Tier List (Shared Top 200)
 
+**Live:** https://kimchankwon.github.io/anime-tierlist/
+
 ## Stack
 
-- Vite + React frontend, hosted on Netlify
+- Vite + React frontend on GitHub Pages
 - Convex database, file storage, and Convex Auth (Google)
 - Same Google sign-in pattern as `kimchankwon/relationship-app`
 
@@ -33,6 +35,7 @@ protagonist and antagonist lists.
 
 ## Deploy
 
-`netlify.toml` builds with `npx convex deploy --cmd "npm run build"` and
-publishes `dist`. Set `CONVEX_DEPLOY_KEY` and `VITE_CONVEX_URL` on Netlify,
-then point Convex prod `SITE_URL` at the Netlify domain.
+Pushes to `main` build the frontend and publish it to GitHub Pages via
+`.github/workflows/pages.yml`. Production Convex is
+`https://watchful-platypus-235.convex.cloud`; set prod `SITE_URL` to
+`https://kimchankwon.github.io/anime-tierlist`.
