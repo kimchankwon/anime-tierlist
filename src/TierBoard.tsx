@@ -46,7 +46,13 @@ export function TierBoard({ listKind }: { listKind: ListKind }) {
 
   useEffect(() => {
     if (!remote) return;
-    if (!dirty.current) setBoard(remote);
+    if (!dirty.current) {
+      setBoard({
+        labels: remote.labels,
+        tiers: remote.tiers,
+        pool: remote.pool,
+      });
+    }
   }, [remote]);
 
   useEffect(() => {
@@ -59,12 +65,20 @@ export function TierBoard({ listKind }: { listKind: ListKind }) {
     if (!board || !dirty.current) return;
     setSaveState("saving");
     const handle = window.setTimeout(() => {
-      void save({ listKind, ...board })
+      void save({
+        listKind,
+        labels: board.labels,
+        tiers: board.tiers,
+        pool: board.pool,
+      })
         .then(() => {
           dirty.current = false;
           setSaveState("saved");
         })
-        .catch(() => showToast("Could not save", true));
+        .catch((err: unknown) => {
+          const message = err instanceof Error ? err.message : "Could not save";
+          showToast(message, true);
+        });
     }, 250);
     return () => window.clearTimeout(handle);
   }, [board, listKind, save]);
