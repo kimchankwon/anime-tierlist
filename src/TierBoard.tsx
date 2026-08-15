@@ -147,6 +147,7 @@ function EditableBoard({
   // lands after a newer drag cannot let the (now stale) server copy overwrite it.
   const rev = useRef(0);
   const savedRev = useRef(0);
+  const pendingSave = useRef<number | null>(null);
   const dirty = () => rev.current !== savedRev.current;
   const dragKey = useRef<string | null>(null);
 
@@ -183,6 +184,7 @@ function EditableBoard({
     setSaveState("saving");
     const sending = rev.current;
     const handle = window.setTimeout(() => {
+      pendingSave.current = null;
       void save({
         listKind,
         labels: board.labels,
@@ -198,7 +200,11 @@ function EditableBoard({
           showToast(message, true);
         });
     }, 250);
-    return () => window.clearTimeout(handle);
+    pendingSave.current = handle;
+    return () => {
+      window.clearTimeout(handle);
+      if (pendingSave.current === handle) pendingSave.current = null;
+    };
   }, [board, listKind, save]);
 
   function showToast(msg: string, err = false) {
@@ -209,6 +215,41 @@ function EditableBoard({
   function commit(next: BoardState) {
     rev.current += 1;
     setBoard(next);
+  }
+
+  // resetToPool and autofillByScore rewrite the whole layout on the server. A
+  // debounced save left armed would fire afterwards and write the pre-bulk
+  // board back over it, so cancel it first. `startedAt` is the revision the
+  // bulk replaces: on success only that revision is marked saved, so an edit
+  // made mid-flight still gets its own save. On failure the cancelled save is
+  // re-armed rather than dropped.
+  function runBulk(
+    op: () => Promise<unknown>,
+    okMsg: string,
+    failMsg: string,
+  ) {
+    const cancelled = pendingSave.current;
+    if (cancelled !== null) {
+      window.clearTimeout(cancelled);
+      pendingSave.current = null;
+    }
+    const startedAt = rev.current;
+    setSaveState("saving");
+    void op()
+      .then(() => {
+        savedRev.current = Math.max(savedRev.current, startedAt);
+        if (!dirty()) setSaveState("saved");
+        showToast(okMsg);
+      })
+      .catch((err: unknown) => {
+        setSaveState("idle");
+        showToast(err instanceof Error ? err.message : failMsg, true);
+        // Re-arm the save we cancelled so the local edit is not lost.
+        if (cancelled !== null) {
+          rev.current += 1;
+          setBoard((prev) => (prev ? { ...prev } : prev));
+        }
+      });
   }
 
   function moveTile(key: string, zone: "pool" | number, beforeKey?: string) {
@@ -242,12 +283,13 @@ function EditableBoard({
         </button>
         <button
           type="button"
-          onClick={() => {
-            void autofillByScore({ listKind }).then(() => {
-              savedRev.current = rev.current;
-              showToast("Auto-filled by score");
-            });
-          }}
+          onClick={() =>
+            runBulk(
+              () => autofillByScore({ listKind }),
+              "Auto-filled by score",
+              "Could not auto-fill",
+            )
+          }
         >
           Auto-fill by score
         </button>
@@ -292,16 +334,11 @@ function EditableBoard({
           onCancel={() => setConfirmingReset(false)}
           onConfirm={() => {
             setConfirmingReset(false);
-            void resetToPool({ listKind })
-              .then(() => {
-                savedRev.current = rev.current;
-                showToast("Reset to pool");
-              })
-              .catch((err: unknown) => {
-                const message =
-                  err instanceof Error ? err.message : "Could not reset";
-                showToast(message, true);
-              });
+            runBulk(
+              () => resetToPool({ listKind }),
+              "Reset to pool",
+              "Could not reset",
+            );
           }}
         />
       ) : null}
