@@ -2510,7 +2510,7 @@
   {
     "key": "antagonist-78",
     "listKind": "antagonist",
-    "rank": 78,
+    "rank": 77,
     "name": "Mahito",
     "anime": "Jujutsu Kaisen",
     "xScore": "9.0",
@@ -2522,7 +2522,7 @@
   {
     "key": "antagonist-79",
     "listKind": "antagonist",
-    "rank": 79,
+    "rank": 78,
     "name": "Diavolo",
     "anime": "JoJo's Bizarre Adventure",
     "xScore": "9.5",
@@ -2534,7 +2534,7 @@
   {
     "key": "antagonist-80",
     "listKind": "antagonist",
-    "rank": 80,
+    "rank": 79,
     "name": "Toichiro Suzuki",
     "anime": "Mob Psycho 100",
     "xScore": "7.0",
@@ -2570,7 +2570,7 @@
   {
     "key": "antagonist-81",
     "listKind": "antagonist",
-    "rank": 81,
+    "rank": 80,
     "name": "Gilgamesh",
     "anime": "Fate/stay night: Unlimited Blade Works",
     "xScore": "6.0",
@@ -2594,7 +2594,7 @@
   {
     "key": "antagonist-83",
     "listKind": "antagonist",
-    "rank": 83,
+    "rank": 81,
     "name": "Near",
     "anime": "Death Note",
     "xScore": "9.5",
@@ -2606,7 +2606,7 @@
   {
     "key": "antagonist-84",
     "listKind": "antagonist",
-    "rank": 84,
+    "rank": 82,
     "name": "Mello",
     "anime": "Death Note",
     "xScore": "9.5",
@@ -2618,7 +2618,7 @@
   {
     "key": "antagonist-85",
     "listKind": "antagonist",
-    "rank": 85,
+    "rank": 83,
     "name": "Keel Lorenz",
     "anime": "The End of Evangelion",
     "xScore": "7.0",
@@ -2630,7 +2630,7 @@
   {
     "key": "antagonist-86",
     "listKind": "antagonist",
-    "rank": 86,
+    "rank": 84,
     "name": "No-Face",
     "anime": "Spirited Away",
     "xScore": "6.5",
@@ -2642,7 +2642,7 @@
   {
     "key": "antagonist-87",
     "listKind": "antagonist",
-    "rank": 87,
+    "rank": 85,
     "name": "Ryomen Sukuna",
     "anime": "Jujutsu Kaisen",
     "xScore": "9.0",
@@ -2654,7 +2654,7 @@
   {
     "key": "antagonist-88",
     "listKind": "antagonist",
-    "rank": 88,
+    "rank": 86,
     "name": "Kars",
     "anime": "JoJo's Bizarre Adventure",
     "xScore": "9.5",
@@ -2666,7 +2666,7 @@
   {
     "key": "antagonist-89",
     "listKind": "antagonist",
-    "rank": 89,
+    "rank": 87,
     "name": "Kotaro Yanagisawa",
     "anime": "Assassination Classroom",
     "xScore": "6.0",
@@ -2678,7 +2678,7 @@
   {
     "key": "antagonist-90",
     "listKind": "antagonist",
-    "rank": 90,
+    "rank": 88,
     "name": "Sylvia",
     "anime": "KonoSuba",
     "xScore": "7.0",
@@ -2690,7 +2690,7 @@
   {
     "key": "antagonist-91",
     "listKind": "antagonist",
-    "rank": 91,
+    "rank": 89,
     "name": "Kai Chisaki",
     "anime": "My Hero Academia",
     "xScore": "5.0",
@@ -2702,7 +2702,7 @@
   {
     "key": "antagonist-92",
     "listKind": "antagonist",
-    "rank": 92,
+    "rank": 90,
     "name": "Zeke Yeager",
     "anime": "Attack on Titan",
     "xScore": "6.0",
@@ -2714,7 +2714,7 @@
   {
     "key": "antagonist-93",
     "listKind": "antagonist",
-    "rank": 93,
+    "rank": 91,
     "name": "Garou",
     "anime": "One-Punch Man",
     "xScore": "6.0",
@@ -2722,5 +2722,53 @@
     "avg": 6.5,
     "soft": true,
     "imageFile": "Garou.png"
+  },
+  {
+    "key": "antagonist-94",
+    "listKind": "antagonist",
+    "rank": 92,
+    "name": "The Reaper",
+    "anime": "Assassination Classroom",
+    "xScore": "6.0",
+    "pScore": "6.5",
+    "avg": 6.25,
+    "soft": false,
+    "imageFile": "The-Reaper.png"
+  },
+  {
+    "key": "antagonist-95",
+    "listKind": "antagonist",
+    "rank": 93,
+    "name": "Stain",
+    "anime": "My Hero Academia",
+    "xScore": "5.0",
+    "pScore": "5.5",
+    "avg": 5.25,
+    "soft": false,
+    "imageFile": "Stain.png"
+  },
+  {
+    "key": "antagonist-96",
+    "listKind": "antagonist",
+    "rank": 94,
+    "name": "Envy",
+    "anime": "Fullmetal Alchemist: Brotherhood",
+    "xScore": "8.0",
+    "pScore": "8.5",
+    "avg": 8.25,
+    "soft": false,
+    "imageFile": "Envy.png"
+  },
+  {
+    "key": "antagonist-97",
+    "listKind": "antagonist",
+    "rank": 95,
+    "name": "Turtle Guildy",
+    "anime": "Gonna be the Twin-Tail!!",
+    "xScore": "2.0",
+    "pScore": "3.0",
+    "avg": 2.5,
+    "soft": false,
+    "imageFile": "Turtle-Guildy.png"
   }
 ]

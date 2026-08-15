@@ -99,6 +99,10 @@ for (const item of retries) {
   const dest = join(dir, imageFile);
   if (!existsSync(dest)) {
     const img = await fetch(node.image.large);
+    if (!img.ok) {
+      console.error(`IMAGE ${img.status} for ${item.name}; skipping`);
+      continue;
+    }
     writeFileSync(dest, Buffer.from(await img.arrayBuffer()));
   }
   nextRank[item.listKind] += 1;

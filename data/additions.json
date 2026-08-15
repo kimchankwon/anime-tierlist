@@ -5,7 +5,7 @@
     { "listKind": "protagonist", "name": "Ken Takakura", "search": "Ken Takakura Okarun", "anime": "DAN DA DAN", "xScore": "8.5", "pScore": "8.0", "avg": 8.25, "soft": true },
     { "listKind": "antagonist", "name": "Turbo Granny", "search": "Turbo Granny", "anime": "DAN DA DAN", "xScore": "8.5", "pScore": "8.0", "avg": 8.25, "soft": false },
     { "listKind": "antagonist", "name": "Evil Eye", "search": "Evil Eye Dandadan", "anime": "DAN DA DAN", "xScore": "8.5", "pScore": "8.0", "avg": 8.25, "soft": false },
-    { "listKind": "antagonist", "name": "Count Saint-Germain", "search": "Count Saint-Germain Dandadan", "anime": "DAN DA DAN", "xScore": "8.5", "pScore": "8.0", "avg": 8.25, "soft": false },
+    { "listKind": "antagonist", "name": "Count Saint-Germain", "search": "Count Saint-Germain Dandadan", "anime": "DAN DA DAN", "xScore": "8.5", "pScore": "8.0", "avg": 8.25, "soft": false, "skip": "Not on AniList's Dandadan character list yet (verified 2026-08-15); re-check when the cast page is updated." },
 
     { "listKind": "protagonist", "name": "Yuji Itadori", "search": "Yuji Itadori", "anime": "Jujutsu Kaisen", "xScore": "9.0", "pScore": "8.0", "avg": 8.5, "soft": false },
     { "listKind": "protagonist", "name": "Satoru Gojo", "search": "Satoru Gojo", "anime": "Jujutsu Kaisen", "xScore": "9.0", "pScore": "8.0", "avg": 8.5, "soft": true },
@@ -79,7 +79,7 @@
 
     { "listKind": "protagonist", "name": "Kyousuke Kousaka", "search": "Kyousuke Kousaka", "anime": "Oreimo", "xScore": "2.0", "pScore": "4.0", "avg": 3.0, "soft": false },
     { "listKind": "protagonist", "name": "Twoearle", "search": "Twoearle", "anime": "Gonna be the Twin-Tail!!", "xScore": "2.0", "pScore": "3.0", "avg": 2.5, "soft": false },
-    { "listKind": "antagonist", "name": "Kaiser Muscle", "search": "Kaiser Muscle", "anime": "Gonna be the Twin-Tail!!", "xScore": "2.0", "pScore": "3.0", "avg": 2.5, "soft": false },
+    { "listKind": "antagonist", "name": "Turtle Guildy", "search": "Turtle Guildy", "anime": "Gonna be the Twin-Tail!!", "xScore": "2.0", "pScore": "3.0", "avg": 2.5, "soft": false },
     { "listKind": "protagonist", "name": "Utsutsu Hasegawa", "search": "Utsutsu Hasegawa", "anime": "Pupa", "xScore": "1.0", "pScore": "1.0", "avg": 1.0, "soft": false },
     { "listKind": "antagonist", "name": "Yume Hasegawa", "search": "Yume Hasegawa", "anime": "Pupa", "xScore": "1.0", "pScore": "1.0", "avg": 1.0, "soft": true },
     { "listKind": "protagonist", "name": "Takeru Hinata", "search": "Takeru Hinata", "anime": "Mars of Destruction", "xScore": "1.0", "pScore": "0.5", "avg": 0.75, "soft": false },
@@ -126,6 +126,6 @@
     { "listKind": "antagonist", "name": "Darkness Devil", "search": "Darkness Devil", "anime": "Chainsaw Man", "xScore": "5.5", "pScore": "7.0", "avg": 6.25, "soft": false },
     { "listKind": "antagonist", "name": "Keel Lorenz", "search": "Keel Lorenz", "anime": "The End of Evangelion", "xScore": "7.0", "pScore": "9.0", "avg": 8.0, "soft": false },
     { "listKind": "antagonist", "name": "No-Face", "search": "No-Face Spirited Away", "anime": "Spirited Away", "xScore": "6.5", "pScore": "8.0", "avg": 7.25, "soft": false },
-    { "listKind": "antagonist", "name": "The Winged Lion", "search": "Winged Lion Dungeon Meshi", "anime": "Delicious in Dungeon", "xScore": "7.0", "pScore": "7.5", "avg": 7.25, "soft": false }
+    { "listKind": "antagonist", "name": "The Winged Lion", "search": "Winged Lion Dungeon Meshi", "anime": "Delicious in Dungeon", "xScore": "7.0", "pScore": "7.5", "avg": 7.25, "soft": false, "skip": "Not in AniList's Delicious in Dungeon cast (66 entries, verified 2026-08-15); re-check when the cast page is updated." }
   ]
 }

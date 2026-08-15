@@ -90,6 +90,11 @@ function franchiseRoot(entry, index) {
   return id;
 }
 
+// Continuity only. ALTERNATIVE would fold separate adaptations (FMA 2003 and
+// FMA: Brotherhood) into one franchise, which is not what "collapse seasons"
+// means here.
+const SAME_FRANCHISE = new Set(["SEQUEL", "PREQUEL", "PARENT"]);
+
 function collapse(entries) {
   const index = new Map(entries.map((e) => [e.mediaId, e]));
   const groups = new Map();
@@ -115,19 +120,46 @@ const prowtar = flatten(await gql(LIST_QUERY, { userName: "Prowtar" }).then((d) 
 const xFranchises = collapse(xtectra);
 const pFranchises = collapse(prowtar);
 
+// Direct membership: the two lists share an actual media id.
 const pByMembers = new Map();
 for (const f of pFranchises) {
   for (const id of f.memberIds) pByMembers.set(id, f);
 }
 
+// franchiseRoot() can only walk relations that are themselves in the user's
+// list, so two users who watched disjoint installments of one franchise end up
+// with no overlapping memberIds and the franchise is dropped. Index one hop of
+// continuity-related media as a fallback, consulted only when there is no
+// direct hit, so a bridged match can never duplicate a direct one.
+const pByRelated = new Map();
+const prowtarById = new Map(prowtar.map((e) => [e.mediaId, e]));
+for (const f of pFranchises) {
+  for (const id of f.memberIds) {
+    for (const rel of prowtarById.get(id)?.relations ?? []) {
+      if (!SAME_FRANCHISE.has(rel.type)) continue;
+      if (!pByMembers.has(rel.id) && !pByRelated.has(rel.id)) {
+        pByRelated.set(rel.id, f);
+      }
+    }
+  }
+}
+
 const shared = [];
 const seen = new Set();
-for (const xf of xFranchises) {
-  const hit = xf.memberIds.map((id) => pByMembers.get(id)).find(Boolean);
+const claimed = new Set();
+// Direct matches first so they always win the claim on a Prowtar franchise.
+const ordered = [
+  ...xFranchises.map((xf) => [xf, xf.memberIds.map((id) => pByMembers.get(id)).find(Boolean), "direct"]),
+  ...xFranchises.map((xf) => [xf, xf.memberIds.map((id) => pByRelated.get(id)).find(Boolean), "related"]),
+];
+for (const [xf, hit, how] of ordered) {
   if (!hit) continue;
+  if (how === "related" && claimed.has(hit.rootId)) continue;
   const key = [xf.rootId, hit.rootId].sort().join("-");
   if (seen.has(key)) continue;
+  if (claimed.has(hit.rootId) && how === "related") continue;
   seen.add(key);
+  claimed.add(hit.rootId);
   shared.push({
     title: xf.title,
     xTitle: xf.title,

@@ -70,9 +70,10 @@ const remaining = [
 ];
 
 const catalogPath = join(root, "data", "characters.json");
-let catalog = JSON.parse(readFileSync(catalogPath, "utf8"));
-catalog = catalog.filter((c) => !(c.listKind === "antagonist" && (c.name === "The Reaper" || c.name === "Ryomen Sukuna")));
-writeFileSync(catalogPath, JSON.stringify(catalog, null, 2) + "\n");
+const catalog = JSON.parse(readFileSync(catalogPath, "utf8"));
+// Records are only ever replaced in place, after a lookup and image download
+// both succeed. Never delete first: a failed retry used to leave the catalog
+// short a character while its downloaded art stayed in seed-assets/.
 
 const existing = new Set(catalog.map((c) => `${c.listKind}:${c.name.toLowerCase()}`));
 const nextRank = {
@@ -96,7 +97,12 @@ for (const item of remaining) {
   const dir = join(root, "seed-assets", item.listKind);
   mkdirSync(dir, { recursive: true });
   const imageFile = `${slug(item.name)}.png`;
-  writeFileSync(join(dir, imageFile), Buffer.from(await (await fetch(node.image.large)).arrayBuffer()));
+  const img = await fetch(node.image.large);
+  if (!img.ok) {
+    console.error(`IMAGE ${img.status} for ${item.name}; skipping`);
+    continue;
+  }
+  writeFileSync(join(dir, imageFile), Buffer.from(await img.arrayBuffer()));
   nextRank[item.listKind] += 1;
   catalog.push({
     key: `${item.listKind}-${nextRank[item.listKind]}`,
