@@ -35,7 +35,14 @@ protagonist and antagonist lists.
 
 ## Deploy
 
-Pushes to `main` build the frontend and publish it to GitHub Pages via
-`.github/workflows/pages.yml`. Production Convex is
-`https://watchful-platypus-235.convex.cloud`; set prod `SITE_URL` to
-`https://kimchankwon.github.io/anime-tierlist`.
+Merges to `main` run two workflows:
+
+- **Convex Deploy** (`.github/workflows/convex-deploy.yml`) — `npx convex deploy`
+  to production, same shape as `the-shed-mobile`. Needs the `CONVEX_DEPLOY_KEY`
+  repo secret (Convex dashboard → prod → Settings → Deploy key). Manual
+  `workflow_dispatch` from a non-main branch deploys a preview.
+- **GitHub Pages** (`.github/workflows/pages.yml`) — builds the Vite app against
+  `https://watchful-platypus-235.convex.cloud` and publishes
+  https://kimchankwon.github.io/anime-tierlist/
+
+Prod `SITE_URL` must stay `https://kimchankwon.github.io/anime-tierlist`.

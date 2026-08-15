@@ -81,6 +81,15 @@ npm run dev
 
 Open http://localhost:5173 and sign in with Google.
 
+## Deploy Convex on merge to main
+
+`.github/workflows/convex-deploy.yml` matches `the-shed-mobile`: every push to
+`main` runs `npx convex deploy` against production. Set the repo secret
+`CONVEX_DEPLOY_KEY` from Convex dashboard → prod deployment → Settings →
+Deploy key (or reuse `.env.production.local`). Until the secret exists the
+job fails. From a non-main branch, **Actions → Convex Deploy → Run workflow**
+deploys a preview named after the branch.
+
 ## Deploy to GitHub Pages
 
 Pushes to `main` run `.github/workflows/pages.yml` and publish

@@ -1,0 +1,34 @@
+name: Convex Deploy
+
+on:
+  # Auto-deploy only on merges to main (prod). Branch/PR pushes do NOT deploy;
+  # use the manual workflow_dispatch below for an on-demand preview deploy.
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: convex-deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Deploy to Convex
+        run: |
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            npx convex deploy
+          else
+            npx convex deploy --preview-name "${{ github.ref_name }}"
+          fi
+        env:
+          CONVEX_DEPLOY_KEY: ${{ secrets.CONVEX_DEPLOY_KEY }}
