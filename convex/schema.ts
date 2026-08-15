@@ -35,5 +35,7 @@ export default defineSchema({
     tiers: v.array(v.array(v.string())),
     pool: v.array(v.string()),
     updatedAt: v.number(),
-  }).index("by_user_list", ["userId", "listKind"]),
+  })
+    .index("by_user_list", ["userId", "listKind"])
+    .index("by_listKind", ["listKind"]),
 });

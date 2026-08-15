@@ -44,7 +44,7 @@ function Shell() {
             {tab === "protagonist"
               ? "Main protagonists of the top 100 anime both xtectra and Prowtar have watched and scored"
               : "Researched main antagonists from the anime in both xtectra’s and Prowtar’s top 200"}
-            {" · "}scores out of 10 · your arrangement auto-saves
+            {" · "}scores out of 10 · your arrangement auto-saves · view or compare others
           </div>
         </div>
         <div className="user-chip">

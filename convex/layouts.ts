@@ -99,6 +99,74 @@ async function getOrCreateLayout(
   return existing;
 }
 
+function personFromUser(
+  user: { name?: string; email?: string; image?: string } | null,
+  userId: Id<"users">,
+  isMe: boolean,
+  updatedAt: number,
+) {
+  return {
+    userId,
+    name: user?.name?.trim() || user?.email?.split("@")[0] || "Anonymous",
+    image: user?.image ?? null,
+    isMe,
+    updatedAt,
+  };
+}
+
+export const listPeople = query({
+  args: { listKind },
+  handler: async (ctx, { listKind: kind }) => {
+    const me = await requireUser(ctx);
+    const rows = await ctx.db
+      .query("layouts")
+      .withIndex("by_listKind", (q) => q.eq("listKind", kind))
+      .collect();
+    const seen = new Set<string>();
+    const people = [];
+    for (const row of rows) {
+      if (seen.has(row.userId)) continue;
+      seen.add(row.userId);
+      const user = await ctx.db.get(row.userId);
+      people.push(personFromUser(user, row.userId, row.userId === me, row.updatedAt));
+    }
+    people.sort((a, b) => {
+      if (a.isMe !== b.isMe) return a.isMe ? -1 : 1;
+      return a.name.localeCompare(b.name);
+    });
+    return people;
+  },
+});
+
+export const getForUser = query({
+  args: { listKind, userId: v.id("users") },
+  handler: async (ctx, { listKind: kind, userId }) => {
+    await requireUser(ctx);
+    const existing = await ctx.db
+      .query("layouts")
+      .withIndex("by_user_list", (q) =>
+        q.eq("userId", userId).eq("listKind", kind),
+      )
+      .unique();
+    const catalog = await catalogKeys(ctx, kind);
+    const user = await ctx.db.get(userId);
+    if (!existing) {
+      return {
+        labels: [...DEFAULT_LABELS],
+        tiers: DEFAULT_LABELS.map(() => [] as string[]),
+        pool: catalog.map((c) => c.key),
+        exists: false,
+        owner: personFromUser(user, userId, false, 0),
+      };
+    }
+    return {
+      ...mergeLayout(existing.labels, existing.tiers, existing.pool, catalog),
+      exists: true,
+      owner: personFromUser(user, userId, false, existing.updatedAt),
+    };
+  },
+});
+
 export const get = query({
   args: { listKind },
   handler: async (ctx, { listKind: kind }) => {
