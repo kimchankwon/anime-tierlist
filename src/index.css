@@ -295,3 +295,25 @@ main { padding: 18px 24px 40px; }
   place-items: center;
   color: #9a9ca5;
 }
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 9, 12, .66);
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  z-index: 60;
+}
+.modal {
+  background: #1c1e24;
+  border: 1px solid #383b45;
+  border-radius: 10px;
+  padding: 20px 22px 18px;
+  max-width: 380px;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, .55);
+}
+.modal h3 { margin: 0 0 8px; font-size: 16px; }
+.modal p { margin: 0 0 18px; color: #9a9ca5; font-size: 13px; }
+.modal-actions { display: flex; gap: 8px; justify-content: flex-end; }
+button.danger { background: #b3402f; border-color: #b3402f; color: #fff; }
+button.danger:hover { background: #c74a37; }

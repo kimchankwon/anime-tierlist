@@ -37,38 +37,46 @@ const types = {
 };
 
 let uploaded = 0;
-let skipped = 0;
+let metadataOnly = 0;
 for (const character of characters) {
   const prev = already.get(character.key);
-  if (prev?.hasImage && process.argv[2] !== "--force") {
-    skipped += 1;
-    continue;
+  // Re-upload the art only when it is missing (or forced), but always write the
+  // row. Skipping the whole character when it already had an image meant catalog
+  // edits - ranks, scores, names, the anime a character belongs to - were never
+  // deployed, so the site kept serving stale metadata.
+  const needsUpload = !prev?.hasImage || process.argv[2] === "--force";
+  let imageId;
+  if (needsUpload) {
+    const uploadUrl = await client.mutation(anyApi.seed.generateUploadUrl, { secret });
+    const filePath = join(
+      root,
+      "seed-assets",
+      character.listKind,
+      character.imageFile,
+    );
+    const bytes = readFileSync(filePath);
+    const contentType = types[extname(character.imageFile).toLowerCase()] ?? "application/octet-stream";
+    const res = await fetch(uploadUrl, {
+      method: "POST",
+      headers: { "Content-Type": contentType },
+      body: bytes,
+    });
+    if (!res.ok) {
+      throw new Error(`Upload failed for ${character.key}: ${res.status} ${await res.text()}`);
+    }
+    ({ storageId: imageId } = await res.json());
+    uploaded += 1;
+    console.log(`seeded ${character.key} (${character.name})`);
+  } else {
+    metadataOnly += 1;
   }
-  const uploadUrl = await client.mutation(anyApi.seed.generateUploadUrl, { secret });
-  const filePath = join(
-    root,
-    "seed-assets",
-    character.listKind,
-    character.imageFile,
-  );
-  const bytes = readFileSync(filePath);
-  const contentType = types[extname(character.imageFile).toLowerCase()] ?? "application/octet-stream";
-  const res = await fetch(uploadUrl, {
-    method: "POST",
-    headers: { "Content-Type": contentType },
-    body: bytes,
-  });
-  if (!res.ok) {
-    throw new Error(`Upload failed for ${character.key}: ${res.status} ${await res.text()}`);
-  }
-  const { storageId } = await res.json();
   await client.mutation(anyApi.seed.upsertCharacter, {
     secret,
     ...character,
-    imageId: storageId,
+    ...(imageId ? { imageId } : {}),
   });
-  uploaded += 1;
-  console.log(`seeded ${character.key} (${character.name})`);
 }
 
-console.log(`done. uploaded=${uploaded} skipped=${skipped} total=${characters.length}`);
+console.log(
+  `done. uploaded=${uploaded} metadata-only=${metadataOnly} total=${characters.length}`,
+);

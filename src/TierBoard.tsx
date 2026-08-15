@@ -35,6 +35,16 @@ function placementOf(board: BoardState): Placement {
   return map;
 }
 
+// countDiffs() compares tier labels, so the per-tile highlight has to as well.
+// Comparing zone indexes instead made a renamed tier read as "21 differ" with
+// nothing highlighted.
+function sameSlot(
+  mine: { label: string } | undefined,
+  zoneLabel: string,
+) {
+  return mine !== undefined && mine.label === zoneLabel;
+}
+
 export function TierBoard({ listKind }: { listKind: ListKind }) {
   const me = useQuery(api.users.me);
   const people = useQuery(api.layouts.listPeople, { listKind });
@@ -131,7 +141,14 @@ function EditableBoard({
   const [big, setBig] = useState(false);
   const [toast, setToast] = useState<{ msg: string; err?: boolean } | null>(null);
   const [saveState, setSaveState] = useState<"idle" | "saving" | "saved">("idle");
-  const dirty = useRef(false);
+  const [confirmingReset, setConfirmingReset] = useState(false);
+  // Bumped on every local edit. `savedRev` is the revision the last successful
+  // save wrote. The board is only clean when the two agree, so a save ack that
+  // lands after a newer drag cannot let the (now stale) server copy overwrite it.
+  const rev = useRef(0);
+  const savedRev = useRef(0);
+  const pendingSave = useRef<number | null>(null);
+  const dirty = () => rev.current !== savedRev.current;
   const dragKey = useRef<string | null>(null);
 
   const byKey = useMemo(() => {
@@ -147,7 +164,7 @@ function EditableBoard({
 
   useEffect(() => {
     if (!remote) return;
-    if (!dirty.current) {
+    if (!dirty()) {
       setBoard({
         labels: remote.labels,
         tiers: remote.tiers,
@@ -163,9 +180,11 @@ function EditableBoard({
   }, [remote, ensure, listKind]);
 
   useEffect(() => {
-    if (!board || !dirty.current) return;
+    if (!board || !dirty()) return;
     setSaveState("saving");
+    const sending = rev.current;
     const handle = window.setTimeout(() => {
+      pendingSave.current = null;
       void save({
         listKind,
         labels: board.labels,
@@ -173,15 +192,19 @@ function EditableBoard({
         pool: board.pool,
       })
         .then(() => {
-          dirty.current = false;
-          setSaveState("saved");
+          savedRev.current = Math.max(savedRev.current, sending);
+          if (!dirty()) setSaveState("saved");
         })
         .catch((err: unknown) => {
           const message = err instanceof Error ? err.message : "Could not save";
           showToast(message, true);
         });
     }, 250);
-    return () => window.clearTimeout(handle);
+    pendingSave.current = handle;
+    return () => {
+      window.clearTimeout(handle);
+      if (pendingSave.current === handle) pendingSave.current = null;
+    };
   }, [board, listKind, save]);
 
   function showToast(msg: string, err = false) {
@@ -190,8 +213,43 @@ function EditableBoard({
   }
 
   function commit(next: BoardState) {
-    dirty.current = true;
+    rev.current += 1;
     setBoard(next);
+  }
+
+  // resetToPool and autofillByScore rewrite the whole layout on the server. A
+  // debounced save left armed would fire afterwards and write the pre-bulk
+  // board back over it, so cancel it first. `startedAt` is the revision the
+  // bulk replaces: on success only that revision is marked saved, so an edit
+  // made mid-flight still gets its own save. On failure the cancelled save is
+  // re-armed rather than dropped.
+  function runBulk(
+    op: () => Promise<unknown>,
+    okMsg: string,
+    failMsg: string,
+  ) {
+    const cancelled = pendingSave.current;
+    if (cancelled !== null) {
+      window.clearTimeout(cancelled);
+      pendingSave.current = null;
+    }
+    const startedAt = rev.current;
+    setSaveState("saving");
+    void op()
+      .then(() => {
+        savedRev.current = Math.max(savedRev.current, startedAt);
+        if (!dirty()) setSaveState("saved");
+        showToast(okMsg);
+      })
+      .catch((err: unknown) => {
+        setSaveState("idle");
+        showToast(err instanceof Error ? err.message : failMsg, true);
+        // Re-arm the save we cancelled so the local edit is not lost.
+        if (cancelled !== null) {
+          rev.current += 1;
+          setBoard((prev) => (prev ? { ...prev } : prev));
+        }
+      });
   }
 
   function moveTile(key: string, zone: "pool" | number, beforeKey?: string) {
@@ -215,29 +273,23 @@ function EditableBoard({
   }
 
   const diffs = theirs ? countDiffs(placementOf(board), theirs) : 0;
+  const ranked = board.tiers.reduce((n, tier) => n + tier.length, 0);
 
   return (
     <>
       <div className="bar inner">
-        <button
-          type="button"
-          onClick={() => {
-            void resetToPool({ listKind }).then(() => {
-              dirty.current = false;
-              showToast("Reset to pool");
-            });
-          }}
-        >
+        <button type="button" onClick={() => setConfirmingReset(true)}>
           Reset to pool
         </button>
         <button
           type="button"
-          onClick={() => {
-            void autofillByScore({ listKind }).then(() => {
-              dirty.current = false;
-              showToast("Auto-filled by score");
-            });
-          }}
+          onClick={() =>
+            runBulk(
+              () => autofillByScore({ listKind }),
+              "Auto-filled by score",
+              "Could not auto-fill",
+            )
+          }
         >
           Auto-fill by score
         </button>
@@ -272,10 +324,85 @@ function EditableBoard({
         contrast={theirs}
         contrastTitle="them"
       />
+      {confirmingReset ? (
+        <ConfirmDialog
+          title="Are you sure?"
+          body={`This clears every tier and puts all ${ranked} ${
+            ranked === 1 ? "tile" : "tiles"
+          } back in Unranked. It cannot be undone.`}
+          confirmLabel="Reset to pool"
+          onCancel={() => setConfirmingReset(false)}
+          onConfirm={() => {
+            setConfirmingReset(false);
+            runBulk(
+              () => resetToPool({ listKind }),
+              "Reset to pool",
+              "Could not reset",
+            );
+          }}
+        />
+      ) : null}
       <div className={`toast${toast ? " on" : ""}${toast?.err ? " err" : ""}`}>
         {toast?.msg}
       </div>
     </>
+  );
+}
+
+function ConfirmDialog({
+  title,
+  body,
+  confirmLabel,
+  onConfirm,
+  onCancel,
+}: {
+  title: string;
+  body: string;
+  confirmLabel: string;
+  onConfirm: () => void;
+  onCancel: () => void;
+}) {
+  const cancelRef = useRef<HTMLButtonElement>(null);
+  // Kept in a ref so re-renders never re-run the effect and steal focus back.
+  const cancelFn = useRef(onCancel);
+  cancelFn.current = onCancel;
+
+  useEffect(() => {
+    cancelRef.current?.focus();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") cancelFn.current();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
+  return (
+    <div
+      className="modal-backdrop"
+      role="presentation"
+      onMouseDown={(e) => {
+        if (e.target === e.currentTarget) onCancel();
+      }}
+    >
+      <div
+        className="modal"
+        role="alertdialog"
+        aria-modal="true"
+        aria-labelledby="confirm-title"
+        aria-describedby="confirm-body"
+      >
+        <h3 id="confirm-title">{title}</h3>
+        <p id="confirm-body">{body}</p>
+        <div className="modal-actions">
+          <button type="button" ref={cancelRef} onClick={onCancel}>
+            Cancel
+          </button>
+          <button type="button" className="danger" onClick={onConfirm}>
+            {confirmLabel}
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -398,6 +525,7 @@ function Board({
             )}
             <DropZone
               zone={i}
+              zoneLabel={label}
               keys={board.tiers[i] ?? []}
               byKey={byKey}
               big={big}
@@ -414,6 +542,7 @@ function Board({
         <h2>Unranked</h2>
         <DropZone
           zone="pool"
+          zoneLabel="Unranked"
           keys={board.pool}
           byKey={byKey}
           big={big}
@@ -436,6 +565,7 @@ function insert(list: string[], key: string, beforeKey?: string) {
 
 function DropZone({
   zone,
+  zoneLabel,
   keys,
   byKey,
   big,
@@ -446,6 +576,7 @@ function DropZone({
   contrastTitle,
 }: {
   zone: "pool" | number;
+  zoneLabel: string;
   keys: string[];
   byKey: Map<string, Character>;
   big: boolean;
@@ -486,7 +617,7 @@ function DropZone({
         const item = byKey.get(key);
         if (!item) return null;
         const other = contrast?.get(key);
-        const isDiff = Boolean(other && other.zone !== zone);
+        const isDiff = Boolean(other) && !sameSlot(other, zoneLabel);
         return (
           <div
             key={key}

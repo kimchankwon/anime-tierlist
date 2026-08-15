@@ -1,0 +1,3229 @@
+{
+  "fetchedAt": "2026-08-15T01:23:21.260Z",
+  "xtectraEntries": 370,
+  "prowtarEntries": 889,
+  "xtectraFranchises": 267,
+  "prowtarFranchises": 662,
+  "sharedFranchises": 163,
+  "shared": [
+    {
+      "title": "Hunter x Hunter (2011)",
+      "xTitle": "Hunter x Hunter (2011)",
+      "pTitle": "Hunter x Hunter (2011)",
+      "xScore": 10,
+      "pScore": 10,
+      "avg": 10,
+      "xIds": [
+        11061
+      ],
+      "pIds": [
+        11061
+      ],
+      "titles": [
+        "Hunter x Hunter (2011)"
+      ]
+    },
+    {
+      "title": "Frieren: Beyond Journey’s End",
+      "xTitle": "Frieren: Beyond Journey’s End",
+      "pTitle": "Frieren: Beyond Journey’s End",
+      "xScore": 9,
+      "pScore": 10,
+      "avg": 9.5,
+      "xIds": [
+        154587,
+        182255
+      ],
+      "pIds": [
+        154587,
+        170068,
+        182255,
+        189513,
+        206425,
+        209939
+      ],
+      "titles": [
+        "Frieren: Beyond Journey’s End",
+        "Frieren: Beyond Journey’s End Season 2",
+        "Sousou no Frieren: ●● no Mahou",
+        "Sousou no Frieren: ●● no Mahou Part 2",
+        "Sousou no Frieren: ●● no Mahou Part 3",
+        "Sousou no Frieren 3rd Season"
+      ]
+    },
+    {
+      "title": "The Disappearance of Haruhi Suzumiya",
+      "xTitle": "The Disappearance of Haruhi Suzumiya",
+      "pTitle": "The Disappearance of Haruhi Suzumiya",
+      "xScore": 9,
+      "pScore": 9.5,
+      "avg": 9.25,
+      "xIds": [
+        7311,
+        4382
+      ],
+      "pIds": [
+        7311,
+        4382,
+        20566
+      ],
+      "titles": [
+        "The Disappearance of Haruhi Suzumiya",
+        "The Melancholy of Haruhi Suzumiya (2009)",
+        "The Disappearance of Nagato Yuki-chan"
+      ]
+    },
+    {
+      "title": "A Silent Voice",
+      "xTitle": "A Silent Voice",
+      "pTitle": "A Silent Voice",
+      "xScore": 9,
+      "pScore": 9,
+      "avg": 9,
+      "xIds": [
+        20954
+      ],
+      "pIds": [
+        20954
+      ],
+      "titles": [
+        "A Silent Voice"
+      ]
+    },
+    {
+      "title": "Bakemonogatari",
+      "xTitle": "Bakemonogatari",
+      "pTitle": "Kizumonogatari Part 3: Reiketsu",
+      "xScore": 8.5,
+      "pScore": 9,
+      "avg": 8.75,
+      "xIds": [
+        5081,
+        9260,
+        21399,
+        21400,
+        21520,
+        17074,
+        15689,
+        11597,
+        21262
+      ],
+      "pIds": [
+        5081,
+        20593,
+        9260,
+        21399,
+        21400,
+        21520,
+        17074,
+        15689,
+        11597,
+        21262,
+        21745,
+        20918,
+        100815,
+        173533,
+        180332,
+        195448
+      ],
+      "titles": [
+        "Bakemonogatari",
+        "Kizumonogatari Part 1: Tekketsu",
+        "Kizumonogatari Part 2: Nekketsu",
+        "Kizumonogatari Part 3: Reiketsu",
+        "Koyomimonogatari",
+        "Monogatari Series Second Season",
+        "Nekomonogatari Black",
+        "Nisemonogatari",
+        "Owarimonogatari",
+        "Hanamonogatari",
+        "Owarimonogatari Second Season",
+        "Tsukimonogatari",
+        "Zoku Owarimonogatari",
+        "MONOGATARI Series: OFF & MONSTER Season",
+        "MONOGATARI Series: OFF & MONSTER Season - A Cruel Fairy Tale: The Beautiful Princess",
+        "Monogatari Series: Off & Monster Season Shin Episode"
+      ]
+    },
+    {
+      "title": "Mushoku Tensei: Jobless Reincarnation Cour 2",
+      "xTitle": "Mushoku Tensei: Jobless Reincarnation Cour 2",
+      "pTitle": "Mushoku Tensei: Jobless Reincarnation Cour 2",
+      "xScore": 8.5,
+      "pScore": 9,
+      "avg": 8.75,
+      "xIds": [
+        108465,
+        127720,
+        146065,
+        166873,
+        178789
+      ],
+      "pIds": [
+        108465,
+        127720,
+        146065,
+        141534,
+        166873,
+        178789
+      ],
+      "titles": [
+        "Mushoku Tensei: Jobless Reincarnation",
+        "Mushoku Tensei: Jobless Reincarnation Cour 2",
+        "Mushoku Tensei: Jobless Reincarnation Season 2",
+        "Mushoku Tensei: Jobless Reincarnation Season 2 Part 2",
+        "Mushoku Tensei: Jobless Reincarnation Season 3",
+        "Mushoku Tensei: Jobless Reincarnation Cour 2 - Eris the Goblin Slayer"
+      ]
+    },
+    {
+      "title": "JoJo's Bizarre Adventure: Stardust Crusaders - Battle in Egypt",
+      "xTitle": "JoJo's Bizarre Adventure: Stardust Crusaders - Battle in Egypt",
+      "pTitle": "JoJo's Bizarre Adventure: Diamond is Unbreakable",
+      "xScore": 9.5,
+      "pScore": 7.5,
+      "avg": 8.5,
+      "xIds": [
+        14719,
+        21450,
+        20474,
+        20799,
+        102883
+      ],
+      "pIds": [
+        14719,
+        21450,
+        20474,
+        20799,
+        190327,
+        21778,
+        146722,
+        210482,
+        102883,
+        131942
+      ],
+      "titles": [
+        "JoJo's Bizarre Adventure (TV)",
+        "JoJo's Bizarre Adventure: Diamond is Unbreakable",
+        "JoJo's Bizarre Adventure: Stardust Crusaders",
+        "JoJo's Bizarre Adventure: Stardust Crusaders - Battle in Egypt",
+        "JoJo's Bizarre Adventure: Golden Wind",
+        "STEEL BALL RUN JoJo's Bizarre Adventure 1st STAGE",
+        "Thus Spoke Rohan Kishibe",
+        "JoJo's Bizarre Adventure: STONE OCEAN Part 2",
+        "STEEL BALL RUN JoJo's Bizarre Adventure 2nd - 3rd STAGE",
+        "JoJo's Bizarre Adventure: STONE OCEAN"
+      ]
+    },
+    {
+      "title": "JUJUTSU KAISEN Season 2",
+      "xTitle": "JUJUTSU KAISEN Season 2",
+      "pTitle": "JUJUTSU KAISEN Season 3: The Culling Game Part 1",
+      "xScore": 9,
+      "pScore": 8,
+      "avg": 8.5,
+      "xIds": [
+        113415,
+        131573,
+        145064,
+        172463
+      ],
+      "pIds": [
+        113415,
+        131573,
+        145064,
+        172463
+      ],
+      "titles": [
+        "JUJUTSU KAISEN",
+        "JUJUTSU KAISEN 0",
+        "JUJUTSU KAISEN Season 2",
+        "JUJUTSU KAISEN Season 3: The Culling Game Part 1"
+      ]
+    },
+    {
+      "title": "DAN DA DAN",
+      "xTitle": "DAN DA DAN",
+      "pTitle": "DAN DA DAN",
+      "xScore": 8.5,
+      "pScore": 8,
+      "avg": 8.25,
+      "xIds": [
+        171018,
+        185660,
+        198966
+      ],
+      "pIds": [
+        171018,
+        185660,
+        198966
+      ],
+      "titles": [
+        "DAN DA DAN",
+        "DAN DA DAN Season 2",
+        "Dandadan 3rd Season"
+      ]
+    },
+    {
+      "title": "Death Note",
+      "xTitle": "Death Note",
+      "pTitle": "Death Note",
+      "xScore": 9.5,
+      "pScore": 7,
+      "avg": 8.25,
+      "xIds": [
+        1535
+      ],
+      "pIds": [
+        1535
+      ],
+      "titles": [
+        "Death Note"
+      ]
+    },
+    {
+      "title": "Fullmetal Alchemist: Brotherhood",
+      "xTitle": "Fullmetal Alchemist: Brotherhood",
+      "pTitle": "Fullmetal Alchemist: Brotherhood",
+      "xScore": 8,
+      "pScore": 8.5,
+      "avg": 8.25,
+      "xIds": [
+        5114
+      ],
+      "pIds": [
+        5114
+      ],
+      "titles": [
+        "Fullmetal Alchemist: Brotherhood"
+      ]
+    },
+    {
+      "title": "Clannad: After Story",
+      "xTitle": "Clannad: After Story",
+      "pTitle": "Clannad: After Story",
+      "xScore": 8,
+      "pScore": 8,
+      "avg": 8,
+      "xIds": [
+        2167,
+        4181
+      ],
+      "pIds": [
+        2167,
+        4181
+      ],
+      "titles": [
+        "Clannad",
+        "Clannad: After Story"
+      ]
+    },
+    {
+      "title": "K-ON! Season 2",
+      "xTitle": "K-ON! Season 2",
+      "pTitle": "K-ON! Season 2",
+      "xScore": 8,
+      "pScore": 8,
+      "avg": 8,
+      "xIds": [
+        5680,
+        9617,
+        7791
+      ],
+      "pIds": [
+        5680,
+        9617,
+        7791,
+        9734
+      ],
+      "titles": [
+        "K-ON!",
+        "K-ON!: The Movie",
+        "K-ON! Season 2",
+        "K-ON! Season 2: Plan!"
+      ]
+    },
+    {
+      "title": "Neon Genesis Evangelion: The End of Evangelion",
+      "xTitle": "Neon Genesis Evangelion: The End of Evangelion",
+      "pTitle": "Neon Genesis Evangelion: The End of Evangelion",
+      "xScore": 7,
+      "pScore": 9,
+      "avg": 8,
+      "xIds": [
+        30,
+        32
+      ],
+      "pIds": [
+        2759,
+        3784,
+        3785,
+        3786,
+        30,
+        32,
+        155399,
+        208192
+      ],
+      "titles": [
+        "Neon Genesis Evangelion",
+        "Neon Genesis Evangelion: The End of Evangelion",
+        "Evangelion: 1.0 You Are (Not) Alone",
+        "Evangelion: 2.0 You Can (Not) Advance",
+        "Evangelion: 3.0 You Can (Not) Redo",
+        "Evangelion: 3.0+1.0 Thrice Upon a Time",
+        "EVANGELION:3.0 (-46h)",
+        "Evangelion (Shinsaku Series)"
+      ]
+    },
+    {
+      "title": "Howl‘s Moving Castle",
+      "xTitle": "Howl‘s Moving Castle",
+      "pTitle": "Howl‘s Moving Castle",
+      "xScore": 8,
+      "pScore": 7.5,
+      "avg": 7.75,
+      "xIds": [
+        431
+      ],
+      "pIds": [
+        431
+      ],
+      "titles": [
+        "Howl‘s Moving Castle"
+      ]
+    },
+    {
+      "title": "Jaadugar: A Witch in Mongolia",
+      "xTitle": "Jaadugar: A Witch in Mongolia",
+      "pTitle": "Jaadugar: A Witch in Mongolia",
+      "xScore": 7.5,
+      "pScore": 8,
+      "avg": 7.75,
+      "xIds": [
+        190569
+      ],
+      "pIds": [
+        190569
+      ],
+      "titles": [
+        "Jaadugar: A Witch in Mongolia"
+      ]
+    },
+    {
+      "title": "Nichijou - My Ordinary Life",
+      "xTitle": "Nichijou - My Ordinary Life",
+      "pTitle": "Nichijou - My Ordinary Life",
+      "xScore": 7.5,
+      "pScore": 8,
+      "avg": 7.75,
+      "xIds": [
+        10165
+      ],
+      "pIds": [
+        10165
+      ],
+      "titles": [
+        "Nichijou - My Ordinary Life"
+      ]
+    },
+    {
+      "title": "Steins;Gate",
+      "xTitle": "Steins;Gate",
+      "pTitle": "Steins;Gate",
+      "xScore": 8,
+      "pScore": 7.5,
+      "avg": 7.75,
+      "xIds": [
+        9253
+      ],
+      "pIds": [
+        9253
+      ],
+      "titles": [
+        "Steins;Gate"
+      ]
+    },
+    {
+      "title": "HAIKYU!!",
+      "xTitle": "HAIKYU!!",
+      "pTitle": "HAIKYU!! 3rd Season",
+      "xScore": 8,
+      "pScore": 7,
+      "avg": 7.5,
+      "xIds": [
+        20464,
+        20992,
+        21698
+      ],
+      "pIds": [
+        20464,
+        20992,
+        21698
+      ],
+      "titles": [
+        "HAIKYU!!",
+        "HAIKYU!! 2nd Season",
+        "HAIKYU!! 3rd Season"
+      ]
+    },
+    {
+      "title": "March comes in like a lion",
+      "xTitle": "March comes in like a lion",
+      "pTitle": "March comes in like a lion Season 2",
+      "xScore": 5,
+      "pScore": 10,
+      "avg": 7.5,
+      "xIds": [
+        21366,
+        98478
+      ],
+      "pIds": [
+        21366,
+        98478,
+        21587
+      ],
+      "titles": [
+        "March comes in like a lion",
+        "March comes in like a lion Season 2",
+        "March comes in like a lion meets Bump of Chicken"
+      ]
+    },
+    {
+      "title": "MONOGATARI Series: OFF & MONSTER Season",
+      "xTitle": "MONOGATARI Series: OFF & MONSTER Season",
+      "pTitle": "Kizumonogatari Part 3: Reiketsu",
+      "xScore": 6,
+      "pScore": 9,
+      "avg": 7.5,
+      "xIds": [
+        20593,
+        21745,
+        100815,
+        173533
+      ],
+      "pIds": [
+        5081,
+        20593,
+        9260,
+        21399,
+        21400,
+        21520,
+        17074,
+        15689,
+        11597,
+        21262,
+        21745,
+        20918,
+        100815,
+        173533,
+        180332,
+        195448
+      ],
+      "titles": [
+        "Hanamonogatari",
+        "Owarimonogatari Second Season",
+        "Zoku Owarimonogatari",
+        "MONOGATARI Series: OFF & MONSTER Season",
+        "Bakemonogatari",
+        "Kizumonogatari Part 1: Tekketsu",
+        "Kizumonogatari Part 2: Nekketsu",
+        "Kizumonogatari Part 3: Reiketsu",
+        "Koyomimonogatari",
+        "Monogatari Series Second Season",
+        "Nekomonogatari Black",
+        "Nisemonogatari",
+        "Owarimonogatari",
+        "Tsukimonogatari",
+        "MONOGATARI Series: OFF & MONSTER Season - A Cruel Fairy Tale: The Beautiful Princess",
+        "Monogatari Series: Off & Monster Season Shin Episode"
+      ]
+    },
+    {
+      "title": "Delicious in Dungeon",
+      "xTitle": "Delicious in Dungeon",
+      "pTitle": "Delicious in Dungeon",
+      "xScore": 7,
+      "pScore": 7.5,
+      "avg": 7.25,
+      "xIds": [
+        153518
+      ],
+      "pIds": [
+        153518,
+        111516,
+        178031
+      ],
+      "titles": [
+        "Delicious in Dungeon",
+        "Delicious in Dungeon CM",
+        "Delicious in Dungeon Season 2"
+      ]
+    },
+    {
+      "title": "Mob Psycho 100",
+      "xTitle": "Mob Psycho 100",
+      "pTitle": "Mob Psycho 100 II",
+      "xScore": 7,
+      "pScore": 7.5,
+      "avg": 7.25,
+      "xIds": [
+        21507,
+        101338,
+        140439
+      ],
+      "pIds": [
+        21507,
+        101338,
+        140439
+      ],
+      "titles": [
+        "Mob Psycho 100",
+        "Mob Psycho 100 II",
+        "Mob Psycho 100 III"
+      ]
+    },
+    {
+      "title": "Spirited Away",
+      "xTitle": "Spirited Away",
+      "pTitle": "Spirited Away",
+      "xScore": 6.5,
+      "pScore": 8,
+      "avg": 7.25,
+      "xIds": [
+        199
+      ],
+      "pIds": [
+        199
+      ],
+      "titles": [
+        "Spirited Away"
+      ]
+    },
+    {
+      "title": "BOCCHI THE ROCK!",
+      "xTitle": "BOCCHI THE ROCK!",
+      "pTitle": "BOCCHI THE ROCK!",
+      "xScore": 6,
+      "pScore": 8,
+      "avg": 7,
+      "xIds": [
+        130003
+      ],
+      "pIds": [
+        130003,
+        186712
+      ],
+      "titles": [
+        "BOCCHI THE ROCK!",
+        "Bocchi the Rock! 2nd Season"
+      ]
+    },
+    {
+      "title": "Chainsaw Man",
+      "xTitle": "Chainsaw Man",
+      "pTitle": "Chainsaw Man – The Movie: Reze Arc",
+      "xScore": 5.5,
+      "pScore": 8.5,
+      "avg": 7,
+      "xIds": [
+        127230
+      ],
+      "pIds": [
+        127230,
+        171627,
+        204429
+      ],
+      "titles": [
+        "Chainsaw Man",
+        "Chainsaw Man – The Movie: Reze Arc",
+        "Chainsaw Man: Shikaku-hen"
+      ]
+    },
+    {
+      "title": "HINAMATSURI",
+      "xTitle": "HINAMATSURI",
+      "pTitle": "HINAMATSURI",
+      "xScore": 6,
+      "pScore": 8,
+      "avg": 7,
+      "xIds": [
+        100077
+      ],
+      "pIds": [
+        100077
+      ],
+      "titles": [
+        "HINAMATSURI"
+      ]
+    },
+    {
+      "title": "Kill la Kill",
+      "xTitle": "Kill la Kill",
+      "pTitle": "Kill la Kill",
+      "xScore": 6.5,
+      "pScore": 7.5,
+      "avg": 7,
+      "xIds": [
+        18679
+      ],
+      "pIds": [
+        18679
+      ],
+      "titles": [
+        "Kill la Kill"
+      ]
+    },
+    {
+      "title": "Made in Abyss",
+      "xTitle": "Made in Abyss",
+      "pTitle": "Made in Abyss: The Golden City of the Scorching Sun",
+      "xScore": 6,
+      "pScore": 8,
+      "avg": 7,
+      "xIds": [
+        97986
+      ],
+      "pIds": [
+        97986,
+        100643,
+        114745,
+        153791,
+        160275
+      ],
+      "titles": [
+        "Made in Abyss",
+        "Made in Abyss: Dawn of the Deep Soul",
+        "Made in Abyss: The Golden City of the Scorching Sun",
+        "Made in Abyss: Retsujitsu no Ougonkyou - Papa to Issho",
+        "Made in Abyss: Mezameru Shinpi"
+      ]
+    },
+    {
+      "title": "Sound! Euphonium",
+      "xTitle": "Sound! Euphonium",
+      "pTitle": "Liz and the Blue Bird",
+      "xScore": 5.5,
+      "pScore": 8.5,
+      "avg": 7,
+      "xIds": [
+        20912,
+        21460
+      ],
+      "pIds": [
+        20912,
+        21460,
+        100178,
+        101992,
+        132615,
+        109731,
+        150429
+      ],
+      "titles": [
+        "Sound! Euphonium",
+        "Sound! Euphonium 2",
+        "Liz and the Blue Bird",
+        "Sound! Euphonium: The Movie - Our Promise: A Brand New Day",
+        "Kimi wa Tennenshoku",
+        "Sound! Euphonium 3",
+        "Sound! Euphonium: Ensemble Contest"
+      ]
+    },
+    {
+      "title": "The Apothecary Diaries",
+      "xTitle": "The Apothecary Diaries",
+      "pTitle": "The Apothecary Diaries Season 2",
+      "xScore": 7,
+      "pScore": 7,
+      "avg": 7,
+      "xIds": [
+        161645,
+        176301
+      ],
+      "pIds": [
+        161645,
+        176301,
+        195516
+      ],
+      "titles": [
+        "The Apothecary Diaries",
+        "The Apothecary Diaries Season 2",
+        "The Apothecary Diaries Season 3"
+      ]
+    },
+    {
+      "title": "Witch Hat Atelier",
+      "xTitle": "Witch Hat Atelier",
+      "pTitle": "Witch Hat Atelier",
+      "xScore": 7,
+      "pScore": 7,
+      "avg": 7,
+      "xIds": [
+        147105
+      ],
+      "pIds": [
+        147105,
+        213702
+      ],
+      "titles": [
+        "Witch Hat Atelier",
+        "Witch Hat Atelier Season 2"
+      ]
+    },
+    {
+      "title": "Fate/stay night: Unlimited Blade Works",
+      "xTitle": "Fate/stay night: Unlimited Blade Works",
+      "pTitle": "Fate/Zero Season 2",
+      "xScore": 6,
+      "pScore": 7.5,
+      "avg": 6.75,
+      "xIds": [
+        19603,
+        20792,
+        10087,
+        11741
+      ],
+      "pIds": [
+        20791,
+        19603,
+        20792,
+        10087,
+        11741,
+        21718,
+        21719
+      ],
+      "titles": [
+        "Fate/stay night: Unlimited Blade Works",
+        "Fate/stay night: Unlimited Blade Works 2nd Season",
+        "Fate/Zero",
+        "Fate/Zero Season 2",
+        "Fate/stay night [Heaven's Feel] I. presage flower",
+        "Fate/stay night [Heaven's Feel] II. lost butterfly",
+        "Fate/stay night [Heaven’s Feel] III. spring song"
+      ]
+    },
+    {
+      "title": "Kiki's Delivery Service",
+      "xTitle": "Kiki's Delivery Service",
+      "pTitle": "Kiki's Delivery Service",
+      "xScore": 5.5,
+      "pScore": 8,
+      "avg": 6.75,
+      "xIds": [
+        512
+      ],
+      "pIds": [
+        512
+      ],
+      "titles": [
+        "Kiki's Delivery Service"
+      ]
+    },
+    {
+      "title": "No Game, No Life",
+      "xTitle": "No Game, No Life",
+      "pTitle": "No Game, No Life",
+      "xScore": 7.5,
+      "pScore": 6,
+      "avg": 6.75,
+      "xIds": [
+        19815
+      ],
+      "pIds": [
+        19815,
+        21875
+      ],
+      "titles": [
+        "No Game, No Life",
+        "No Game, No Life Zero"
+      ]
+    },
+    {
+      "title": "Puella Magi Madoka Magica",
+      "xTitle": "Puella Magi Madoka Magica",
+      "pTitle": "Puella Magi Madoka Magica",
+      "xScore": 6,
+      "pScore": 7.5,
+      "avg": 6.75,
+      "xIds": [
+        9756,
+        11981
+      ],
+      "pIds": [
+        9756,
+        11981,
+        133007
+      ],
+      "titles": [
+        "Puella Magi Madoka Magica",
+        "Puella Magi Madoka Magica the Movie -Rebellion-",
+        "Puella Magi Madoka Magica the Movie -Walpurgisnacht: Rising-"
+      ]
+    },
+    {
+      "title": "You and I Are Polar Opposites",
+      "xTitle": "You and I Are Polar Opposites",
+      "pTitle": "You and I Are Polar Opposites Season 2",
+      "xScore": 6.5,
+      "pScore": 7,
+      "avg": 6.75,
+      "xIds": [
+        184951,
+        210031
+      ],
+      "pIds": [
+        184951,
+        210031
+      ],
+      "titles": [
+        "You and I Are Polar Opposites",
+        "You and I Are Polar Opposites Season 2"
+      ]
+    },
+    {
+      "title": "Gurren Lagann",
+      "xTitle": "Gurren Lagann",
+      "pTitle": "Gurren Lagann",
+      "xScore": 5.5,
+      "pScore": 7.5,
+      "avg": 6.5,
+      "xIds": [
+        2001
+      ],
+      "pIds": [
+        2001
+      ],
+      "titles": [
+        "Gurren Lagann"
+      ]
+    },
+    {
+      "title": "Lucky☆Star",
+      "xTitle": "Lucky☆Star",
+      "pTitle": "Lucky☆Star",
+      "xScore": 7,
+      "pScore": 6,
+      "avg": 6.5,
+      "xIds": [
+        1887
+      ],
+      "pIds": [
+        1887,
+        4472
+      ],
+      "titles": [
+        "Lucky☆Star",
+        "Lucky☆Star OVA"
+      ]
+    },
+    {
+      "title": "Miss Kobayashi's Dragon Maid",
+      "xTitle": "Miss Kobayashi's Dragon Maid",
+      "pTitle": "Miss Kobayashi's Dragon Maid",
+      "xScore": 5,
+      "pScore": 8,
+      "avg": 6.5,
+      "xIds": [
+        21776
+      ],
+      "pIds": [
+        21776,
+        98502,
+        98580,
+        107717
+      ],
+      "titles": [
+        "Miss Kobayashi's Dragon Maid",
+        "Miss Kobayashi's Dragon Something",
+        "Miss Kobayashi's Dragon Maid: Valentines and Hot Springs! (Please Don't Get Your Hopes Up)",
+        "Miss Kobayashi's Dragon Maid S"
+      ]
+    },
+    {
+      "title": "One-Punch Man",
+      "xTitle": "One-Punch Man",
+      "pTitle": "One-Punch Man",
+      "xScore": 6,
+      "pScore": 7,
+      "avg": 6.5,
+      "xIds": [
+        21087
+      ],
+      "pIds": [
+        21087,
+        97668
+      ],
+      "titles": [
+        "One-Punch Man",
+        "One-Punch Man Season 2"
+      ]
+    },
+    {
+      "title": "Your Name.",
+      "xTitle": "Your Name.",
+      "pTitle": "Your Name.",
+      "xScore": 8,
+      "pScore": 5,
+      "avg": 6.5,
+      "xIds": [
+        21519
+      ],
+      "pIds": [
+        21519
+      ],
+      "titles": [
+        "Your Name."
+      ]
+    },
+    {
+      "title": "Assassination Classroom",
+      "xTitle": "Assassination Classroom",
+      "pTitle": "Assassination Classroom Second Season",
+      "xScore": 6,
+      "pScore": 6.5,
+      "avg": 6.25,
+      "xIds": [
+        20755,
+        21170
+      ],
+      "pIds": [
+        20755,
+        21170
+      ],
+      "titles": [
+        "Assassination Classroom",
+        "Assassination Classroom Second Season"
+      ]
+    },
+    {
+      "title": "Kaguya-sama: Love is War",
+      "xTitle": "Kaguya-sama: Love is War",
+      "pTitle": "Kaguya-sama: Love is War",
+      "xScore": 7,
+      "pScore": 5.5,
+      "avg": 6.25,
+      "xIds": [
+        101921,
+        112641,
+        125367
+      ],
+      "pIds": [
+        101921
+      ],
+      "titles": [
+        "Kaguya-sama: Love is War",
+        "Kaguya-sama: Love is War?",
+        "Kaguya-sama: Love is War -Ultra Romantic-"
+      ]
+    },
+    {
+      "title": "Hyouka",
+      "xTitle": "Hyouka",
+      "pTitle": "Hyouka",
+      "xScore": 5.5,
+      "pScore": 6.5,
+      "avg": 6,
+      "xIds": [
+        12189
+      ],
+      "pIds": [
+        12189
+      ],
+      "titles": [
+        "Hyouka"
+      ]
+    },
+    {
+      "title": "KONOSUBA -God's blessing on this wonderful world!",
+      "xTitle": "KONOSUBA -God's blessing on this wonderful world!",
+      "pTitle": "KONOSUBA -God's blessing on this wonderful world! 2",
+      "xScore": 7,
+      "pScore": 5,
+      "avg": 6,
+      "xIds": [
+        21202,
+        21699,
+        97996,
+        21574
+      ],
+      "pIds": [
+        21202,
+        21699,
+        97996,
+        21574
+      ],
+      "titles": [
+        "KONOSUBA -God's blessing on this wonderful world!",
+        "KONOSUBA -God's blessing on this wonderful world! 2",
+        "KONOSUBA -God's blessing on this wonderful world! 2: God's Blessings on These Wonderful Works of Art!",
+        "KONOSUBA -God's blessing on this wonderful world!: God's Blessings On This Wonderful Choker!"
+      ]
+    },
+    {
+      "title": "Non Non Biyori",
+      "xTitle": "Non Non Biyori",
+      "pTitle": "Non Non Biyori",
+      "xScore": 6,
+      "pScore": 6,
+      "avg": 6,
+      "xIds": [
+        17549,
+        20694,
+        109403
+      ],
+      "pIds": [
+        17549,
+        20694,
+        21585,
+        109403,
+        137337,
+        98779
+      ],
+      "titles": [
+        "Non Non Biyori",
+        "Non Non Biyori Repeat",
+        "Non Non Biyori Nonstop",
+        "Non Non Biyori: Repeat - Hotaru ga Tanoshinda",
+        "Non Non Biyori Nonstop: Our Club Worked Hard",
+        "Non Non Biyori Vacation"
+      ]
+    },
+    {
+      "title": "Re:ZERO -Starting Life in Another World-",
+      "xTitle": "Re:ZERO -Starting Life in Another World-",
+      "pTitle": "Re:ZERO -Starting Life in Another World-",
+      "xScore": 7,
+      "pScore": 5,
+      "avg": 6,
+      "xIds": [
+        21355
+      ],
+      "pIds": [
+        21355,
+        119661,
+        108632
+      ],
+      "titles": [
+        "Re:ZERO -Starting Life in Another World-",
+        "Re:ZERO -Starting Life in Another World- Season 2 Part 2",
+        "Re:ZERO -Starting Life in Another World- Season 2"
+      ]
+    },
+    {
+      "title": "Anohana: The Flower We Saw That Day",
+      "xTitle": "Anohana: The Flower We Saw That Day",
+      "pTitle": "Anohana: The Flower We Saw That Day",
+      "xScore": 5.5,
+      "pScore": 6,
+      "avg": 5.75,
+      "xIds": [
+        9989
+      ],
+      "pIds": [
+        9989
+      ],
+      "titles": [
+        "Anohana: The Flower We Saw That Day"
+      ]
+    },
+    {
+      "title": "Paprika",
+      "xTitle": "Paprika",
+      "pTitle": "Paprika",
+      "xScore": 5,
+      "pScore": 6.5,
+      "avg": 5.75,
+      "xIds": [
+        1943
+      ],
+      "pIds": [
+        1943
+      ],
+      "titles": [
+        "Paprika"
+      ]
+    },
+    {
+      "title": "The Devil is a Part-Timer!",
+      "xTitle": "The Devil is a Part-Timer!",
+      "pTitle": "The Devil is a Part-Timer!",
+      "xScore": 5,
+      "pScore": 6.5,
+      "avg": 5.75,
+      "xIds": [
+        15809
+      ],
+      "pIds": [
+        15809,
+        130592
+      ],
+      "titles": [
+        "The Devil is a Part-Timer!",
+        "The Devil is a Part-Timer! Season 2"
+      ]
+    },
+    {
+      "title": "Your lie in April",
+      "xTitle": "Your lie in April",
+      "pTitle": "Your lie in April",
+      "xScore": 6,
+      "pScore": 5.5,
+      "avg": 5.75,
+      "xIds": [
+        20665
+      ],
+      "pIds": [
+        20665
+      ],
+      "titles": [
+        "Your lie in April"
+      ]
+    },
+    {
+      "title": "Attack on Titan",
+      "xTitle": "Attack on Titan",
+      "pTitle": "Attack on Titan",
+      "xScore": 6,
+      "pScore": 5,
+      "avg": 5.5,
+      "xIds": [
+        16498,
+        20958,
+        99147
+      ],
+      "pIds": [
+        16498,
+        20958,
+        99147
+      ],
+      "titles": [
+        "Attack on Titan",
+        "Attack on Titan Season 2",
+        "Attack on Titan Season 3"
+      ]
+    },
+    {
+      "title": "Barakamon",
+      "xTitle": "Barakamon",
+      "pTitle": "Barakamon",
+      "xScore": 5,
+      "pScore": 6,
+      "avg": 5.5,
+      "xIds": [
+        20722
+      ],
+      "pIds": [
+        20722,
+        21626
+      ],
+      "titles": [
+        "Barakamon",
+        "Handa-kun"
+      ]
+    },
+    {
+      "title": "Bunny Drop",
+      "xTitle": "Bunny Drop",
+      "pTitle": "Bunny Drop",
+      "xScore": 5,
+      "pScore": 6,
+      "avg": 5.5,
+      "xIds": [
+        10162
+      ],
+      "pIds": [
+        10162
+      ],
+      "titles": [
+        "Bunny Drop"
+      ]
+    },
+    {
+      "title": "Code Geass: Lelouch of the Rebellion",
+      "xTitle": "Code Geass: Lelouch of the Rebellion",
+      "pTitle": "Code Geass: Lelouch of the Rebellion",
+      "xScore": 8,
+      "pScore": 3,
+      "avg": 5.5,
+      "xIds": [
+        1575,
+        2904
+      ],
+      "pIds": [
+        1575
+      ],
+      "titles": [
+        "Code Geass: Lelouch of the Rebellion",
+        "Code Geass: Lelouch of the Rebellion R2"
+      ]
+    },
+    {
+      "title": "Daily Lives of High School Boys",
+      "xTitle": "Daily Lives of High School Boys",
+      "pTitle": "Daily Lives of High School Boys",
+      "xScore": 5,
+      "pScore": 6,
+      "avg": 5.5,
+      "xIds": [
+        11843
+      ],
+      "pIds": [
+        11843
+      ],
+      "titles": [
+        "Daily Lives of High School Boys"
+      ]
+    },
+    {
+      "title": "Death Parade",
+      "xTitle": "Death Parade",
+      "pTitle": "Death Parade",
+      "xScore": 6,
+      "pScore": 5,
+      "avg": 5.5,
+      "xIds": [
+        20931
+      ],
+      "pIds": [
+        20931
+      ],
+      "titles": [
+        "Death Parade"
+      ]
+    },
+    {
+      "title": "Monthly Girls' Nozaki-kun",
+      "xTitle": "Monthly Girls' Nozaki-kun",
+      "pTitle": "Monthly Girls' Nozaki-kun",
+      "xScore": 6,
+      "pScore": 5,
+      "avg": 5.5,
+      "xIds": [
+        20668
+      ],
+      "pIds": [
+        20668
+      ],
+      "titles": [
+        "Monthly Girls' Nozaki-kun"
+      ]
+    },
+    {
+      "title": "My Love Story!!",
+      "xTitle": "My Love Story!!",
+      "pTitle": "My Love Story!!",
+      "xScore": 6,
+      "pScore": 5,
+      "avg": 5.5,
+      "xIds": [
+        20946
+      ],
+      "pIds": [
+        20946
+      ],
+      "titles": [
+        "My Love Story!!"
+      ]
+    },
+    {
+      "title": "My Neighbor Totoro",
+      "xTitle": "My Neighbor Totoro",
+      "pTitle": "My Neighbor Totoro",
+      "xScore": 5,
+      "pScore": 6,
+      "avg": 5.5,
+      "xIds": [
+        523
+      ],
+      "pIds": [
+        523
+      ],
+      "titles": [
+        "My Neighbor Totoro"
+      ]
+    },
+    {
+      "title": "Nisekoi",
+      "xTitle": "Nisekoi",
+      "pTitle": "Nisekoi:",
+      "xScore": 5.5,
+      "pScore": 5.5,
+      "avg": 5.5,
+      "xIds": [
+        18897,
+        20876
+      ],
+      "pIds": [
+        18897,
+        20728,
+        20876
+      ],
+      "titles": [
+        "Nisekoi",
+        "Nisekoi:",
+        "Nisekoi OVA"
+      ]
+    },
+    {
+      "title": "Parasyte -the maxim-",
+      "xTitle": "Parasyte -the maxim-",
+      "pTitle": "Parasyte -the maxim-",
+      "xScore": 5,
+      "pScore": 6,
+      "avg": 5.5,
+      "xIds": [
+        20623
+      ],
+      "pIds": [
+        20623
+      ],
+      "titles": [
+        "Parasyte -the maxim-"
+      ]
+    },
+    {
+      "title": "Spice and Wolf",
+      "xTitle": "Spice and Wolf",
+      "pTitle": "Spice and Wolf",
+      "xScore": 5,
+      "pScore": 6,
+      "avg": 5.5,
+      "xIds": [
+        2966
+      ],
+      "pIds": [
+        2966,
+        6007,
+        5341
+      ],
+      "titles": [
+        "Spice and Wolf",
+        "Spice and Wolf II: Wolf and the Amber Melancholy",
+        "Spice and Wolf II"
+      ]
+    },
+    {
+      "title": "Amagi Brilliant Park",
+      "xTitle": "Amagi Brilliant Park",
+      "pTitle": "Amagi Brilliant Park",
+      "xScore": 5,
+      "pScore": 5.5,
+      "avg": 5.25,
+      "xIds": [
+        20602
+      ],
+      "pIds": [
+        20602
+      ],
+      "titles": [
+        "Amagi Brilliant Park"
+      ]
+    },
+    {
+      "title": "Angel Beats!",
+      "xTitle": "Angel Beats!",
+      "pTitle": "Angel Beats!",
+      "xScore": 6.5,
+      "pScore": 4,
+      "avg": 5.25,
+      "xIds": [
+        6547
+      ],
+      "pIds": [
+        6547
+      ],
+      "titles": [
+        "Angel Beats!"
+      ]
+    },
+    {
+      "title": "Haven't You Heard? I'm Sakamoto",
+      "xTitle": "Haven't You Heard? I'm Sakamoto",
+      "pTitle": "Haven't You Heard? I'm Sakamoto",
+      "xScore": 5.5,
+      "pScore": 5,
+      "avg": 5.25,
+      "xIds": [
+        21595
+      ],
+      "pIds": [
+        21595
+      ],
+      "titles": [
+        "Haven't You Heard? I'm Sakamoto"
+      ]
+    },
+    {
+      "title": "Love, Chunibyo & Other Delusions",
+      "xTitle": "Love, Chunibyo & Other Delusions",
+      "pTitle": "Love, Chunibyo & Other Delusions",
+      "xScore": 5.5,
+      "pScore": 5,
+      "avg": 5.25,
+      "xIds": [
+        14741
+      ],
+      "pIds": [
+        14741
+      ],
+      "titles": [
+        "Love, Chunibyo & Other Delusions"
+      ]
+    },
+    {
+      "title": "My Hero Academia",
+      "xTitle": "My Hero Academia",
+      "pTitle": "My Hero Academia Season 4",
+      "xScore": 5,
+      "pScore": 5.5,
+      "avg": 5.25,
+      "xIds": [
+        21459,
+        21856,
+        100166,
+        104276
+      ],
+      "pIds": [
+        21459,
+        21856,
+        100166,
+        104276,
+        185736
+      ],
+      "titles": [
+        "My Hero Academia",
+        "My Hero Academia Season 2",
+        "My Hero Academia Season 3",
+        "My Hero Academia Season 4",
+        "My Hero Academia: Vigilantes"
+      ]
+    },
+    {
+      "title": "My Teen Romantic Comedy SNAFU",
+      "xTitle": "My Teen Romantic Comedy SNAFU",
+      "pTitle": "My Teen Romantic Comedy SNAFU",
+      "xScore": 5.5,
+      "pScore": 5,
+      "avg": 5.25,
+      "xIds": [
+        14813,
+        20698
+      ],
+      "pIds": [
+        14813
+      ],
+      "titles": [
+        "My Teen Romantic Comedy SNAFU",
+        "My Teen Romantic Comedy SNAFU TOO!"
+      ]
+    },
+    {
+      "title": "NEW GAME!",
+      "xTitle": "NEW GAME!",
+      "pTitle": "NEW GAME!!",
+      "xScore": 5.5,
+      "pScore": 5,
+      "avg": 5.25,
+      "xIds": [
+        21455
+      ],
+      "pIds": [
+        21455,
+        98292,
+        97637
+      ],
+      "titles": [
+        "NEW GAME!",
+        "NEW GAME!!",
+        "NEW GAME!: Watashi, Shainryokoutte Hajimete na no de..."
+      ]
+    },
+    {
+      "title": "The Pet Girl of Sakurasou",
+      "xTitle": "The Pet Girl of Sakurasou",
+      "pTitle": "The Pet Girl of Sakurasou",
+      "xScore": 5.5,
+      "pScore": 5,
+      "avg": 5.25,
+      "xIds": [
+        13759
+      ],
+      "pIds": [
+        13759
+      ],
+      "titles": [
+        "The Pet Girl of Sakurasou"
+      ]
+    },
+    {
+      "title": "Welcome to the N-H-K",
+      "xTitle": "Welcome to the N-H-K",
+      "pTitle": "Welcome to the N-H-K",
+      "xScore": 5.5,
+      "pScore": 5,
+      "avg": 5.25,
+      "xIds": [
+        1210
+      ],
+      "pIds": [
+        1210
+      ],
+      "titles": [
+        "Welcome to the N-H-K"
+      ]
+    },
+    {
+      "title": "Black Rock Shooter",
+      "xTitle": "Black Rock Shooter",
+      "pTitle": "Black Rock Shooter",
+      "xScore": 5,
+      "pScore": 5,
+      "avg": 5,
+      "xIds": [
+        11285
+      ],
+      "pIds": [
+        11285
+      ],
+      "titles": [
+        "Black Rock Shooter"
+      ]
+    },
+    {
+      "title": "Gintama",
+      "xTitle": "Gintama",
+      "pTitle": "Gintama Season 4",
+      "xScore": 10,
+      "pScore": 0,
+      "avg": 5,
+      "xIds": [
+        918,
+        15335,
+        9969
+      ],
+      "pIds": [
+        97889,
+        99714,
+        918,
+        9969,
+        15417,
+        20996
+      ],
+      "titles": [
+        "Gintama",
+        "Gintama: The Final Chapter - Be Forever Yorozuya",
+        "Gintama Season 2",
+        "Gintama Season 4",
+        "Gintama.: Slip Arc",
+        "Gintama Season 2 Part 2",
+        "Gintama Season 3"
+      ]
+    },
+    {
+      "title": "I Can't Understand What My Husband Is Saying",
+      "xTitle": "I Can't Understand What My Husband Is Saying",
+      "pTitle": "I Can't Understand What My Husband Is Saying",
+      "xScore": 5,
+      "pScore": 5,
+      "avg": 5,
+      "xIds": [
+        20735,
+        21000
+      ],
+      "pIds": [
+        20735,
+        21000
+      ],
+      "titles": [
+        "I Can't Understand What My Husband Is Saying",
+        "I Can't Understand What My Husband is Saying 2nd Thread"
+      ]
+    },
+    {
+      "title": "Is the Order a Rabbit?",
+      "xTitle": "Is the Order a Rabbit?",
+      "pTitle": "Is the Order a Rabbit?",
+      "xScore": 5,
+      "pScore": 5,
+      "avg": 5,
+      "xIds": [
+        20517,
+        21034
+      ],
+      "pIds": [
+        20517
+      ],
+      "titles": [
+        "Is the Order a Rabbit?",
+        "Is the Order a Rabbit?? Season 2"
+      ]
+    },
+    {
+      "title": "Kemono Friends",
+      "xTitle": "Kemono Friends",
+      "pTitle": "Kemono Friends",
+      "xScore": 5,
+      "pScore": 5,
+      "avg": 5,
+      "xIds": [
+        87496
+      ],
+      "pIds": [
+        87496,
+        99624
+      ],
+      "titles": [
+        "Kemono Friends",
+        "Kemono Friends 2"
+      ]
+    },
+    {
+      "title": "PUNCH LINE",
+      "xTitle": "PUNCH LINE",
+      "pTitle": "PUNCH LINE",
+      "xScore": 5,
+      "pScore": 5,
+      "avg": 5,
+      "xIds": [
+        20964
+      ],
+      "pIds": [
+        20964
+      ],
+      "titles": [
+        "PUNCH LINE"
+      ]
+    },
+    {
+      "title": "SCHOOL-LIVE!",
+      "xTitle": "SCHOOL-LIVE!",
+      "pTitle": "SCHOOL-LIVE!",
+      "xScore": 5,
+      "pScore": 5,
+      "avg": 5,
+      "xIds": [
+        20754
+      ],
+      "pIds": [
+        20754
+      ],
+      "titles": [
+        "SCHOOL-LIVE!"
+      ]
+    },
+    {
+      "title": "Tanaka-kun is Always Listless",
+      "xTitle": "Tanaka-kun is Always Listless",
+      "pTitle": "Tanaka-kun is Always Listless",
+      "xScore": 5,
+      "pScore": 5,
+      "avg": 5,
+      "xIds": [
+        21495
+      ],
+      "pIds": [
+        21495
+      ],
+      "titles": [
+        "Tanaka-kun is Always Listless"
+      ]
+    },
+    {
+      "title": "Food Wars!",
+      "xTitle": "Food Wars!",
+      "pTitle": "Food Wars!",
+      "xScore": 5.5,
+      "pScore": 4,
+      "avg": 4.75,
+      "xIds": [
+        20923,
+        21518
+      ],
+      "pIds": [
+        20923,
+        21518
+      ],
+      "titles": [
+        "Food Wars!",
+        "Food Wars! The Second Plate"
+      ]
+    },
+    {
+      "title": "Aoharu x Machinegun",
+      "xTitle": "Aoharu x Machinegun",
+      "pTitle": "Aoharu x Machinegun",
+      "xScore": 5,
+      "pScore": 4,
+      "avg": 4.5,
+      "xIds": [
+        21078
+      ],
+      "pIds": [
+        21078
+      ],
+      "titles": [
+        "Aoharu x Machinegun"
+      ]
+    },
+    {
+      "title": "Charlotte",
+      "xTitle": "Charlotte",
+      "pTitle": "Charlotte",
+      "xScore": 5,
+      "pScore": 4,
+      "avg": 4.5,
+      "xIds": [
+        20997
+      ],
+      "pIds": [
+        20997
+      ],
+      "titles": [
+        "Charlotte"
+      ]
+    },
+    {
+      "title": "Durarara!!",
+      "xTitle": "Durarara!!",
+      "pTitle": "Durarara!!",
+      "xScore": 5,
+      "pScore": 4,
+      "avg": 4.5,
+      "xIds": [
+        6746,
+        20652
+      ],
+      "pIds": [
+        6746
+      ],
+      "titles": [
+        "Durarara!!",
+        "Durarara!! X2"
+      ]
+    },
+    {
+      "title": "Gugure! Kokkuri-san",
+      "xTitle": "Gugure! Kokkuri-san",
+      "pTitle": "Gugure! Kokkuri-san",
+      "xScore": 5,
+      "pScore": 4,
+      "avg": 4.5,
+      "xIds": [
+        20656
+      ],
+      "pIds": [
+        20656
+      ],
+      "titles": [
+        "Gugure! Kokkuri-san"
+      ]
+    },
+    {
+      "title": "Hamatora",
+      "xTitle": "Hamatora",
+      "pTitle": "Hamatora",
+      "xScore": 5,
+      "pScore": 4,
+      "avg": 4.5,
+      "xIds": [
+        20521,
+        20711
+      ],
+      "pIds": [
+        20521
+      ],
+      "titles": [
+        "Hamatora",
+        "Re: Hamatora"
+      ]
+    },
+    {
+      "title": "Log Horizon",
+      "xTitle": "Log Horizon",
+      "pTitle": "Log Horizon",
+      "xScore": 5,
+      "pScore": 4,
+      "avg": 4.5,
+      "xIds": [
+        17265,
+        20671
+      ],
+      "pIds": [
+        17265
+      ],
+      "titles": [
+        "Log Horizon",
+        "Log Horizon 2"
+      ]
+    },
+    {
+      "title": "Noragami",
+      "xTitle": "Noragami",
+      "pTitle": "Noragami",
+      "xScore": 5,
+      "pScore": 4,
+      "avg": 4.5,
+      "xIds": [
+        20447,
+        21128
+      ],
+      "pIds": [
+        20447,
+        21128
+      ],
+      "titles": [
+        "Noragami",
+        "Noragami Aragoto"
+      ]
+    },
+    {
+      "title": "selector infected WIXOSS",
+      "xTitle": "selector infected WIXOSS",
+      "pTitle": "selector infected WIXOSS",
+      "xScore": 5,
+      "pScore": 4,
+      "avg": 4.5,
+      "xIds": [
+        20615,
+        20714
+      ],
+      "pIds": [
+        20615,
+        20714
+      ],
+      "titles": [
+        "selector infected WIXOSS",
+        "selector spread WIXOSS"
+      ]
+    },
+    {
+      "title": "Terror in Resonance",
+      "xTitle": "Terror in Resonance",
+      "pTitle": "Terror in Resonance",
+      "xScore": 5,
+      "pScore": 4,
+      "avg": 4.5,
+      "xIds": [
+        20661
+      ],
+      "pIds": [
+        20661
+      ],
+      "titles": [
+        "Terror in Resonance"
+      ]
+    },
+    {
+      "title": "Wagnaria!!",
+      "xTitle": "Wagnaria!!",
+      "pTitle": "Wagnaria!!",
+      "xScore": 5,
+      "pScore": 4,
+      "avg": 4.5,
+      "xIds": [
+        6956,
+        20819,
+        10521
+      ],
+      "pIds": [
+        6956,
+        20819,
+        21384,
+        10521
+      ],
+      "titles": [
+        "Wagnaria!!",
+        "Wagnaria!!3",
+        "Wagnaria!!2",
+        "Wagnaria!!3: Lord of the Takanashi"
+      ]
+    },
+    {
+      "title": "Zom 100: Bucket List of the Dead",
+      "xTitle": "Zom 100: Bucket List of the Dead",
+      "pTitle": "Zom 100: Bucket List of the Dead",
+      "xScore": 5,
+      "pScore": 4,
+      "avg": 4.5,
+      "xIds": [
+        159831
+      ],
+      "pIds": [
+        159831
+      ],
+      "titles": [
+        "Zom 100: Bucket List of the Dead"
+      ]
+    },
+    {
+      "title": "ALDNOAH.ZERO",
+      "xTitle": "ALDNOAH.ZERO",
+      "pTitle": "ALDNOAH.ZERO",
+      "xScore": 5.5,
+      "pScore": 3,
+      "avg": 4.25,
+      "xIds": [
+        20632,
+        20853
+      ],
+      "pIds": [
+        20632,
+        20853
+      ],
+      "titles": [
+        "ALDNOAH.ZERO",
+        "ALDNOAH.ZERO Season 2"
+      ]
+    },
+    {
+      "title": "Demon Slayer: Kimetsu no Yaiba",
+      "xTitle": "Demon Slayer: Kimetsu no Yaiba",
+      "pTitle": "Demon Slayer: Kimetsu no Yaiba",
+      "xScore": 5.5,
+      "pScore": 3,
+      "avg": 4.25,
+      "xIds": [
+        101922,
+        112151
+      ],
+      "pIds": [
+        112151,
+        101922
+      ],
+      "titles": [
+        "Demon Slayer: Kimetsu no Yaiba",
+        "Demon Slayer -Kimetsu no Yaiba- The Movie: Mugen Train"
+      ]
+    },
+    {
+      "title": "ERASED",
+      "xTitle": "ERASED",
+      "pTitle": "ERASED",
+      "xScore": 5.5,
+      "pScore": 3,
+      "avg": 4.25,
+      "xIds": [
+        21234
+      ],
+      "pIds": [
+        21234
+      ],
+      "titles": [
+        "ERASED"
+      ]
+    },
+    {
+      "title": "Guilty Crown",
+      "xTitle": "Guilty Crown",
+      "pTitle": "Guilty Crown",
+      "xScore": 5.5,
+      "pScore": 3,
+      "avg": 4.25,
+      "xIds": [
+        10793
+      ],
+      "pIds": [
+        10793
+      ],
+      "titles": [
+        "Guilty Crown"
+      ]
+    },
+    {
+      "title": "Tokyo Ghoul",
+      "xTitle": "Tokyo Ghoul",
+      "pTitle": "Tokyo Ghoul",
+      "xScore": 5.5,
+      "pScore": 3,
+      "avg": 4.25,
+      "xIds": [
+        20605
+      ],
+      "pIds": [
+        20605,
+        20850,
+        195457
+      ],
+      "titles": [
+        "Tokyo Ghoul",
+        "Tokyo Ghoul √A",
+        "「unravel」×『Tokyo Ghoul』TV Animation 10th Anniversary Collaboration MV"
+      ]
+    },
+    {
+      "title": "Blue Exorcist",
+      "xTitle": "Blue Exorcist",
+      "pTitle": "Blue Exorcist",
+      "xScore": 4,
+      "pScore": 4,
+      "avg": 4,
+      "xIds": [
+        9919
+      ],
+      "pIds": [
+        9919
+      ],
+      "titles": [
+        "Blue Exorcist"
+      ]
+    },
+    {
+      "title": "CITY THE ANIMATION",
+      "xTitle": "CITY THE ANIMATION",
+      "pTitle": "CITY THE ANIMATION",
+      "xScore": 0,
+      "pScore": 8,
+      "avg": 4,
+      "xIds": [
+        181841
+      ],
+      "pIds": [
+        181841
+      ],
+      "titles": [
+        "CITY THE ANIMATION"
+      ]
+    },
+    {
+      "title": "Himouto! Umaru-chan",
+      "xTitle": "Himouto! Umaru-chan",
+      "pTitle": "Himouto! Umaru-chan",
+      "xScore": 5,
+      "pScore": 3,
+      "avg": 4,
+      "xIds": [
+        20987
+      ],
+      "pIds": [
+        20987
+      ],
+      "titles": [
+        "Himouto! Umaru-chan"
+      ]
+    },
+    {
+      "title": "Is It Wrong to Try to Pick Up Girls in a Dungeon?",
+      "xTitle": "Is It Wrong to Try to Pick Up Girls in a Dungeon?",
+      "pTitle": "Is It Wrong to Try to Pick Up Girls in a Dungeon?",
+      "xScore": 4,
+      "pScore": 4,
+      "avg": 4,
+      "xIds": [
+        20920
+      ],
+      "pIds": [
+        20920
+      ],
+      "titles": [
+        "Is It Wrong to Try to Pick Up Girls in a Dungeon?"
+      ]
+    },
+    {
+      "title": "Kokoro Connect",
+      "xTitle": "Kokoro Connect",
+      "pTitle": "Kokoro Connect",
+      "xScore": 4,
+      "pScore": 4,
+      "avg": 4,
+      "xIds": [
+        11887
+      ],
+      "pIds": [
+        11887
+      ],
+      "titles": [
+        "Kokoro Connect"
+      ]
+    },
+    {
+      "title": "Kuroko's Basketball",
+      "xTitle": "Kuroko's Basketball",
+      "pTitle": "Kuroko's Basketball 3",
+      "xScore": 4,
+      "pScore": 4,
+      "avg": 4,
+      "xIds": [
+        11771,
+        16894,
+        20725
+      ],
+      "pIds": [
+        11771,
+        16894,
+        20725
+      ],
+      "titles": [
+        "Kuroko's Basketball",
+        "Kuroko's Basketball 2",
+        "Kuroko's Basketball 3"
+      ]
+    },
+    {
+      "title": "Rampo Kitan: Game of Laplace",
+      "xTitle": "Rampo Kitan: Game of Laplace",
+      "pTitle": "Rampo Kitan: Game of Laplace",
+      "xScore": 4,
+      "pScore": 4,
+      "avg": 4,
+      "xIds": [
+        21189
+      ],
+      "pIds": [
+        21189
+      ],
+      "titles": [
+        "Rampo Kitan: Game of Laplace"
+      ]
+    },
+    {
+      "title": "ReLIFE",
+      "xTitle": "ReLIFE",
+      "pTitle": "ReLIFE",
+      "xScore": 4,
+      "pScore": 4,
+      "avg": 4,
+      "xIds": [
+        21049
+      ],
+      "pIds": [
+        21049
+      ],
+      "titles": [
+        "ReLIFE"
+      ]
+    },
+    {
+      "title": "The Quintessential Quintuplets",
+      "xTitle": "The Quintessential Quintuplets",
+      "pTitle": "The Quintessential Quintuplets",
+      "xScore": 4,
+      "pScore": 4,
+      "avg": 4,
+      "xIds": [
+        103572
+      ],
+      "pIds": [
+        103572
+      ],
+      "titles": [
+        "The Quintessential Quintuplets"
+      ]
+    },
+    {
+      "title": "The Seven Deadly Sins",
+      "xTitle": "The Seven Deadly Sins",
+      "pTitle": "The Seven Deadly Sins",
+      "xScore": 5,
+      "pScore": 3,
+      "avg": 4,
+      "xIds": [
+        20789
+      ],
+      "pIds": [
+        20789
+      ],
+      "titles": [
+        "The Seven Deadly Sins"
+      ]
+    },
+    {
+      "title": "Sword Art Online",
+      "xTitle": "Sword Art Online",
+      "pTitle": "Sword Art Online",
+      "xScore": 5.5,
+      "pScore": 2,
+      "avg": 3.75,
+      "xIds": [
+        11757
+      ],
+      "pIds": [
+        11757
+      ],
+      "titles": [
+        "Sword Art Online"
+      ]
+    },
+    {
+      "title": "The Future Diary",
+      "xTitle": "The Future Diary",
+      "pTitle": "The Future Diary",
+      "xScore": 5.5,
+      "pScore": 2,
+      "avg": 3.75,
+      "xIds": [
+        10620
+      ],
+      "pIds": [
+        10620
+      ],
+      "titles": [
+        "The Future Diary"
+      ]
+    },
+    {
+      "title": "BTOOOM!",
+      "xTitle": "BTOOOM!",
+      "pTitle": "BTOOOM!",
+      "xScore": 5,
+      "pScore": 2,
+      "avg": 3.5,
+      "xIds": [
+        14345
+      ],
+      "pIds": [
+        14345
+      ],
+      "titles": [
+        "BTOOOM!"
+      ]
+    },
+    {
+      "title": "Castle Town Dandelion",
+      "xTitle": "Castle Town Dandelion",
+      "pTitle": "Castle Town Dandelion",
+      "xScore": 4,
+      "pScore": 3,
+      "avg": 3.5,
+      "xIds": [
+        20951
+      ],
+      "pIds": [
+        20951
+      ],
+      "titles": [
+        "Castle Town Dandelion"
+      ]
+    },
+    {
+      "title": "Hajime no Ippo: The Fighting!",
+      "xTitle": "Hajime no Ippo: The Fighting!",
+      "pTitle": "Hajime no Ippo: The Fighting!",
+      "xScore": 7,
+      "pScore": 0,
+      "avg": 3.5,
+      "xIds": [
+        263
+      ],
+      "pIds": [
+        263
+      ],
+      "titles": [
+        "Hajime no Ippo: The Fighting!"
+      ]
+    },
+    {
+      "title": "Makeine: Too Many Losing Heroines!",
+      "xTitle": "Makeine: Too Many Losing Heroines!",
+      "pTitle": "Makeine: Too Many Losing Heroines!",
+      "xScore": 0,
+      "pScore": 7,
+      "avg": 3.5,
+      "xIds": [
+        171457
+      ],
+      "pIds": [
+        171457,
+        189796
+      ],
+      "titles": [
+        "Makeine: Too Many Losing Heroines!",
+        "Make Heroine ga Oosugiru! 2nd Season"
+      ]
+    },
+    {
+      "title": "Overlord",
+      "xTitle": "Overlord",
+      "pTitle": "Overlord",
+      "xScore": 5,
+      "pScore": 2,
+      "avg": 3.5,
+      "xIds": [
+        20832
+      ],
+      "pIds": [
+        20832
+      ],
+      "titles": [
+        "Overlord"
+      ]
+    },
+    {
+      "title": "Ranking of Kings",
+      "xTitle": "Ranking of Kings",
+      "pTitle": "Ranking of Kings",
+      "xScore": 0,
+      "pScore": 7,
+      "avg": 3.5,
+      "xIds": [
+        113717
+      ],
+      "pIds": [
+        113717
+      ],
+      "titles": [
+        "Ranking of Kings"
+      ]
+    },
+    {
+      "title": "SPY x FAMILY",
+      "xTitle": "SPY x FAMILY",
+      "pTitle": "SPY x FAMILY",
+      "xScore": 7,
+      "pScore": 0,
+      "avg": 3.5,
+      "xIds": [
+        140960
+      ],
+      "pIds": [
+        140960
+      ],
+      "titles": [
+        "SPY x FAMILY"
+      ]
+    },
+    {
+      "title": "WataMote: No Matter How I Look At It, It's You Guys' Fault I'm Not Popular!",
+      "xTitle": "WataMote: No Matter How I Look At It, It's You Guys' Fault I'm Not Popular!",
+      "pTitle": "WataMote: No Matter How I Look At It, It's You Guys' Fault I'm Not Popular!",
+      "xScore": 3,
+      "pScore": 4,
+      "avg": 3.5,
+      "xIds": [
+        16742
+      ],
+      "pIds": [
+        16742
+      ],
+      "titles": [
+        "WataMote: No Matter How I Look At It, It's You Guys' Fault I'm Not Popular!"
+      ]
+    },
+    {
+      "title": "From the New World",
+      "xTitle": "From the New World",
+      "pTitle": "From the New World",
+      "xScore": 5.5,
+      "pScore": 1,
+      "avg": 3.25,
+      "xIds": [
+        13125
+      ],
+      "pIds": [
+        13125
+      ],
+      "titles": [
+        "From the New World"
+      ]
+    },
+    {
+      "title": "PSYCHO-PASS",
+      "xTitle": "PSYCHO-PASS",
+      "pTitle": "PSYCHO-PASS",
+      "xScore": 6.5,
+      "pScore": 0,
+      "avg": 3.25,
+      "xIds": [
+        13601,
+        20513
+      ],
+      "pIds": [
+        13601
+      ],
+      "titles": [
+        "PSYCHO-PASS",
+        "PSYCHO-PASS 2"
+      ]
+    },
+    {
+      "title": "A Whisker Away",
+      "xTitle": "A Whisker Away",
+      "pTitle": "A Whisker Away",
+      "xScore": 2,
+      "pScore": 4,
+      "avg": 3,
+      "xIds": [
+        114963
+      ],
+      "pIds": [
+        114963
+      ],
+      "titles": [
+        "A Whisker Away"
+      ]
+    },
+    {
+      "title": "Black Bullet",
+      "xTitle": "Black Bullet",
+      "pTitle": "Black Bullet",
+      "xScore": 4,
+      "pScore": 2,
+      "avg": 3,
+      "xIds": [
+        20457
+      ],
+      "pIds": [
+        20457
+      ],
+      "titles": [
+        "Black Bullet"
+      ]
+    },
+    {
+      "title": "Little Busters!",
+      "xTitle": "Little Busters!",
+      "pTitle": "Little Busters!",
+      "xScore": 6,
+      "pScore": 0,
+      "avg": 3,
+      "xIds": [
+        13655,
+        20481,
+        18195
+      ],
+      "pIds": [
+        13655
+      ],
+      "titles": [
+        "Little Busters!",
+        "Little Busters!: EX",
+        "Little Busters! Refrain"
+      ]
+    },
+    {
+      "title": "Magic Kaito 1412",
+      "xTitle": "Magic Kaito 1412",
+      "pTitle": "Magic Kaito 1412",
+      "xScore": 6,
+      "pScore": 0,
+      "avg": 3,
+      "xIds": [
+        20790
+      ],
+      "pIds": [
+        20790
+      ],
+      "titles": [
+        "Magic Kaito 1412"
+      ]
+    },
+    {
+      "title": "NANA",
+      "xTitle": "NANA",
+      "pTitle": "NANA",
+      "xScore": 6,
+      "pScore": 0,
+      "avg": 3,
+      "xIds": [
+        877
+      ],
+      "pIds": [
+        877
+      ],
+      "titles": [
+        "NANA"
+      ]
+    },
+    {
+      "title": "Oreimo 2",
+      "xTitle": "Oreimo 2",
+      "pTitle": "Oreimo",
+      "xScore": 2,
+      "pScore": 4,
+      "avg": 3,
+      "xIds": [
+        8769,
+        10020,
+        13659,
+        18857
+      ],
+      "pIds": [
+        8769
+      ],
+      "titles": [
+        "Oreimo",
+        "Ore no Imouto ga Konna ni Kawaii Wake ga Nai TRUE ROUTE",
+        "Oreimo 2",
+        "Oreimo 2 (ONA)"
+      ]
+    },
+    {
+      "title": "Spice and Wolf II",
+      "xTitle": "Spice and Wolf II",
+      "pTitle": "Spice and Wolf",
+      "xScore": 0,
+      "pScore": 6,
+      "avg": 3,
+      "xIds": [
+        5341
+      ],
+      "pIds": [
+        2966,
+        6007,
+        5341
+      ],
+      "titles": [
+        "Spice and Wolf II",
+        "Spice and Wolf",
+        "Spice and Wolf II: Wolf and the Amber Melancholy"
+      ]
+    },
+    {
+      "title": "Terra Formars",
+      "xTitle": "Terra Formars",
+      "pTitle": "Terra Formars",
+      "xScore": 4,
+      "pScore": 2,
+      "avg": 3,
+      "xIds": [
+        20629
+      ],
+      "pIds": [
+        20629
+      ],
+      "titles": [
+        "Terra Formars"
+      ]
+    },
+    {
+      "title": "SHIROBAKO",
+      "xTitle": "SHIROBAKO",
+      "pTitle": "SHIROBAKO",
+      "xScore": 5.5,
+      "pScore": 0,
+      "avg": 2.75,
+      "xIds": [
+        20812,
+        101574
+      ],
+      "pIds": [
+        20812
+      ],
+      "titles": [
+        "SHIROBAKO",
+        "SHIROBAKO the Movie"
+      ]
+    },
+    {
+      "title": "The Tatami Galaxy",
+      "xTitle": "The Tatami Galaxy",
+      "pTitle": "The Night is Short, Walk on Girl",
+      "xScore": 0,
+      "pScore": 5.5,
+      "avg": 2.75,
+      "xIds": [
+        7785
+      ],
+      "pIds": [
+        97917,
+        137819,
+        7785
+      ],
+      "titles": [
+        "The Tatami Galaxy",
+        "The Night is Short, Walk on Girl",
+        "The Tatami Time Machine Blues"
+      ]
+    },
+    {
+      "title": "Toradora!",
+      "xTitle": "Toradora!",
+      "pTitle": "Toradora!",
+      "xScore": 5.5,
+      "pScore": 0,
+      "avg": 2.75,
+      "xIds": [
+        4224
+      ],
+      "pIds": [
+        4224
+      ],
+      "titles": [
+        "Toradora!"
+      ]
+    },
+    {
+      "title": "Akame ga Kill!",
+      "xTitle": "Akame ga Kill!",
+      "pTitle": "Akame ga Kill!",
+      "xScore": 3,
+      "pScore": 2,
+      "avg": 2.5,
+      "xIds": [
+        20613
+      ],
+      "pIds": [
+        20613
+      ],
+      "titles": [
+        "Akame ga Kill!"
+      ]
+    },
+    {
+      "title": "FLCL Progressive",
+      "xTitle": "FLCL Progressive",
+      "pTitle": "FLCL",
+      "xScore": 0,
+      "pScore": 5,
+      "avg": 2.5,
+      "xIds": [
+        21746
+      ],
+      "pIds": [
+        227,
+        21748,
+        21746
+      ],
+      "titles": [
+        "FLCL Progressive",
+        "FLCL",
+        "FLCL Alternative"
+      ]
+    },
+    {
+      "title": "Gonna be the Twin-Tail!!",
+      "xTitle": "Gonna be the Twin-Tail!!",
+      "pTitle": "Gonna be the Twin-Tail!!",
+      "xScore": 2,
+      "pScore": 3,
+      "avg": 2.5,
+      "xIds": [
+        20565
+      ],
+      "pIds": [
+        20565
+      ],
+      "titles": [
+        "Gonna be the Twin-Tail!!"
+      ]
+    },
+    {
+      "title": "Mr. Osomatsu",
+      "xTitle": "Mr. Osomatsu",
+      "pTitle": "Mr. Osomatsu",
+      "xScore": 0,
+      "pScore": 5,
+      "avg": 2.5,
+      "xIds": [
+        21261
+      ],
+      "pIds": [
+        21261
+      ],
+      "titles": [
+        "Mr. Osomatsu"
+      ]
+    },
+    {
+      "title": "NEW GAME!!",
+      "xTitle": "NEW GAME!!",
+      "pTitle": "NEW GAME!!",
+      "xScore": 0,
+      "pScore": 5,
+      "avg": 2.5,
+      "xIds": [
+        98292
+      ],
+      "pIds": [
+        21455,
+        98292,
+        97637
+      ],
+      "titles": [
+        "NEW GAME!!",
+        "NEW GAME!",
+        "NEW GAME!: Watashi, Shainryokoutte Hajimete na no de..."
+      ]
+    },
+    {
+      "title": "When They Cry",
+      "xTitle": "When They Cry",
+      "pTitle": "When They Cry",
+      "xScore": 5,
+      "pScore": 0,
+      "avg": 2.5,
+      "xIds": [
+        934
+      ],
+      "pIds": [
+        934,
+        1889
+      ],
+      "titles": [
+        "When They Cry",
+        "When They Cry Kai"
+      ]
+    },
+    {
+      "title": "Beyond the Boundary",
+      "xTitle": "Beyond the Boundary",
+      "pTitle": "Beyond the Boundary",
+      "xScore": 4,
+      "pScore": 0,
+      "avg": 2,
+      "xIds": [
+        18153
+      ],
+      "pIds": [
+        18153
+      ],
+      "titles": [
+        "Beyond the Boundary"
+      ]
+    },
+    {
+      "title": "Bungo Stray Dogs",
+      "xTitle": "Bungo Stray Dogs",
+      "pTitle": "Bungo Stray Dogs",
+      "xScore": 0,
+      "pScore": 4,
+      "avg": 2,
+      "xIds": [
+        21311
+      ],
+      "pIds": [
+        21311
+      ],
+      "titles": [
+        "Bungo Stray Dogs"
+      ]
+    },
+    {
+      "title": "Joker Game",
+      "xTitle": "Joker Game",
+      "pTitle": "Joker Game",
+      "xScore": 0,
+      "pScore": 4,
+      "avg": 2,
+      "xIds": [
+        21291
+      ],
+      "pIds": [
+        21291
+      ],
+      "titles": [
+        "Joker Game"
+      ]
+    },
+    {
+      "title": "Kiznaiver",
+      "xTitle": "Kiznaiver",
+      "pTitle": "Kiznaiver",
+      "xScore": 0,
+      "pScore": 4,
+      "avg": 2,
+      "xIds": [
+        21421
+      ],
+      "pIds": [
+        21421
+      ],
+      "titles": [
+        "Kiznaiver"
+      ]
+    },
+    {
+      "title": "ONIMAI: I'm Now Your Sister!",
+      "xTitle": "ONIMAI: I'm Now Your Sister!",
+      "pTitle": "ONIMAI: I'm Now Your Sister!",
+      "xScore": 0,
+      "pScore": 4,
+      "avg": 2,
+      "xIds": [
+        147864
+      ],
+      "pIds": [
+        147864
+      ],
+      "titles": [
+        "ONIMAI: I'm Now Your Sister!"
+      ]
+    },
+    {
+      "title": "Wolf Children",
+      "xTitle": "Wolf Children",
+      "pTitle": "Wolf Children",
+      "xScore": 0,
+      "pScore": 4,
+      "avg": 2,
+      "xIds": [
+        12355
+      ],
+      "pIds": [
+        12355
+      ],
+      "titles": [
+        "Wolf Children"
+      ]
+    },
+    {
+      "title": "Yuki Yuna is a Hero",
+      "xTitle": "Yuki Yuna is a Hero",
+      "pTitle": "Yuki Yuna is a Hero",
+      "xScore": 4,
+      "pScore": 0,
+      "avg": 2,
+      "xIds": [
+        20800
+      ],
+      "pIds": [
+        20800
+      ],
+      "titles": [
+        "Yuki Yuna is a Hero"
+      ]
+    },
+    {
+      "title": "God Eater",
+      "xTitle": "God Eater",
+      "pTitle": "God Eater",
+      "xScore": 0,
+      "pScore": 3,
+      "avg": 1.5,
+      "xIds": [
+        20849
+      ],
+      "pIds": [
+        20849
+      ],
+      "titles": [
+        "God Eater"
+      ]
+    },
+    {
+      "title": "Kabaneri of the Iron Fortress",
+      "xTitle": "Kabaneri of the Iron Fortress",
+      "pTitle": "Kabaneri of the Iron Fortress",
+      "xScore": 0,
+      "pScore": 3,
+      "avg": 1.5,
+      "xIds": [
+        21196
+      ],
+      "pIds": [
+        21196
+      ],
+      "titles": [
+        "Kabaneri of the Iron Fortress"
+      ]
+    },
+    {
+      "title": "Pupa",
+      "xTitle": "Pupa",
+      "pTitle": "Pupa",
+      "xScore": 1,
+      "pScore": 1,
+      "avg": 1,
+      "xIds": [
+        19315
+      ],
+      "pIds": [
+        19315
+      ],
+      "titles": [
+        "Pupa"
+      ]
+    },
+    {
+      "title": "Mars of Destruction",
+      "xTitle": "Mars of Destruction",
+      "pTitle": "Mars of Destruction",
+      "xScore": 1,
+      "pScore": 0.5,
+      "avg": 0.75,
+      "xIds": [
+        413
+      ],
+      "pIds": [
+        413
+      ],
+      "titles": [
+        "Mars of Destruction"
+      ]
+    },
+    {
+      "title": "The Lost Village",
+      "xTitle": "The Lost Village",
+      "pTitle": "The Lost Village",
+      "xScore": 0,
+      "pScore": 1,
+      "avg": 0.5,
+      "xIds": [
+        21567
+      ],
+      "pIds": [
+        21567
+      ],
+      "titles": [
+        "The Lost Village"
+      ]
+    },
+    {
+      "title": "Demon Slayer: Kimetsu no Yaiba Entertainment District Arc",
+      "xTitle": "Demon Slayer: Kimetsu no Yaiba Entertainment District Arc",
+      "pTitle": "Demon Slayer: Kimetsu no Yaiba Entertainment District Arc",
+      "xScore": 0,
+      "pScore": 0,
+      "avg": 0,
+      "xIds": [
+        142329,
+        145139,
+        178788,
+        166240
+      ],
+      "pIds": [
+        142329
+      ],
+      "titles": [
+        "Demon Slayer: Kimetsu no Yaiba Entertainment District Arc",
+        "Demon Slayer: Kimetsu no Yaiba Swordsmith Village Arc",
+        "Demon Slayer: Kimetsu no Yaiba Infinity Castle",
+        "Demon Slayer: Kimetsu no Yaiba Hashira Training Arc"
+      ]
+    },
+    {
+      "title": "Fruits Basket (2019)",
+      "xTitle": "Fruits Basket (2019)",
+      "pTitle": "Fruits Basket (2019)",
+      "xScore": 0,
+      "pScore": 0,
+      "avg": 0,
+      "xIds": [
+        105334
+      ],
+      "pIds": [
+        105334
+      ],
+      "titles": [
+        "Fruits Basket (2019)"
+      ]
+    },
+    {
+      "title": "Gintama Season 3",
+      "xTitle": "Gintama Season 3",
+      "pTitle": "Gintama Season 4",
+      "xScore": 0,
+      "pScore": 0,
+      "avg": 0,
+      "xIds": [
+        20996,
+        99714,
+        100784,
+        101925,
+        126819,
+        97889
+      ],
+      "pIds": [
+        97889,
+        99714,
+        918,
+        9969,
+        15417,
+        20996
+      ],
+      "titles": [
+        "Gintama Season 3",
+        "Gintama.: Slip Arc",
+        "Gintama.: Silver Soul Arc",
+        "Gintama.: Silver Soul Arc - Second Half War",
+        "Gintama: THE SEMI-FINAL",
+        "Gintama Season 4",
+        "Gintama",
+        "Gintama Season 2",
+        "Gintama Season 2 Part 2"
+      ]
+    },
+    {
+      "title": "HAIKYU!! TO THE TOP",
+      "xTitle": "HAIKYU!! TO THE TOP",
+      "pTitle": "HAIKYU!! TO THE TOP",
+      "xScore": 0,
+      "pScore": 0,
+      "avg": 0,
+      "xIds": [
+        106625
+      ],
+      "pIds": [
+        106625
+      ],
+      "titles": [
+        "HAIKYU!! TO THE TOP"
+      ]
+    },
+    {
+      "title": "Hajime no Ippo: The Fighting! New Challenger",
+      "xTitle": "Hajime no Ippo: The Fighting! New Challenger",
+      "pTitle": "Hajime no Ippo: The Fighting! New Challenger",
+      "xScore": 0,
+      "pScore": 0,
+      "avg": 0,
+      "xIds": [
+        5258,
+        19647
+      ],
+      "pIds": [
+        5258,
+        19647
+      ],
+      "titles": [
+        "Hajime no Ippo: The Fighting! New Challenger",
+        "Hajime No Ippo: The Fighting! - Rising -"
+      ]
+    },
+    {
+      "title": "KONOSUBA -God's blessing on this wonderful world! 3",
+      "xTitle": "KONOSUBA -God's blessing on this wonderful world! 3",
+      "pTitle": "KONOSUBA -God's blessing on this wonderful world! 3",
+      "xScore": 0,
+      "pScore": 0,
+      "avg": 0,
+      "xIds": [
+        136804
+      ],
+      "pIds": [
+        136804
+      ],
+      "titles": [
+        "KONOSUBA -God's blessing on this wonderful world! 3"
+      ]
+    },
+    {
+      "title": "Monster",
+      "xTitle": "Monster",
+      "pTitle": "Monster",
+      "xScore": 0,
+      "pScore": 0,
+      "avg": 0,
+      "xIds": [
+        19
+      ],
+      "pIds": [
+        19
+      ],
+      "titles": [
+        "Monster"
+      ]
+    },
+    {
+      "title": "Robotics;Notes",
+      "xTitle": "Robotics;Notes",
+      "pTitle": "Robotics;Notes",
+      "xScore": 0,
+      "pScore": 0,
+      "avg": 0,
+      "xIds": [
+        13599
+      ],
+      "pIds": [
+        13599
+      ],
+      "titles": [
+        "Robotics;Notes"
+      ]
+    },
+    {
+      "title": "Serial Experiments Lain",
+      "xTitle": "Serial Experiments Lain",
+      "pTitle": "Serial Experiments Lain",
+      "xScore": 0,
+      "pScore": 0,
+      "avg": 0,
+      "xIds": [
+        339
+      ],
+      "pIds": [
+        339
+      ],
+      "titles": [
+        "Serial Experiments Lain"
+      ]
+    },
+    {
+      "title": "Shangri-La Frontier",
+      "xTitle": "Shangri-La Frontier",
+      "pTitle": "Shangri-La Frontier",
+      "xScore": 0,
+      "pScore": 0,
+      "avg": 0,
+      "xIds": [
+        151970
+      ],
+      "pIds": [
+        151970
+      ],
+      "titles": [
+        "Shangri-La Frontier"
+      ]
+    },
+    {
+      "title": "Steins;Gate 0",
+      "xTitle": "Steins;Gate 0",
+      "pTitle": "Steins;Gate 0",
+      "xScore": 0,
+      "pScore": 0,
+      "avg": 0,
+      "xIds": [
+        21127
+      ],
+      "pIds": [
+        21127
+      ],
+      "titles": [
+        "Steins;Gate 0"
+      ]
+    },
+    {
+      "title": "Sword Art Online II",
+      "xTitle": "Sword Art Online II",
+      "pTitle": "Sword Art Online II",
+      "xScore": 0,
+      "pScore": 0,
+      "avg": 0,
+      "xIds": [
+        20594
+      ],
+      "pIds": [
+        20594,
+        21403,
+        100182
+      ],
+      "titles": [
+        "Sword Art Online II",
+        "Sword Art Online the Movie: Ordinal Scale",
+        "Sword Art Online: Alicization"
+      ]
+    },
+    {
+      "title": "The Melancholy of Haruhi Suzumiya",
+      "xTitle": "The Melancholy of Haruhi Suzumiya",
+      "pTitle": "The Melancholy of Haruhi Suzumiya",
+      "xScore": 0,
+      "pScore": 0,
+      "avg": 0,
+      "xIds": [
+        849
+      ],
+      "pIds": [
+        849
+      ],
+      "titles": [
+        "The Melancholy of Haruhi Suzumiya"
+      ]
+    },
+    {
+      "title": "WWW.WAGNARIA!!",
+      "xTitle": "WWW.WAGNARIA!!",
+      "pTitle": "WWW.WAGNARIA!!",
+      "xScore": 0,
+      "pScore": 0,
+      "avg": 0,
+      "xIds": [
+        21764
+      ],
+      "pIds": [
+        21764
+      ],
+      "titles": [
+        "WWW.WAGNARIA!!"
+      ]
+    }
+  ]
+}
