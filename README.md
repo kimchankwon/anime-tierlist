@@ -2,7 +2,8 @@
 
 Per-user protagonist and antagonist tier lists, signed in with Google via
 Convex Auth. Character art lives in Convex file storage. Dragging a tile
-auto-saves that user's board; catalog updates (new or removed characters)
+auto-saves that user's board (pointer drag, so it works on a phone too);
+catalog updates (new or removed characters)
 merge into existing layouts without wiping them.
 
 The source boards are the shared-list HTML exports in Downloads:

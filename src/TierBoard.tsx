@@ -1,8 +1,24 @@
 import { useMutation, useQuery } from "convex/react";
-import { useEffect, useMemo, useRef, useState, type MutableRefObject } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type PointerEvent as ReactPointerEvent,
+} from "react";
+import { createPortal } from "react-dom";
 import { api } from "../convex/_generated/api";
 import type { Id } from "../convex/_generated/dataModel";
 import type { ListKind } from "./App";
+import {
+  dropIntentAt,
+  nextKeyIn,
+  wouldMove,
+  zoneOf,
+  type DropIntent,
+  type ZoneId,
+} from "./pointerDrag";
 
 const TIER_COLORS = ["#ff7f7f", "#ffbf7f", "#ffdf7f", "#ffff7f", "#bfff7f", "#7fffff"];
 
@@ -149,7 +165,6 @@ function EditableBoard({
   const savedRev = useRef(0);
   const pendingSave = useRef<number | null>(null);
   const dirty = () => rev.current !== savedRev.current;
-  const dragKey = useRef<string | null>(null);
 
   const byKey = useMemo(() => {
     const map = new Map<string, Character>();
@@ -309,7 +324,7 @@ function EditableBoard({
           </span>
         ) : (
           <span className="hint">
-            Drag tiles into a tier · click a tier letter to rename it
+            Drag tiles into a tier · on a phone, hold a tile to pick it up
           </span>
         )}
       </div>
@@ -318,7 +333,6 @@ function EditableBoard({
         byKey={byKey}
         big={big}
         editable
-        dragKey={dragKey}
         onMove={moveTile}
         onRename={renameLabel}
         contrast={theirs}
@@ -481,12 +495,45 @@ function countDiffs(a: Placement, b: Placement) {
   return n;
 }
 
+const HOLD_MS = 140;
+const MOVE_PX = 8;
+const SCROLL_PX = 10;
+const SETTLE_MS = 180;
+
+type PendingPick = {
+  key: string;
+  pointerId: number;
+  grabX: number;
+  grabY: number;
+  w: number;
+  h: number;
+  startX: number;
+  startY: number;
+  pointerType: string;
+  origin: DropIntent;
+};
+
+type DragSession = PendingPick & {
+  x: number;
+  y: number;
+  settling: boolean;
+};
+
+type ScrollGesture = {
+  pointerId: number;
+  lastY: number;
+};
+
+function scrollByDelta(dy: number) {
+  const el = document.scrollingElement ?? document.documentElement;
+  el.scrollTop -= dy;
+}
+
 function Board({
   board,
   byKey,
   big,
   editable = false,
-  dragKey,
   onMove,
   onRename,
   contrast,
@@ -496,12 +543,294 @@ function Board({
   byKey: Map<string, Character>;
   big: boolean;
   editable?: boolean;
-  dragKey?: MutableRefObject<string | null>;
-  onMove?: (key: string, zone: "pool" | number, beforeKey?: string) => void;
+  onMove?: (key: string, zone: ZoneId, beforeKey?: string) => void;
   onRename?: (index: number, value: string) => void;
   contrast?: Placement;
   contrastTitle?: string;
 }) {
+  const [drag, setDrag] = useState<DragSession | null>(null);
+  const [hover, setHover] = useState<DropIntent | null>(null);
+  const pendingRef = useRef<PendingPick | null>(null);
+  const scrollRef = useRef<ScrollGesture | null>(null);
+  const holdTimer = useRef<number | null>(null);
+  const settleRaf = useRef<number | null>(null);
+  const settleTimer = useRef<number | null>(null);
+  const liveRef = useRef(true);
+  const dragRef = useRef<DragSession | null>(null);
+  const hoverRef = useRef<DropIntent | null>(null);
+  const boardRef = useRef(board);
+  const onMoveRef = useRef(onMove);
+  dragRef.current = drag;
+  hoverRef.current = hover;
+  boardRef.current = board;
+  onMoveRef.current = onMove;
+
+  const clearHold = () => {
+    if (holdTimer.current !== null) {
+      window.clearTimeout(holdTimer.current);
+      holdTimer.current = null;
+    }
+  };
+
+  const clearSettle = () => {
+    if (settleRaf.current !== null) {
+      cancelAnimationFrame(settleRaf.current);
+      settleRaf.current = null;
+    }
+    if (settleTimer.current !== null) {
+      window.clearTimeout(settleTimer.current);
+      settleTimer.current = null;
+    }
+  };
+
+  const activate = useCallback((pending: PendingPick, clientX: number, clientY: number) => {
+    if (pendingRef.current !== pending) return;
+    pendingRef.current = null;
+    clearHold();
+    const next: DragSession = {
+      ...pending,
+      x: clientX - pending.grabX,
+      y: clientY - pending.grabY,
+      settling: false,
+    };
+    dragRef.current = next;
+    hoverRef.current = pending.origin;
+    setDrag(next);
+    setHover(pending.origin);
+    document.body.classList.add("dragging");
+    if (pending.pointerType === "touch") navigator.vibrate?.(10);
+  }, []);
+
+  const cancelPending = useCallback(() => {
+    pendingRef.current = null;
+    clearHold();
+  }, []);
+
+  const settleOrCommit = useCallback((intent: DropIntent | null) => {
+    const session = dragRef.current;
+    if (!session || session.settling) return;
+    const boardNow = boardRef.current;
+    const commit = (target: DropIntent | null) => {
+      document.body.classList.remove("dragging");
+      dragRef.current = null;
+      hoverRef.current = null;
+      if (!liveRef.current) return;
+      if (
+        target &&
+        wouldMove(boardNow.tiers, boardNow.pool, session.key, target)
+      ) {
+        onMoveRef.current?.(session.key, target.zone, target.beforeKey);
+      }
+      setDrag(null);
+      setHover(null);
+    };
+
+    if (!intent) {
+      clearSettle();
+      commit(null);
+      return;
+    }
+
+    hoverRef.current = intent;
+    setHover(intent);
+    // Two frames so React can paint the landing slot before we measure it.
+    settleRaf.current = requestAnimationFrame(() => {
+      settleRaf.current = requestAnimationFrame(() => {
+        settleRaf.current = null;
+        if (!liveRef.current) {
+          commit(null);
+          return;
+        }
+        const ph = document.querySelector<HTMLElement>(".tile.ph");
+        const dest = ph?.getBoundingClientRect();
+        if (!dest) {
+          commit(intent);
+          return;
+        }
+        const settled: DragSession = {
+          ...session,
+          settling: true,
+          x: dest.left,
+          y: dest.top,
+        };
+        dragRef.current = settled;
+        setDrag(settled);
+        settleTimer.current = window.setTimeout(() => {
+          settleTimer.current = null;
+          commit(intent);
+        }, SETTLE_MS);
+      });
+    });
+  }, []);
+
+  useEffect(() => {
+    if (!editable) return;
+    liveRef.current = true;
+
+    const onMovePtr = (e: PointerEvent) => {
+      const scrolling = scrollRef.current;
+      if (scrolling && e.pointerId === scrolling.pointerId) {
+        scrollByDelta(e.clientY - scrolling.lastY);
+        scrolling.lastY = e.clientY;
+        return;
+      }
+
+      const pending = pendingRef.current;
+      if (pending && e.pointerId === pending.pointerId) {
+        const dx = e.clientX - pending.startX;
+        const dy = e.clientY - pending.startY;
+        const dist = Math.hypot(dx, dy);
+        if (
+          pending.pointerType === "touch" &&
+          dist > SCROLL_PX &&
+          Math.abs(dy) > Math.abs(dx)
+        ) {
+          cancelPending();
+          scrollRef.current = { pointerId: e.pointerId, lastY: e.clientY };
+          scrollByDelta(dy);
+          return;
+        }
+        if (dist > MOVE_PX) activate(pending, e.clientX, e.clientY);
+        return;
+      }
+
+      const session = dragRef.current;
+      if (!session || session.settling || e.pointerId !== session.pointerId) {
+        return;
+      }
+      e.preventDefault();
+      session.x = e.clientX - session.grabX;
+      session.y = e.clientY - session.grabY;
+      const ghostEl = document.querySelector<HTMLElement>(".tile-ghost");
+      if (ghostEl && !ghostEl.classList.contains("settling")) {
+        ghostEl.style.left = `${session.x}px`;
+        ghostEl.style.top = `${session.y}px`;
+      }
+      const intent = dropIntentAt(e.clientX, e.clientY, session.key);
+      if (
+        intent &&
+        (hoverRef.current?.zone !== intent.zone ||
+          hoverRef.current?.beforeKey !== intent.beforeKey)
+      ) {
+        hoverRef.current = intent;
+        setHover(intent);
+      }
+    };
+
+    const onUp = (e: PointerEvent) => {
+      if (scrollRef.current?.pointerId === e.pointerId) {
+        scrollRef.current = null;
+        return;
+      }
+      const pending = pendingRef.current;
+      if (pending && e.pointerId === pending.pointerId) {
+        cancelPending();
+        return;
+      }
+      const session = dragRef.current;
+      if (!session || e.pointerId !== session.pointerId) return;
+      const intent =
+        dropIntentAt(e.clientX, e.clientY, session.key) ?? hoverRef.current;
+      settleOrCommit(intent);
+    };
+
+    const onCancel = (e: PointerEvent) => {
+      if (scrollRef.current?.pointerId === e.pointerId) {
+        scrollRef.current = null;
+        return;
+      }
+      const pending = pendingRef.current;
+      if (pending && e.pointerId === pending.pointerId) {
+        cancelPending();
+        return;
+      }
+      const session = dragRef.current;
+      if (!session || e.pointerId !== session.pointerId) return;
+      // pointerup already started the drop animation — don't abort it if a
+      // cancel follows the release on some browsers.
+      if (
+        session.settling ||
+        settleRaf.current !== null ||
+        settleTimer.current !== null
+      ) {
+        return;
+      }
+      settleOrCommit(null);
+    };
+
+    const blockScroll = (e: TouchEvent) => {
+      if (dragRef.current && !dragRef.current.settling) e.preventDefault();
+    };
+
+    window.addEventListener("pointermove", onMovePtr);
+    window.addEventListener("pointerup", onUp);
+    window.addEventListener("pointercancel", onCancel);
+    window.addEventListener("touchmove", blockScroll, { passive: false });
+    return () => {
+      liveRef.current = false;
+      clearHold();
+      clearSettle();
+      pendingRef.current = null;
+      scrollRef.current = null;
+      dragRef.current = null;
+      hoverRef.current = null;
+      window.removeEventListener("pointermove", onMovePtr);
+      window.removeEventListener("pointerup", onUp);
+      window.removeEventListener("pointercancel", onCancel);
+      window.removeEventListener("touchmove", blockScroll);
+      document.body.classList.remove("dragging");
+    };
+  }, [activate, cancelPending, editable, settleOrCommit]);
+
+  const onPick = useCallback(
+    (e: ReactPointerEvent<HTMLElement>, key: string) => {
+      if (!editable || e.button !== 0 || dragRef.current) return;
+      const rect = e.currentTarget.getBoundingClientRect();
+      const zone = zoneOf(board.tiers, key);
+      const list = zone === "pool" ? board.pool : (board.tiers[zone] ?? []);
+      const pending: PendingPick = {
+        key,
+        pointerId: e.pointerId,
+        grabX: e.clientX - rect.left,
+        grabY: e.clientY - rect.top,
+        w: rect.width,
+        h: rect.height,
+        startX: e.clientX,
+        startY: e.clientY,
+        pointerType: e.pointerType,
+        origin: { zone, beforeKey: nextKeyIn(list, key) },
+      };
+      pendingRef.current = pending;
+      clearHold();
+      if (e.pointerType === "touch") {
+        holdTimer.current = window.setTimeout(
+          () => activate(pending, pending.startX, pending.startY),
+          HOLD_MS
+        );
+      }
+    },
+    [activate, board.pool, board.tiers, editable]
+  );
+
+  const ghostItem = drag ? byKey.get(drag.key) : undefined;
+  const ghost =
+    drag && ghostItem
+      ? createPortal(
+          <div
+            className={`tile tile-ghost${big ? " big" : ""}${drag.settling ? " settling" : ""}`}
+            style={{
+              width: drag.w,
+              height: drag.h,
+              left: drag.x,
+              top: drag.y,
+            }}
+          >
+            <TileFace item={ghostItem} />
+          </div>,
+          document.body
+        )
+      : null;
+
   return (
     <main>
       <div>
@@ -530,8 +859,10 @@ function Board({
               byKey={byKey}
               big={big}
               editable={editable}
-              dragKey={dragKey}
-              onMove={onMove}
+              dragKey={drag?.key ?? null}
+              hover={hover}
+              tileSize={drag ? { w: drag.w, h: drag.h } : null}
+              onPick={onPick}
               contrast={contrast}
               contrastTitle={contrastTitle}
             />
@@ -547,12 +878,15 @@ function Board({
           byKey={byKey}
           big={big}
           editable={editable}
-          dragKey={dragKey}
-          onMove={onMove}
+          dragKey={drag?.key ?? null}
+          hover={hover}
+          tileSize={drag ? { w: drag.w, h: drag.h } : null}
+          onPick={onPick}
           contrast={contrast}
           contrastTitle={contrastTitle}
         />
       </div>
+      {ghost}
     </main>
   );
 }
@@ -563,6 +897,32 @@ function insert(list: string[], key: string, beforeKey?: string) {
   else list.push(key);
 }
 
+function TileFace({
+  item,
+  other,
+  contrastTitle,
+}: {
+  item: Character;
+  other?: { label: string };
+  contrastTitle?: string;
+}) {
+  return (
+    <>
+      {item.imageUrl ? (
+        <img src={item.imageUrl} alt={item.name} draggable={false} />
+      ) : null}
+      <span className="rk">#{item.rank}</span>
+      {item.soft ? <span className="soft">?</span> : null}
+      {other ? (
+        <span className="vs">
+          {contrastTitle} {other.label}
+        </span>
+      ) : null}
+      <span className="cap">{item.name}</span>
+    </>
+  );
+}
+
 function DropZone({
   zone,
   zoneLabel,
@@ -571,91 +931,86 @@ function DropZone({
   big,
   editable = false,
   dragKey,
-  onMove,
+  hover,
+  tileSize,
+  onPick,
   contrast,
   contrastTitle,
 }: {
-  zone: "pool" | number;
+  zone: ZoneId;
   zoneLabel: string;
   keys: string[];
   byKey: Map<string, Character>;
   big: boolean;
   editable?: boolean;
-  dragKey?: MutableRefObject<string | null>;
-  onMove?: (key: string, zone: "pool" | number, beforeKey?: string) => void;
+  dragKey: string | null;
+  hover: DropIntent | null;
+  tileSize: { w: number; h: number } | null;
+  onPick: (e: ReactPointerEvent<HTMLElement>, key: string) => void;
   contrast?: Placement;
   contrastTitle?: string;
 }) {
-  const [over, setOver] = useState(false);
+  const visible = dragKey ? keys.filter((k) => k !== dragKey) : keys;
+  const showPh = Boolean(dragKey && hover && hover.zone === zone);
+  const phAt = showPh
+    ? hover!.beforeKey
+      ? visible.indexOf(hover!.beforeKey)
+      : visible.length
+    : -1;
+  const insertAt = phAt < 0 ? visible.length : phAt;
+
+  const cells: Array<{ type: "tile"; key: string } | { type: "ph" }> = [];
+  visible.forEach((key, i) => {
+    if (i === insertAt && showPh) cells.push({ type: "ph" });
+    cells.push({ type: "tile", key });
+  });
+  if (showPh && insertAt >= visible.length) cells.push({ type: "ph" });
 
   return (
     <div
-      className={`drop${over ? " over" : ""}`}
-      onDragOver={
-        editable
-          ? (e) => {
-              e.preventDefault();
-              setOver(true);
-            }
-          : undefined
-      }
-      onDragLeave={editable ? () => setOver(false) : undefined}
-      onDrop={
-        editable && onMove && dragKey
-          ? (e) => {
-              e.preventDefault();
-              setOver(false);
-              const key = e.dataTransfer.getData("text/plain") || dragKey.current;
-              if (!key) return;
-              const after = (e.target as HTMLElement).closest(".tile") as HTMLElement | null;
-              onMove(key, zone, after?.dataset.key);
-            }
-          : undefined
-      }
+      className={`drop${showPh ? " over" : ""}`}
+      data-zone={String(zone)}
     >
-      {keys.map((key) => {
-        const item = byKey.get(key);
+      {cells.map((cell) => {
+        if (cell.type === "ph") {
+          return (
+            <div
+              key="ph"
+              className={`tile ph${big ? " big" : ""}`}
+              style={
+                tileSize
+                  ? { width: tileSize.w, height: tileSize.h }
+                  : undefined
+              }
+            />
+          );
+        }
+        const item = byKey.get(cell.key);
         if (!item) return null;
-        const other = contrast?.get(key);
+        const other = contrast?.get(cell.key);
         const isDiff = Boolean(other) && !sameSlot(other, zoneLabel);
         return (
           <div
-            key={key}
+            key={cell.key}
             className={`tile${big ? " big" : ""}${isDiff ? " diff" : ""}${editable ? "" : " locked"}`}
-            draggable={editable}
-            data-key={key}
+            data-key={cell.key}
             title={
               isDiff && other
                 ? `${item.anime}  —  ${item.name}   (${contrastTitle}: ${other.label})`
                 : `${item.anime}  —  ${item.name}   (xtectra ${item.xScore} / Prowtar ${item.pScore} — avg ${item.avg})`
             }
-            onDragStart={
-              editable && dragKey
-                ? (e) => {
-                    dragKey.current = key;
-                    e.dataTransfer.setData("text/plain", key);
-                    (e.currentTarget as HTMLElement).classList.add("drag");
-                  }
-                : undefined
+            onPointerDown={
+              editable ? (e) => onPick(e, cell.key) : undefined
             }
-            onDragEnd={
-              editable && dragKey
-                ? (e) => {
-                    (e.currentTarget as HTMLElement).classList.remove("drag");
-                    dragKey.current = null;
-                  }
-                : undefined
+            onContextMenu={
+              editable ? (e) => e.preventDefault() : undefined
             }
           >
-            {item.imageUrl ? <img src={item.imageUrl} alt={item.name} /> : null}
-            <span className="rk">#{item.rank}</span>
-            {item.soft ? <span className="soft">?</span> : null}
-            {isDiff && other ? (
-              <span className="vs">
-                {contrastTitle} {other.label}
-              </span>
-            ) : null}
-            <span className="cap">{item.name}</span>
+            <TileFace
+              item={item}
+              other={isDiff ? other : undefined}
+              contrastTitle={contrastTitle}
+            />
           </div>
         );
       })}

@@ -139,6 +139,11 @@ main { padding: 18px 24px 40px; }
   background: #000;
   border: 1px solid #33363f;
   flex: 0 0 auto;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
 }
 .tile.big { width: 104px; height: 104px; }
 .tile img {
@@ -150,7 +155,31 @@ main { padding: 18px 24px 40px; }
   pointer-events: none;
 }
 .tile:active { cursor: grabbing; }
-.tile.drag { opacity: .35; }
+.tile.ph {
+  cursor: default;
+  background: #262a35;
+  border: 1px dashed #5a6070;
+  pointer-events: none;
+}
+.tile-ghost {
+  position: fixed;
+  z-index: 80;
+  margin: 0;
+  pointer-events: none;
+  cursor: grabbing;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, .55);
+  transform: scale(1.06);
+  touch-action: none;
+}
+.tile-ghost.settling {
+  transform: scale(1);
+  transition:
+    left 180ms cubic-bezier(.2, .8, .2, 1),
+    top 180ms cubic-bezier(.2, .8, .2, 1),
+    transform 180ms cubic-bezier(.2, .8, .2, 1);
+}
+body.dragging,
+body.dragging * { cursor: grabbing !important; user-select: none; }
 .tile .cap {
   position: absolute;
   left: 0; right: 0; bottom: 0;
@@ -261,6 +290,29 @@ main { padding: 18px 24px 40px; }
 }
 @media (max-width: 900px) {
   .compare { grid-template-columns: 1fr; padding: 0 16px 40px; }
+}
+
+@media (max-width: 640px) {
+  .app-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: max(12px, env(safe-area-inset-top)) 14px 8px;
+  }
+  .user-chip { justify-content: flex-end; }
+  .user-meta .email { display: none; }
+  .tabs { padding: 10px 14px 0; }
+  .tab { flex: 1; text-align: center; }
+  .bar { padding: 10px 14px; }
+  .bar.inner { padding: 10px 0 12px; }
+  .hint { margin-left: 0; width: 100%; }
+  main { padding: 12px 12px calc(32px + env(safe-area-inset-bottom)); }
+  .label { flex: 0 0 56px; width: 56px; font-size: 18px; }
+  .tile { width: 72px; height: 72px; }
+  .tile.big { width: 88px; height: 88px; }
+  .drop { min-height: 80px; }
+  .pool .drop { min-height: 104px; }
+  button { min-height: 40px; }
 }
 
 .signin {
