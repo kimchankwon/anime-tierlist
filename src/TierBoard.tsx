@@ -542,6 +542,9 @@ function Board({
   const [hover, setHover] = useState<DropIntent | null>(null);
   const pendingRef = useRef<PendingPick | null>(null);
   const holdTimer = useRef<number | null>(null);
+  const settleRaf = useRef<number | null>(null);
+  const settleTimer = useRef<number | null>(null);
+  const liveRef = useRef(true);
   const dragRef = useRef<DragSession | null>(null);
   const hoverRef = useRef<DropIntent | null>(null);
   const boardRef = useRef(board);
@@ -555,6 +558,17 @@ function Board({
     if (holdTimer.current !== null) {
       window.clearTimeout(holdTimer.current);
       holdTimer.current = null;
+    }
+  };
+
+  const clearSettle = () => {
+    if (settleRaf.current !== null) {
+      cancelAnimationFrame(settleRaf.current);
+      settleRaf.current = null;
+    }
+    if (settleTimer.current !== null) {
+      window.clearTimeout(settleTimer.current);
+      settleTimer.current = null;
     }
   };
 
@@ -587,19 +601,21 @@ function Board({
     const boardNow = boardRef.current;
     const commit = (target: DropIntent | null) => {
       document.body.classList.remove("dragging");
+      dragRef.current = null;
+      hoverRef.current = null;
+      if (!liveRef.current) return;
       if (
         target &&
         wouldMove(boardNow.tiers, boardNow.pool, session.key, target)
       ) {
         onMoveRef.current?.(session.key, target.zone, target.beforeKey);
       }
-      dragRef.current = null;
-      hoverRef.current = null;
       setDrag(null);
       setHover(null);
     };
 
     if (!intent) {
+      clearSettle();
       commit(null);
       return;
     }
@@ -607,8 +623,13 @@ function Board({
     hoverRef.current = intent;
     setHover(intent);
     // Two frames so React can paint the landing slot before we measure it.
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
+    settleRaf.current = requestAnimationFrame(() => {
+      settleRaf.current = requestAnimationFrame(() => {
+        settleRaf.current = null;
+        if (!liveRef.current) {
+          commit(null);
+          return;
+        }
         const ph = document.querySelector<HTMLElement>(".tile.ph");
         const dest = ph?.getBoundingClientRect();
         if (!dest) {
@@ -623,13 +644,17 @@ function Board({
         };
         dragRef.current = settled;
         setDrag(settled);
-        window.setTimeout(() => commit(intent), SETTLE_MS);
+        settleTimer.current = window.setTimeout(() => {
+          settleTimer.current = null;
+          commit(intent);
+        }, SETTLE_MS);
       });
     });
   }, []);
 
   useEffect(() => {
     if (!editable) return;
+    liveRef.current = true;
 
     const onMovePtr = (e: PointerEvent) => {
       const pending = pendingRef.current;
@@ -685,18 +710,44 @@ function Board({
       settleOrCommit(intent);
     };
 
+    const onCancel = (e: PointerEvent) => {
+      const pending = pendingRef.current;
+      if (pending && e.pointerId === pending.pointerId) {
+        cancelPending();
+        return;
+      }
+      const session = dragRef.current;
+      if (!session || e.pointerId !== session.pointerId) return;
+      // pointerup already started the drop animation — don't abort it if a
+      // cancel follows the release on some browsers.
+      if (
+        session.settling ||
+        settleRaf.current !== null ||
+        settleTimer.current !== null
+      ) {
+        return;
+      }
+      settleOrCommit(null);
+    };
+
     const blockScroll = (e: TouchEvent) => {
       if (dragRef.current && !dragRef.current.settling) e.preventDefault();
     };
 
     window.addEventListener("pointermove", onMovePtr);
     window.addEventListener("pointerup", onUp);
-    window.addEventListener("pointercancel", onUp);
+    window.addEventListener("pointercancel", onCancel);
     window.addEventListener("touchmove", blockScroll, { passive: false });
     return () => {
+      liveRef.current = false;
+      clearHold();
+      clearSettle();
+      pendingRef.current = null;
+      dragRef.current = null;
+      hoverRef.current = null;
       window.removeEventListener("pointermove", onMovePtr);
       window.removeEventListener("pointerup", onUp);
-      window.removeEventListener("pointercancel", onUp);
+      window.removeEventListener("pointercancel", onCancel);
       window.removeEventListener("touchmove", blockScroll);
       document.body.classList.remove("dragging");
     };

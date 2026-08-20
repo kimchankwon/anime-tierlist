@@ -139,7 +139,7 @@ main { padding: 18px 24px 40px; }
   background: #000;
   border: 1px solid #33363f;
   flex: 0 0 auto;
-  touch-action: pan-y;
+  touch-action: none;
   user-select: none;
   -webkit-user-select: none;
   -webkit-user-drag: none;
