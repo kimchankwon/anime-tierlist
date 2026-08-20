@@ -519,6 +519,16 @@ type DragSession = PendingPick & {
   settling: boolean;
 };
 
+type ScrollGesture = {
+  pointerId: number;
+  lastY: number;
+};
+
+function scrollByDelta(dy: number) {
+  const el = document.scrollingElement ?? document.documentElement;
+  el.scrollTop -= dy;
+}
+
 function Board({
   board,
   byKey,
@@ -541,6 +551,7 @@ function Board({
   const [drag, setDrag] = useState<DragSession | null>(null);
   const [hover, setHover] = useState<DropIntent | null>(null);
   const pendingRef = useRef<PendingPick | null>(null);
+  const scrollRef = useRef<ScrollGesture | null>(null);
   const holdTimer = useRef<number | null>(null);
   const settleRaf = useRef<number | null>(null);
   const settleTimer = useRef<number | null>(null);
@@ -657,6 +668,13 @@ function Board({
     liveRef.current = true;
 
     const onMovePtr = (e: PointerEvent) => {
+      const scrolling = scrollRef.current;
+      if (scrolling && e.pointerId === scrolling.pointerId) {
+        scrollByDelta(e.clientY - scrolling.lastY);
+        scrolling.lastY = e.clientY;
+        return;
+      }
+
       const pending = pendingRef.current;
       if (pending && e.pointerId === pending.pointerId) {
         const dx = e.clientX - pending.startX;
@@ -668,6 +686,8 @@ function Board({
           Math.abs(dy) > Math.abs(dx)
         ) {
           cancelPending();
+          scrollRef.current = { pointerId: e.pointerId, lastY: e.clientY };
+          scrollByDelta(dy);
           return;
         }
         if (dist > MOVE_PX) activate(pending, e.clientX, e.clientY);
@@ -698,6 +718,10 @@ function Board({
     };
 
     const onUp = (e: PointerEvent) => {
+      if (scrollRef.current?.pointerId === e.pointerId) {
+        scrollRef.current = null;
+        return;
+      }
       const pending = pendingRef.current;
       if (pending && e.pointerId === pending.pointerId) {
         cancelPending();
@@ -711,6 +735,10 @@ function Board({
     };
 
     const onCancel = (e: PointerEvent) => {
+      if (scrollRef.current?.pointerId === e.pointerId) {
+        scrollRef.current = null;
+        return;
+      }
       const pending = pendingRef.current;
       if (pending && e.pointerId === pending.pointerId) {
         cancelPending();
@@ -743,6 +771,7 @@ function Board({
       clearHold();
       clearSettle();
       pendingRef.current = null;
+      scrollRef.current = null;
       dragRef.current = null;
       hoverRef.current = null;
       window.removeEventListener("pointermove", onMovePtr);
