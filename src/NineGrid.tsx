@@ -12,7 +12,14 @@ import { api } from "../convex/_generated/api";
 import type { Id } from "../convex/_generated/dataModel";
 import { ConfirmDialog } from "./ConfirmDialog";
 import { TilePicker } from "./TilePicker";
-import { sameCells, toWire, type NineCell, type NineDoc } from "./nine";
+import {
+  displayTitle,
+  sameCells,
+  toWire,
+  UNTITLED,
+  type NineCell,
+  type NineDoc,
+} from "./nine";
 
 export function NineGrids() {
   const people = useQuery(api.grids.listPeople, {});
@@ -66,7 +73,7 @@ function MyGrids() {
   function newGrid() {
     setCreating(true);
     setError(null);
-    void create({ title: "Untitled 3x3" })
+    void create({ title: UNTITLED })
       .then((id) => setSelected(id))
       .catch((err: unknown) =>
         setError(err instanceof Error ? err.message : "Could not make a 3x3"),
@@ -100,7 +107,7 @@ function MyGrids() {
                 >
                   <Thumb cells={g.cells} />
                   <span className="nine-card-text">
-                    <span className="nine-card-title">{g.title}</span>
+                    <span className="nine-card-title">{displayTitle(g.title)}</span>
                     <span className="nine-card-sub">
                       {g.filled}/9 · {new Date(g.updatedAt).toLocaleDateString()}
                     </span>
@@ -148,7 +155,7 @@ function TheirGrids({ userId }: { userId: Id<"users"> }) {
                 >
                   <Thumb cells={g.cells} />
                   <span className="nine-card-text">
-                    <span className="nine-card-title">{g.title}</span>
+                    <span className="nine-card-title">{displayTitle(g.title)}</span>
                     <span className="nine-card-sub">
                       {g.filled}/9 · {new Date(g.updatedAt).toLocaleDateString()}
                     </span>
@@ -163,7 +170,7 @@ function TheirGrids({ userId }: { userId: Id<"users"> }) {
         {current ? (
           <>
             <div className="nine-head">
-              <h3 className="nine-title-read">{current.title}</h3>
+              <h3 className="nine-title-read">{displayTitle(current.title)}</h3>
               <span className="save-state">{data.owner.name}’s 3x3</span>
             </div>
             <NineBoard cells={current.cells} />
@@ -195,7 +202,9 @@ function GridEditor({ doc, onDeleted }: { doc: NineDoc; onDeleted: () => void })
   const [cells, setCells] = useState<NineCell[]>(doc.cells);
   const [pickFor, setPickFor] = useState<number | null>(null);
   const [confirmingDelete, setConfirmingDelete] = useState(false);
-  const [saveState, setSaveState] = useState<"idle" | "saving" | "saved">("idle");
+  const [saveState, setSaveState] = useState<
+    "idle" | "saving" | "saved" | "unsaved"
+  >("idle");
   const [toast, setToast] = useState<{ msg: string; err?: boolean } | null>(null);
   // Same guard the tier board uses: a save ack that lands after a newer edit
   // must not let the stale server copy overwrite what is on screen.
@@ -225,7 +234,10 @@ function GridEditor({ doc, onDeleted }: { doc: NineDoc; onDeleted: () => void })
           if (!dirty()) setSaveState("saved");
         })
         .catch((err: unknown) => {
-          setSaveState("idle");
+          // "idle" renders the n/9 badge, which is exactly what a saved grid
+          // shows — a failed save looked like a successful one once the toast
+          // faded. The next edit retries.
+          setSaveState("unsaved");
           showToast(err instanceof Error ? err.message : "Could not save", true);
         });
     }, 400);
@@ -322,13 +334,19 @@ function GridEditor({ doc, onDeleted }: { doc: NineDoc; onDeleted: () => void })
           className="nine-title"
           value={title}
           maxLength={80}
+          placeholder={UNTITLED}
           spellCheck={false}
           aria-label="3x3 title"
-          placeholder="Title this 3x3"
           onChange={(e) => editTitle(e.target.value)}
         />
         <span className={`save-state ${saveState}`}>
-          {saveState === "saving" ? "Saving…" : saveState === "saved" ? "Saved" : `${filled}/9`}
+          {saveState === "saving"
+            ? "Saving…"
+            : saveState === "saved"
+              ? "Saved"
+              : saveState === "unsaved"
+                ? "Not saved"
+                : `${filled}/9`}
         </span>
         <button type="button" className="danger" onClick={() => setConfirmingDelete(true)}>
           Delete

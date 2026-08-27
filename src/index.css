@@ -139,12 +139,15 @@ main { padding: 18px 24px 40px; }
   background: #000;
   border: 1px solid #33363f;
   flex: 0 0 auto;
-  touch-action: none;
   user-select: none;
   -webkit-user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
 }
+/* Only a tile that can actually be picked up blocks browser panning. A
+   read-only board attaches no pointerdown handler and registers no window
+   listeners, so leaving touch-action off it there would strand the page. */
+.tile:not(.locked) { touch-action: none; }
 .tile.big { width: 104px; height: 104px; }
 .tile img {
   width: 100%;
@@ -230,6 +233,7 @@ body.dragging * { cursor: grabbing !important; user-select: none; }
 .save-state { color: #7c7f89; font-size: 12px; }
 .save-state.saving { color: #e8a33d; }
 .save-state.saved { color: #6dce8a; }
+.save-state.unsaved { color: #e08573; }
 .picker {
   display: inline-flex;
   align-items: center;
@@ -493,12 +497,14 @@ button.danger:hover { background: #c74a37; }
   background: #000;
   border: 1px solid #33363f;
   padding: 0;
-  touch-action: none;
   user-select: none;
   -webkit-user-select: none;
   -webkit-touch-callout: none;
 }
-.nine-grid:not(.locked) .n-cell.filled { cursor: grab; }
+.nine-grid:not(.locked) .n-cell.filled {
+  cursor: grab;
+  touch-action: none;
+}
 .nine-grid:not(.locked) .n-cell.filled:active { cursor: grabbing; }
 .n-cell img {
   width: 100%;

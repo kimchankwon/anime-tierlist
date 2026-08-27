@@ -16,9 +16,15 @@ type Cell = Doc<"grids">["cells"][number];
 
 const EMPTY: Cell[] = Array.from({ length: GRID_SIZE }, () => null);
 
-function cleanTitle(title: string) {
-  const trimmed = title.trim().replace(/\s+/g, " ").slice(0, MAX_TITLE);
-  return trimmed || "Untitled 3x3";
+export const UNTITLED = "Untitled 3x3";
+
+// Length is the only thing enforced on text the user is actively typing.
+// Trimming or collapsing whitespace here would come straight back through the
+// editor's sync effect and rewrite the field mid-keystroke: a trailing space
+// in "Attack on " vanished, and the next keystrokes produced "Attack onTitan".
+// The empty-title fallback is a display concern, applied where it is shown.
+function capText(text: string, max: number) {
+  return text.slice(0, max);
 }
 
 /** Server-side trim of a whole grid: fixed length, capped text, one image source. */
@@ -34,9 +40,9 @@ function cleanCells(cells: Cell[]): Cell[] {
     }
     if (url && url.length > MAX_URL) throw new Error("Image link is too long");
     return {
-      caption: cell.caption.trim().slice(0, MAX_CAPTION),
-      ...(cell.subtitle?.trim()
-        ? { subtitle: cell.subtitle.trim().slice(0, MAX_CAPTION) }
+      caption: capText(cell.caption, MAX_CAPTION),
+      ...(cell.subtitle
+        ? { subtitle: capText(cell.subtitle, MAX_CAPTION) }
         : {}),
       // An uploaded file wins, so a cell never carries two competing pictures.
       ...(cell.imageId ? { imageId: cell.imageId } : url ? { imageUrl: url } : {}),
@@ -63,14 +69,20 @@ async function assertUsableUploads(ctx: MutationCtx, cells: Cell[]) {
   }
 }
 
-async function resolveGrid(ctx: QueryCtx, row: Doc<"grids">) {
+/**
+ * `mine` controls whether storage ids come back. The owner's editor round-trips
+ * them on save, but a read-only viewer only ever draws `url` — handing them out
+ * would let anyone pin someone else's file into their own grid, after which the
+ * owner could never reclaim it by clearing the tile.
+ */
+async function resolveGrid(ctx: QueryCtx, row: Doc<"grids">, mine: boolean) {
   const cells = await Promise.all(
     row.cells.map(async (cell) => {
       if (!cell) return null;
       return {
         caption: cell.caption,
         subtitle: cell.subtitle ?? null,
-        imageId: cell.imageId ?? null,
+        imageId: mine ? (cell.imageId ?? null) : null,
         imageUrl: cell.imageUrl ?? null,
         url: cell.imageId
           ? await ctx.storage.getUrl(cell.imageId)
@@ -116,6 +128,13 @@ async function pruneImages(
       if (cell?.imageId) stillUsed.add(cell.imageId);
     }
   }
+  // The seeded catalog shares this bucket. Nothing today can put a character's
+  // storage id into a cell — it is never sent to the client — but if anything
+  // ever does, deleting that grid would take the shared art with it. The sweep
+  // already guards this; the two delete paths should not disagree.
+  for (const row of await ctx.db.query("characters").collect()) {
+    if (row.imageId) stillUsed.add(row.imageId);
+  }
   for (const id of unique) {
     if (!stillUsed.has(id)) await ctx.storage.delete(id);
   }
@@ -137,7 +156,9 @@ export const listMine = query({
       .query("grids")
       .withIndex("by_user", (q) => q.eq("userId", userId))
       .collect();
-    const resolved = await Promise.all(rows.map((row) => resolveGrid(ctx, row)));
+    const resolved = await Promise.all(
+      rows.map((row) => resolveGrid(ctx, row, true)),
+    );
     return resolved.sort(newestFirst);
   },
 });
@@ -151,9 +172,17 @@ export const listForUser = query({
       .withIndex("by_user", (q) => q.eq("userId", userId))
       .collect();
     const user = await ctx.db.get(userId);
-    const resolved = await Promise.all(rows.map((row) => resolveGrid(ctx, row)));
+    const resolved = await Promise.all(
+      rows.map((row) => resolveGrid(ctx, row, false)),
+    );
     return {
-      owner: personFromUser(user, userId, false, rows[0]?.updatedAt ?? 0),
+      owner: personFromUser(
+        user,
+        userId,
+        false,
+        // by_user is creation order, so rows[0] is the oldest, not the latest.
+        rows.reduce((latest, row) => Math.max(latest, row.updatedAt), 0),
+      ),
       grids: resolved.sort(newestFirst),
     };
   },
@@ -197,7 +226,7 @@ export const create = mutation({
     await assertUsableUploads(ctx, nextCells);
     return await ctx.db.insert("grids", {
       userId,
-      title: cleanTitle(title ?? ""),
+      title: capText(title?.trim() || UNTITLED, MAX_TITLE),
       cells: nextCells,
       updatedAt: Date.now(),
     });
@@ -215,7 +244,7 @@ export const update = mutation({
     const nextCells = cells ? cleanCells(cells) : row.cells;
     if (cells) await assertUsableUploads(ctx, nextCells);
     await ctx.db.patch(gridId, {
-      ...(title === undefined ? {} : { title: cleanTitle(title) }),
+      ...(title === undefined ? {} : { title: capText(title, MAX_TITLE) }),
       ...(cells ? { cells: nextCells } : {}),
       updatedAt: Date.now(),
     });

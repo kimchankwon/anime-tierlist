@@ -24,6 +24,14 @@ export type NineDoc = {
 
 export const GRID_SIZE = 9;
 
+/**
+ * The server stores a title exactly as typed, so an empty one stays empty
+ * rather than being rewritten under the user's caret. Anywhere a title is
+ * displayed rather than edited falls back to this.
+ */
+export const UNTITLED = "Untitled 3x3";
+export const displayTitle = (title: string) => title.trim() || UNTITLED;
+
 export const emptyCells = (): NineCell[] =>
   Array.from({ length: GRID_SIZE }, () => null);
 
