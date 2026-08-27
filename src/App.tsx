@@ -2,10 +2,27 @@ import { Authenticated, AuthLoading, Unauthenticated, useQuery } from "convex/re
 import { useAuthActions } from "@convex-dev/auth/react";
 import { useState } from "react";
 import { api } from "../convex/_generated/api";
+import { NineGrids } from "./NineGrid";
 import { SignIn } from "./SignIn";
 import { TierBoard } from "./TierBoard";
 
 export type ListKind = "protagonist" | "antagonist";
+type Tab = ListKind | "nine";
+
+const HEADINGS: Record<Tab, { title: string; sub: string }> = {
+  protagonist: {
+    title: "Protagonist Tier List",
+    sub: "Main protagonists of the top 100 anime both xtectra and Prowtar have watched and scored",
+  },
+  antagonist: {
+    title: "Antagonist Tier List",
+    sub: "Researched main antagonists from the anime in both xtectra’s and Prowtar’s top 200",
+  },
+  nine: {
+    title: "3x3",
+    sub: "Nine picks of your own — search anime and characters or bring your own pictures",
+  },
+};
 
 export default function App() {
   return (
@@ -26,7 +43,7 @@ export default function App() {
 function Shell() {
   const me = useQuery(api.users.me);
   const { signOut } = useAuthActions();
-  const [tab, setTab] = useState<ListKind>("protagonist");
+  const [tab, setTab] = useState<Tab>("protagonist");
 
   const initials = (me?.name ?? me?.email ?? "?")
     .split(" ")
@@ -39,12 +56,12 @@ function Shell() {
     <>
       <header className="app-header">
         <div>
-          <h1>{tab === "protagonist" ? "Protagonist" : "Antagonist"} Tier List</h1>
+          <h1>{HEADINGS[tab].title}</h1>
           <div className="sub">
-            {tab === "protagonist"
-              ? "Main protagonists of the top 100 anime both xtectra and Prowtar have watched and scored"
-              : "Researched main antagonists from the anime in both xtectra’s and Prowtar’s top 200"}
-            {" · "}scores out of 10 · your arrangement auto-saves · view or compare others
+            {HEADINGS[tab].sub}
+            {tab === "nine"
+              ? " · titled and saved to your collection · view your friends’ 3x3s"
+              : " · scores out of 10 · your arrangement auto-saves · view or compare others"}
           </div>
         </div>
         <div className="user-chip">
@@ -77,8 +94,15 @@ function Shell() {
         >
           Antagonists
         </button>
+        <button
+          type="button"
+          className={tab === "nine" ? "tab active" : "tab"}
+          onClick={() => setTab("nine")}
+        >
+          3x3
+        </button>
       </div>
-      <TierBoard key={tab} listKind={tab} />
+      {tab === "nine" ? <NineGrids /> : <TierBoard key={tab} listKind={tab} />}
     </>
   );
 }

@@ -7,6 +7,20 @@ export const listKind = v.union(
   v.literal("antagonist"),
 );
 
+export const GRID_SIZE = 9;
+
+// One tile of a 3x3. The picture is either an outside URL (AniList art) or a
+// file the user uploaded into Convex storage — never both.
+export const gridCell = v.union(
+  v.null(),
+  v.object({
+    caption: v.string(),
+    subtitle: v.optional(v.string()),
+    imageUrl: v.optional(v.string()),
+    imageId: v.optional(v.id("_storage")),
+  }),
+);
+
 export default defineSchema({
   ...authTables,
 
@@ -38,4 +52,15 @@ export default defineSchema({
   })
     .index("by_user_list", ["userId", "listKind"])
     .index("by_listKind", ["listKind"]),
+
+  // A 3x3 collage. `cells` is always nine entries in reading order; an empty
+  // slot is null so a hole in the middle of the grid survives a save.
+  grids: defineTable({
+    userId: v.id("users"),
+    title: v.string(),
+    cells: v.array(gridCell),
+    updatedAt: v.number(),
+  })
+    .index("by_user", ["userId"])
+    .index("by_user_updated", ["userId", "updatedAt"]),
 });
