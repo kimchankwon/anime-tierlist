@@ -1,6 +1,7 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 import { requireUser } from "./lib/auth";
+import { personFromUser } from "./lib/people";
 import { listKind } from "./schema";
 import { Id } from "./_generated/dataModel";
 import { MutationCtx, QueryCtx } from "./_generated/server";
@@ -105,21 +106,6 @@ async function getOrCreateLayout(
     return (await ctx.db.get(existing._id))!;
   }
   return existing;
-}
-
-function personFromUser(
-  user: { name?: string; email?: string; image?: string } | null,
-  userId: Id<"users">,
-  isMe: boolean,
-  updatedAt: number,
-) {
-  return {
-    userId,
-    name: user?.name?.trim() || user?.email?.split("@")[0] || "Anonymous",
-    image: user?.image ?? null,
-    isMe,
-    updatedAt,
-  };
 }
 
 export const listPeople = query({

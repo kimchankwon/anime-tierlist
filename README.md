@@ -11,6 +11,12 @@ The source boards are the shared-list HTML exports in Downloads:
 - Protagonist Tier List (Top 100 Shared)
 - Antagonist Tier List (Shared Top 200)
 
+A third tab holds **3x3s**: nine-slot collages you fill from an AniList anime
+or character search, or with your own uploaded picture (or an image link).
+Every tile takes a caption, tiles drag to swap slots and clear with the ×,
+and each 3x3 is titled and kept in your own saved list. The View picker at
+the top swaps to a friend's collection, read-only.
+
 **Live:** https://kimchankwon.github.io/anime-tierlist/
 
 ## Stack
@@ -32,7 +38,7 @@ npm run dev
 ```
 
 Sign in at http://localhost:5173. Each Google account gets its own saved
-protagonist and antagonist lists. New boards start **unranked**; use
+protagonist and antagonist lists, plus its own 3x3s. New boards start **unranked**; use
 Auto-fill by score only if you want that.
 
 The catalog is the intersection of
