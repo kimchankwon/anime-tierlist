@@ -5,6 +5,7 @@ import {
   useRef,
   useState,
   type PointerEvent as ReactPointerEvent,
+  type SetStateAction,
 } from "react";
 import { createPortal } from "react-dom";
 import { api } from "../convex/_generated/api";
@@ -200,6 +201,10 @@ function GridEditor({ doc, onDeleted }: { doc: NineDoc; onDeleted: () => void })
   // must not let the stale server copy overwrite what is on screen.
   const rev = useRef(0);
   const savedRev = useRef(0);
+  const pendingSave = useRef<number | null>(null);
+  // Set once the grid is on its way out. Every queued write for it is dropped
+  // rather than left to land on a document that no longer exists.
+  const abandoned = useRef(false);
   const dirty = () => rev.current !== savedRev.current;
 
   useEffect(() => {
@@ -209,10 +214,11 @@ function GridEditor({ doc, onDeleted }: { doc: NineDoc; onDeleted: () => void })
   }, [doc]);
 
   useEffect(() => {
-    if (!dirty()) return;
+    if (!dirty() || abandoned.current) return;
     setSaveState("saving");
     const sending = rev.current;
     const handle = window.setTimeout(() => {
+      pendingSave.current = null;
       void update({ gridId: doc._id, title, cells: toWire(cells) })
         .then(() => {
           savedRev.current = Math.max(savedRev.current, sending);
@@ -223,7 +229,11 @@ function GridEditor({ doc, onDeleted }: { doc: NineDoc; onDeleted: () => void })
           showToast(err instanceof Error ? err.message : "Could not save", true);
         });
     }, 400);
-    return () => window.clearTimeout(handle);
+    pendingSave.current = handle;
+    return () => {
+      window.clearTimeout(handle);
+      if (pendingSave.current === handle) pendingSave.current = null;
+    };
   }, [title, cells, doc._id, update]);
 
   // Picking another 3x3 in the sidebar unmounts this editor. Without this the
@@ -233,21 +243,50 @@ function GridEditor({ doc, onDeleted }: { doc: NineDoc; onDeleted: () => void })
   latest.current = { title, cells };
   useEffect(() => {
     return () => {
-      if (rev.current === savedRev.current) return;
+      if (rev.current === savedRev.current || abandoned.current) return;
       void update({
         gridId: doc._id,
         title: latest.current.title,
         cells: toWire(latest.current.cells),
+      }).catch(() => {
+        // Another tab may have deleted the grid meanwhile. Nothing left to
+        // save, and no UI left to report it in.
       });
     };
   }, [doc._id, update]);
+
+  // The picker previews a just-uploaded file with an object URL until the
+  // query comes back carrying the stored file's real URL. Revoke each one as
+  // soon as no cell points at it, and on unmount, so an afternoon of uploads
+  // does not pin every blob in memory for the life of the page.
+  const blobUrls = useRef(new Set<string>());
+  useEffect(() => {
+    const live = new Set<string>();
+    for (const cell of cells) {
+      if (!cell?.url) continue;
+      live.add(cell.url);
+      if (cell.url.startsWith("blob:")) blobUrls.current.add(cell.url);
+    }
+    for (const url of blobUrls.current) {
+      if (live.has(url)) continue;
+      URL.revokeObjectURL(url);
+      blobUrls.current.delete(url);
+    }
+  }, [cells]);
+  useEffect(() => {
+    const urls = blobUrls.current;
+    return () => {
+      for (const url of urls) URL.revokeObjectURL(url);
+      urls.clear();
+    };
+  }, []);
 
   function showToast(msg: string, err = false) {
     setToast({ msg, err });
     window.setTimeout(() => setToast(null), 1800);
   }
 
-  function commit(next: NineCell[]) {
+  function commit(next: SetStateAction<NineCell[]>) {
     rev.current += 1;
     setCells(next);
   }
@@ -268,6 +307,11 @@ function GridEditor({ doc, onDeleted }: { doc: NineDoc; onDeleted: () => void })
       return next;
     });
   }, []);
+
+  // Every cell edit derives from the previous state rather than this render's
+  // snapshot, so none of them depend on render timing.
+  const setCell = (index: number, cell: NineCell) =>
+    commit((prev) => prev.map((c, n) => (n === index ? cell : c)));
 
   const filled = cells.filter(Boolean).length;
 
@@ -295,9 +339,11 @@ function GridEditor({ doc, onDeleted }: { doc: NineDoc; onDeleted: () => void })
         editable
         onMove={moveCell}
         onAdd={(i) => setPickFor(i)}
-        onClear={(i) => commit(cells.map((c, n) => (n === i ? null : c)))}
+        onClear={(i) => setCell(i, null)}
         onCaption={(i, caption) =>
-          commit(cells.map((c, n) => (n === i && c ? { ...c, caption } : c)))
+          commit((prev) =>
+            prev.map((c, n) => (n === i && c ? { ...c, caption } : c)),
+          )
         }
       />
       <p className="nine-hint">
@@ -308,7 +354,7 @@ function GridEditor({ doc, onDeleted }: { doc: NineDoc; onDeleted: () => void })
         <TilePicker
           onClose={() => setPickFor(null)}
           onPick={(cell) => {
-            commit(cells.map((c, n) => (n === pickFor ? cell : c)));
+            setCell(pickFor, cell);
             setPickFor(null);
           }}
         />
@@ -321,11 +367,20 @@ function GridEditor({ doc, onDeleted }: { doc: NineDoc; onDeleted: () => void })
           onCancel={() => setConfirmingDelete(false)}
           onConfirm={() => {
             setConfirmingDelete(false);
+            // Drop the queued save and the unmount flush first. Either one
+            // landing after the delete would fail on a missing document and
+            // surface as a bogus "no longer exists" error.
+            abandoned.current = true;
+            if (pendingSave.current !== null) {
+              window.clearTimeout(pendingSave.current);
+              pendingSave.current = null;
+            }
             void remove({ gridId: doc._id })
               .then(onDeleted)
-              .catch((err: unknown) =>
-                showToast(err instanceof Error ? err.message : "Could not delete", true),
-              );
+              .catch((err: unknown) => {
+                abandoned.current = false;
+                showToast(err instanceof Error ? err.message : "Could not delete", true);
+              });
           }}
         />
       ) : null}

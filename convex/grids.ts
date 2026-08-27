@@ -1,5 +1,5 @@
 import { v } from "convex/values";
-import { mutation, query } from "./_generated/server";
+import { internalMutation, mutation, query } from "./_generated/server";
 import { requireUser } from "./lib/auth";
 import { personFromUser } from "./lib/people";
 import { GRID_SIZE, gridCell } from "./schema";
@@ -10,6 +10,7 @@ const MAX_TITLE = 80;
 const MAX_CAPTION = 80;
 const MAX_URL = 2048;
 const MAX_GRIDS_PER_USER = 60;
+const MAX_UPLOAD_BYTES = 8 * 1024 * 1024;
 
 type Cell = Doc<"grids">["cells"][number];
 
@@ -41,6 +42,25 @@ function cleanCells(cells: Cell[]): Cell[] {
       ...(cell.imageId ? { imageId: cell.imageId } : url ? { imageUrl: url } : {}),
     };
   });
+}
+
+/**
+ * The URL `generateUploadUrl` hands out enforces nothing about what gets
+ * POSTed to it, and the picker's own type and size checks are client-side, so
+ * trivially skipped. Re-check here, where a file first becomes part of a grid.
+ */
+async function assertUsableUploads(ctx: MutationCtx, cells: Cell[]) {
+  for (const cell of cells) {
+    if (!cell?.imageId) continue;
+    const meta = await ctx.db.system.get(cell.imageId);
+    if (!meta) throw new Error("That upload is no longer available");
+    if (!meta.contentType?.startsWith("image/")) {
+      throw new Error("Tiles have to be images");
+    }
+    if (meta.size > MAX_UPLOAD_BYTES) {
+      throw new Error("Images have to be under 8 MB");
+    }
+  }
 }
 
 async function resolveGrid(ctx: QueryCtx, row: Doc<"grids">) {
@@ -173,10 +193,12 @@ export const create = mutation({
     if (existing.length >= MAX_GRIDS_PER_USER) {
       throw new Error(`You can keep up to ${MAX_GRIDS_PER_USER} 3x3s`);
     }
+    const nextCells = cells ? cleanCells(cells) : [...EMPTY];
+    await assertUsableUploads(ctx, nextCells);
     return await ctx.db.insert("grids", {
       userId,
       title: cleanTitle(title ?? ""),
-      cells: cells ? cleanCells(cells) : [...EMPTY],
+      cells: nextCells,
       updatedAt: Date.now(),
     });
   },
@@ -191,6 +213,7 @@ export const update = mutation({
   handler: async (ctx, { gridId, title, cells }) => {
     const { row } = await ownedGrid(ctx, gridId);
     const nextCells = cells ? cleanCells(cells) : row.cells;
+    if (cells) await assertUsableUploads(ctx, nextCells);
     await ctx.db.patch(gridId, {
       ...(title === undefined ? {} : { title: cleanTitle(title) }),
       ...(cells ? { cells: nextCells } : {}),
@@ -211,6 +234,45 @@ export const remove = mutation({
     const { row } = await ownedGrid(ctx, gridId);
     await ctx.db.delete(gridId);
     await pruneImages(ctx, imageIdsOf(row.cells), gridId);
+  },
+});
+
+// A file only becomes reachable once a grid points at it, and the server never
+// learns the storage id until the client sends it back — so an upload that is
+// never referenced (a failed save, a closed tab, a client that just skips the
+// mutation) leaves an object nothing can reach. Sweep those instead of trying
+// to track pending uploads, which a client can simply decline to report.
+const ORPHAN_GRACE_MS = 24 * 60 * 60 * 1000;
+
+export const sweepOrphanedUploads = internalMutation({
+  args: {},
+  handler: async (ctx) => {
+    // Gather every reference BEFORE deleting anything: if a read throws or a
+    // table is missed, the mutation aborts having deleted nothing.
+    const referenced = new Set<string>();
+    for (const row of await ctx.db.query("grids").collect()) {
+      for (const cell of row.cells) {
+        if (cell?.imageId) referenced.add(cell.imageId);
+      }
+    }
+    // The seeded character art lives in the same bucket. Missing these would
+    // wipe the catalog's images, so they are collected the same way.
+    for (const row of await ctx.db.query("characters").collect()) {
+      if (row.imageId) referenced.add(row.imageId);
+    }
+
+    const cutoff = Date.now() - ORPHAN_GRACE_MS;
+    const files = await ctx.db.system.query("_storage").collect();
+    let deleted = 0;
+    for (const file of files) {
+      // The grace period keeps a file that was uploaded moments ago and has
+      // not been saved into a grid yet.
+      if (file._creationTime >= cutoff) continue;
+      if (referenced.has(file._id)) continue;
+      await ctx.storage.delete(file._id);
+      deleted += 1;
+    }
+    return { scanned: files.length, referenced: referenced.size, deleted };
   },
 });
 

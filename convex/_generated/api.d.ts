@@ -10,6 +10,7 @@
 
 import type * as auth from "../auth.js";
 import type * as characters from "../characters.js";
+import type * as crons from "../crons.js";
 import type * as grids from "../grids.js";
 import type * as http from "../http.js";
 import type * as layouts from "../layouts.js";
@@ -27,6 +28,7 @@ import type {
 declare const fullApi: ApiFromModules<{
   auth: typeof auth;
   characters: typeof characters;
+  crons: typeof crons;
   grids: typeof grids;
   http: typeof http;
   layouts: typeof layouts;

@@ -115,7 +115,15 @@ export function TilePicker({
   }, [mode]);
 
   useEffect(() => {
-    if (mode === "own") return;
+    // Leaving a search mid-flight aborts the request, and the abort skips the
+    // `finally` below — so clear the spinner here or the upload panel opens
+    // with its file input disabled and a stuck "Uploading…".
+    if (mode === "own") {
+      setResults([]);
+      setError(null);
+      setBusy(false);
+      return;
+    }
     const term = q.trim();
     if (term.length < 2) {
       setResults([]);
