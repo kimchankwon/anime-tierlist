@@ -34,6 +34,18 @@ export const UNTITLED = "Untitled 3x3";
 export const displayTitle = (title: string) => title.trim() || UNTITLED;
 export const hasTitle = (title: string) => title.trim().length > 0;
 
+export type SaveState = "idle" | "saving" | "saved" | "unsaved" | "needs-title";
+
+/** Badge next to the title. A blank name wins over idle/saved so a row that
+ *  already has "" from before this guard still reads Needs a title. */
+export function editorSaveBadge(saveState: SaveState, title: string, filled: number) {
+  if (saveState === "saving") return { text: "Saving…", kind: "saving" as const };
+  if (!hasTitle(title)) return { text: "Needs a title", kind: "needs-title" as const };
+  if (saveState === "saved") return { text: "Saved", kind: "saved" as const };
+  if (saveState === "unsaved") return { text: "Not saved", kind: "unsaved" as const };
+  return { text: `${filled}/9`, kind: "idle" as const };
+}
+
 export function gridDeleteBody(title: string, filled: number) {
   const n = filled === 1 ? "tile" : "tiles";
   return `“${displayTitle(title)}” and its ${filled} ${n} go away for good. This cannot be undone.`;

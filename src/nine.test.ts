@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   displayTitle,
   gridDeleteBody,
+  editorSaveBadge,
   hasTitle,
   tileRemoveBody,
   toWire,
@@ -26,6 +27,30 @@ describe("hasTitle", () => {
     expect(hasTitle("   ")).toBe(false);
     expect(hasTitle("My List")).toBe(true);
     expect(hasTitle("Attack on ")).toBe(true);
+  });
+});
+
+describe("editorSaveBadge", () => {
+  it("shows Needs a title for a blank document even when saveState is idle", () => {
+    expect(editorSaveBadge("idle", "", 3)).toEqual({
+      text: "Needs a title",
+      kind: "needs-title",
+    });
+    expect(editorSaveBadge("saved", "   ", 0)).toEqual({
+      text: "Needs a title",
+      kind: "needs-title",
+    });
+  });
+
+  it("keeps Saving while a write is in flight, even if the box was just cleared", () => {
+    expect(editorSaveBadge("saving", "", 3).text).toBe("Saving…");
+  });
+
+  it("falls back to n/9 for a named idle grid", () => {
+    expect(editorSaveBadge("idle", "Best Girl", 4)).toEqual({
+      text: "4/9",
+      kind: "idle",
+    });
   });
 });
 

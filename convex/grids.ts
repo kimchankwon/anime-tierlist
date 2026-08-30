@@ -234,7 +234,7 @@ export const create = mutation({
     await assertUsableUploads(ctx, nextCells);
     return await ctx.db.insert("grids", {
       userId,
-      title: requireTitle(title?.trim() || UNTITLED),
+      title: title === undefined ? UNTITLED : requireTitle(title),
       cells: nextCells,
       updatedAt: Date.now(),
     });

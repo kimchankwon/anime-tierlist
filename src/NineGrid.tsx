@@ -14,6 +14,7 @@ import { ConfirmDialog } from "./ConfirmDialog";
 import { TilePicker } from "./TilePicker";
 import {
   displayTitle,
+  editorSaveBadge,
   gridDeleteBody,
   hasTitle,
   sameCells,
@@ -22,6 +23,7 @@ import {
   UNTITLED,
   type NineCell,
   type NineDoc,
+  type SaveState,
 } from "./nine";
 
 export function NineGrids() {
@@ -206,9 +208,9 @@ function GridEditor({ doc, onDeleted }: { doc: NineDoc; onDeleted: () => void })
   const [pickFor, setPickFor] = useState<number | null>(null);
   const [confirmingDelete, setConfirmingDelete] = useState(false);
   const [confirmingClear, setConfirmingClear] = useState<number | null>(null);
-  const [saveState, setSaveState] = useState<
-    "idle" | "saving" | "saved" | "unsaved" | "needs-title"
-  >("idle");
+  const [saveState, setSaveState] = useState<SaveState>(
+    hasTitle(doc.title) ? "idle" : "needs-title",
+  );
   const [toast, setToast] = useState<{ msg: string; err?: boolean } | null>(null);
   // Same guard the tier board uses: a save ack that lands after a newer edit
   // must not let the stale server copy overwrite what is on screen.
@@ -338,6 +340,7 @@ function GridEditor({ doc, onDeleted }: { doc: NineDoc; onDeleted: () => void })
     commit((prev) => prev.map((c, n) => (n === index ? cell : c)));
 
   const filled = cells.filter(Boolean).length;
+  const badge = editorSaveBadge(saveState, title, filled);
 
   return (
     <>
@@ -352,17 +355,7 @@ function GridEditor({ doc, onDeleted }: { doc: NineDoc; onDeleted: () => void })
           aria-invalid={!hasTitle(title)}
           onChange={(e) => editTitle(e.target.value)}
         />
-        <span className={`save-state ${saveState}`}>
-          {saveState === "saving"
-            ? "Saving…"
-            : saveState === "saved"
-              ? "Saved"
-              : saveState === "unsaved"
-                ? "Not saved"
-                : saveState === "needs-title"
-                  ? "Needs a title"
-                  : `${filled}/9`}
-        </span>
+        <span className={`save-state ${badge.kind}`}>{badge.text}</span>
         <button type="button" className="danger" onClick={() => setConfirmingDelete(true)}>
           Delete
         </button>
