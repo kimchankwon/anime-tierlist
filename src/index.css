@@ -233,7 +233,8 @@ body.dragging * { cursor: grabbing !important; user-select: none; }
 .save-state { color: #7c7f89; font-size: 12px; }
 .save-state.saving { color: #e8a33d; }
 .save-state.saved { color: #6dce8a; }
-.save-state.unsaved { color: #e08573; }
+.save-state.unsaved,
+.save-state.needs-title { color: #e08573; }
 .picker {
   display: inline-flex;
   align-items: center;
@@ -634,7 +635,9 @@ button.danger:hover { background: #c74a37; }
   padding: 12px 14px;
   min-height: 120px;
   align-content: start;
+  transition: opacity 120ms ease;
 }
+.picker-results.stale { opacity: .62; }
 .picker-hit {
   display: flex;
   flex-direction: column;

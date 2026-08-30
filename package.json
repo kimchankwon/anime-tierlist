@@ -8,6 +8,8 @@
     "dev:frontend": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "seed": "node scripts/seed-images.mjs",
     "extract": "node scripts/extract-characters.mjs"
   },
@@ -19,12 +21,16 @@
     "react-dom": "^19.1.1"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
     "@types/node": "^24.3.0",
     "@types/react": "^19.1.12",
     "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react": "^5.0.2",
     "jose": "^6.0.12",
+    "jsdom": "^30.0.1",
     "typescript": "^5.9.2",
-    "vite": "^7.1.5"
+    "vite": "^7.1.5",
+    "vitest": "^4.1.11"
   }
 }

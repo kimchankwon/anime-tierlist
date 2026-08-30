@@ -22,9 +22,17 @@ export const UNTITLED = "Untitled 3x3";
 // Trimming or collapsing whitespace here would come straight back through the
 // editor's sync effect and rewrite the field mid-keystroke: a trailing space
 // in "Attack on " vanished, and the next keystrokes produced "Attack onTitan".
-// The empty-title fallback is a display concern, applied where it is shown.
+// A blank title is rejected rather than rewritten to "Untitled 3x3", for the
+// same reason: substituting it would land in the box the next time the query
+// caught up.
 function capText(text: string, max: number) {
   return text.slice(0, max);
+}
+
+function requireTitle(title: string) {
+  const next = capText(title, MAX_TITLE);
+  if (!next.trim()) throw new Error("Give this 3x3 a title");
+  return next;
 }
 
 /** Server-side trim of a whole grid: fixed length, capped text, one image source. */
@@ -226,7 +234,7 @@ export const create = mutation({
     await assertUsableUploads(ctx, nextCells);
     return await ctx.db.insert("grids", {
       userId,
-      title: capText(title?.trim() || UNTITLED, MAX_TITLE),
+      title: requireTitle(title?.trim() || UNTITLED),
       cells: nextCells,
       updatedAt: Date.now(),
     });
@@ -244,7 +252,7 @@ export const update = mutation({
     const nextCells = cells ? cleanCells(cells) : row.cells;
     if (cells) await assertUsableUploads(ctx, nextCells);
     await ctx.db.patch(gridId, {
-      ...(title === undefined ? {} : { title: capText(title, MAX_TITLE) }),
+      ...(title === undefined ? {} : { title: requireTitle(title) }),
       ...(cells ? { cells: nextCells } : {}),
       updatedAt: Date.now(),
     });
