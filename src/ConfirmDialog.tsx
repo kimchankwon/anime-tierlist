@@ -1,4 +1,5 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useId, useRef } from "react";
+import { createPortal } from "react-dom";
 
 export function ConfirmDialog({
   title,
@@ -13,6 +14,8 @@ export function ConfirmDialog({
   onConfirm: () => void;
   onCancel: () => void;
 }) {
+  const titleId = useId();
+  const bodyId = useId();
   const cancelRef = useRef<HTMLButtonElement>(null);
   // Kept in a ref so re-renders never re-run the effect and steal focus back.
   const cancelFn = useRef(onCancel);
@@ -27,7 +30,7 @@ export function ConfirmDialog({
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  return (
+  return createPortal(
     <div
       className="modal-backdrop"
       role="presentation"
@@ -39,11 +42,11 @@ export function ConfirmDialog({
         className="modal"
         role="alertdialog"
         aria-modal="true"
-        aria-labelledby="confirm-title"
-        aria-describedby="confirm-body"
+        aria-labelledby={titleId}
+        aria-describedby={bodyId}
       >
-        <h3 id="confirm-title">{title}</h3>
-        <p id="confirm-body">{body}</p>
+        <h3 id={titleId}>{title}</h3>
+        <p id={bodyId}>{body}</p>
         <div className="modal-actions">
           <button type="button" ref={cancelRef} onClick={onCancel}>
             Cancel
@@ -53,6 +56,7 @@ export function ConfirmDialog({
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

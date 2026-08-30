@@ -1,11 +1,21 @@
 import { useMutation } from "convex/react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { api } from "../convex/_generated/api";
 import type { Id } from "../convex/_generated/dataModel";
 import type { NineCell } from "./nine";
+import {
+  DEBOUNCE_MS,
+  isAbortError,
+  needsNetwork,
+  pickerStatus,
+  searchCache,
+  selectVisible,
+  type Fetched,
+  type PickerMode,
+  type Suggestion,
+} from "./pickerSearch";
 
 const ANILIST = "https://graphql.anilist.co";
-const DEBOUNCE_MS = 320;
 const MAX_UPLOAD_BYTES = 8 * 1024 * 1024;
 
 const ANIME_QUERY = `query ($q: String!) {
@@ -29,15 +39,6 @@ const CHARACTER_QUERY = `query ($q: String!) {
     }
   }
 }`;
-
-type Mode = "anime" | "character" | "own";
-
-type Suggestion = {
-  id: string;
-  caption: string;
-  subtitle: string | null;
-  imageUrl: string;
-};
 
 type AniListTitle = { romaji?: string | null; english?: string | null };
 
@@ -91,16 +92,18 @@ export function TilePicker({
   onClose: () => void;
 }) {
   const generateUploadUrl = useMutation(api.grids.generateUploadUrl);
-  const [mode, setMode] = useState<Mode>("anime");
+  const [mode, setMode] = useState<PickerMode>("anime");
   const [q, setQ] = useState("");
-  const [results, setResults] = useState<Suggestion[]>([]);
-  const [busy, setBusy] = useState(false);
+  const [fetched, setFetched] = useState<Fetched | null>(null);
+  const [searching, setSearching] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [link, setLink] = useState("");
   const [linkCaption, setLinkCaption] = useState("");
   const searchRef = useRef<HTMLInputElement>(null);
   const closeFn = useRef(onClose);
   closeFn.current = onClose;
+  const term = q.trim();
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -114,46 +117,60 @@ export function TilePicker({
     if (mode !== "own") searchRef.current?.focus();
   }, [mode]);
 
+  // AniList 429s if we fire on every keystroke, so the network call waits
+  // until typing pauses. The grid itself does not wait: a cache hit renders
+  // immediately, otherwise the last result stays up (filtered to the new
+  // query when anything still matches) so the picker never blanks out
+  // between letters. Searching and uploading are separate flags because
+  // aborting a search used to leave the upload panel on a frozen
+  // "Uploading…" with the file input disabled.
+  const view = useMemo(
+    () => selectVisible(mode, term, fetched, searchCache),
+    [mode, term, fetched],
+  );
+  const { rows: visible, confirmed, stale } = view;
+  const status = pickerStatus({
+    mode,
+    term,
+    searching,
+    uploading,
+    error,
+    visibleCount: visible.length,
+    confirmed,
+    stale,
+  });
+
   useEffect(() => {
-    // Leaving a search mid-flight aborts the request, and the abort skips the
-    // `finally` below — so clear the spinner here or the upload panel opens
-    // with its file input disabled and a stuck "Uploading…".
-    if (mode === "own") {
-      setResults([]);
+    if (!needsNetwork(mode, term, searchCache)) {
+      setSearching(false);
       setError(null);
-      setBusy(false);
       return;
     }
-    const term = q.trim();
-    if (term.length < 2) {
-      setResults([]);
-      setError(null);
-      setBusy(false);
-      return;
-    }
+    setSearching(false);
+    setError(null);
     const controller = new AbortController();
-    setBusy(true);
     const handle = window.setTimeout(() => {
+      setSearching(true);
       const run = mode === "anime" ? searchAnime : searchCharacters;
       run(term, controller.signal)
         .then((rows) => {
-          setResults(rows);
-          setError(rows.length === 0 ? "Nothing found" : null);
+          if (controller.signal.aborted) return;
+          searchCache.set(mode, term, rows);
+          setFetched({ mode, term, rows });
         })
         .catch((err: unknown) => {
-          if (controller.signal.aborted) return;
-          setResults([]);
+          if (isAbortError(err, controller.signal)) return;
           setError(err instanceof Error ? err.message : "Search failed");
         })
         .finally(() => {
-          if (!controller.signal.aborted) setBusy(false);
+          if (!controller.signal.aborted) setSearching(false);
         });
     }, DEBOUNCE_MS);
     return () => {
       controller.abort();
       window.clearTimeout(handle);
     };
-  }, [mode, q]);
+  }, [mode, term]);
 
   async function uploadFile(file: File) {
     if (!file.type.startsWith("image/")) {
@@ -164,7 +181,7 @@ export function TilePicker({
       setError("Images have to be under 8 MB");
       return;
     }
-    setBusy(true);
+    setUploading(true);
     setError(null);
     try {
       const url = await generateUploadUrl({});
@@ -186,7 +203,7 @@ export function TilePicker({
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Upload failed");
     } finally {
-      setBusy(false);
+      setUploading(false);
     }
   }
 
@@ -248,7 +265,7 @@ export function TilePicker({
               <input
                 type="file"
                 accept="image/*"
-                disabled={busy}
+                disabled={uploading}
                 onChange={(e) => {
                   const file = e.target.files?.[0];
                   e.target.value = "";
@@ -295,8 +312,11 @@ export function TilePicker({
               value={q}
               onChange={(e) => setQ(e.target.value)}
             />
-            <div className="picker-results">
-              {results.map((row) => (
+            <div
+              className={`picker-results${stale ? " stale" : ""}`}
+              aria-busy={searching}
+            >
+              {visible.map((row) => (
                 <button
                   type="button"
                   key={row.id}
@@ -321,16 +341,7 @@ export function TilePicker({
             </div>
           </>
         )}
-        <div className={`picker-status${error ? " err" : ""}`}>
-          {busy
-            ? mode === "own"
-              ? "Uploading…"
-              : "Searching…"
-            : (error ??
-              (mode === "own"
-                ? "Anything you upload stays in your own 3x3s"
-                : "Art comes from AniList"))}
-        </div>
+        <div className={`picker-status${status.err ? " err" : ""}`}>{status.text}</div>
       </div>
     </div>
   );

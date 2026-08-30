@@ -14,11 +14,16 @@ import { ConfirmDialog } from "./ConfirmDialog";
 import { TilePicker } from "./TilePicker";
 import {
   displayTitle,
+  editorSaveBadge,
+  gridDeleteBody,
+  hasTitle,
   sameCells,
+  tileRemoveBody,
   toWire,
   UNTITLED,
   type NineCell,
   type NineDoc,
+  type SaveState,
 } from "./nine";
 
 export function NineGrids() {
@@ -202,9 +207,10 @@ function GridEditor({ doc, onDeleted }: { doc: NineDoc; onDeleted: () => void })
   const [cells, setCells] = useState<NineCell[]>(doc.cells);
   const [pickFor, setPickFor] = useState<number | null>(null);
   const [confirmingDelete, setConfirmingDelete] = useState(false);
-  const [saveState, setSaveState] = useState<
-    "idle" | "saving" | "saved" | "unsaved"
-  >("idle");
+  const [confirmingClear, setConfirmingClear] = useState<number | null>(null);
+  const [saveState, setSaveState] = useState<SaveState>(
+    hasTitle(doc.title) ? "idle" : "needs-title",
+  );
   const [toast, setToast] = useState<{ msg: string; err?: boolean } | null>(null);
   // Same guard the tier board uses: a save ack that lands after a newer edit
   // must not let the stale server copy overwrite what is on screen.
@@ -224,6 +230,12 @@ function GridEditor({ doc, onDeleted }: { doc: NineDoc; onDeleted: () => void })
 
   useEffect(() => {
     if (!dirty() || abandoned.current) return;
+    // An empty title is not written. Cell edits stay local until there is a
+    // name again, so a pause after select-all + delete does not persist "".
+    if (!hasTitle(title)) {
+      setSaveState("needs-title");
+      return;
+    }
     setSaveState("saving");
     const sending = rev.current;
     const handle = window.setTimeout(() => {
@@ -256,10 +268,12 @@ function GridEditor({ doc, onDeleted }: { doc: NineDoc; onDeleted: () => void })
   useEffect(() => {
     return () => {
       if (rev.current === savedRev.current || abandoned.current) return;
+      const pending = latest.current;
       void update({
         gridId: doc._id,
-        title: latest.current.title,
-        cells: toWire(latest.current.cells),
+        cells: toWire(pending.cells),
+        // Leave the last saved name in place rather than writing "".
+        ...(hasTitle(pending.title) ? { title: pending.title } : {}),
       }).catch(() => {
         // Another tab may have deleted the grid meanwhile. Nothing left to
         // save, and no UI left to report it in.
@@ -326,6 +340,7 @@ function GridEditor({ doc, onDeleted }: { doc: NineDoc; onDeleted: () => void })
     commit((prev) => prev.map((c, n) => (n === index ? cell : c)));
 
   const filled = cells.filter(Boolean).length;
+  const badge = editorSaveBadge(saveState, title, filled);
 
   return (
     <>
@@ -337,17 +352,10 @@ function GridEditor({ doc, onDeleted }: { doc: NineDoc; onDeleted: () => void })
           placeholder={UNTITLED}
           spellCheck={false}
           aria-label="3x3 title"
+          aria-invalid={!hasTitle(title)}
           onChange={(e) => editTitle(e.target.value)}
         />
-        <span className={`save-state ${saveState}`}>
-          {saveState === "saving"
-            ? "Saving…"
-            : saveState === "saved"
-              ? "Saved"
-              : saveState === "unsaved"
-                ? "Not saved"
-                : `${filled}/9`}
-        </span>
+        <span className={`save-state ${badge.kind}`}>{badge.text}</span>
         <button type="button" className="danger" onClick={() => setConfirmingDelete(true)}>
           Delete
         </button>
@@ -357,7 +365,7 @@ function GridEditor({ doc, onDeleted }: { doc: NineDoc; onDeleted: () => void })
         editable
         onMove={moveCell}
         onAdd={(i) => setPickFor(i)}
-        onClear={(i) => setCell(i, null)}
+        onClear={(i) => setConfirmingClear(i)}
         onCaption={(i, caption) =>
           commit((prev) =>
             prev.map((c, n) => (n === i && c ? { ...c, caption } : c)),
@@ -366,7 +374,7 @@ function GridEditor({ doc, onDeleted }: { doc: NineDoc; onDeleted: () => void })
       />
       <p className="nine-hint">
         Drag a tile onto another slot to swap them · on a phone, hold a tile to
-        pick it up · × clears a slot
+        pick it up · × removes a tile
       </p>
       {pickFor !== null ? (
         <TilePicker
@@ -380,7 +388,7 @@ function GridEditor({ doc, onDeleted }: { doc: NineDoc; onDeleted: () => void })
       {confirmingDelete ? (
         <ConfirmDialog
           title="Delete this 3x3?"
-          body={`“${title}” and its ${filled} ${filled === 1 ? "tile" : "tiles"} go away for good.`}
+          body={gridDeleteBody(title, filled)}
           confirmLabel="Delete"
           onCancel={() => setConfirmingDelete(false)}
           onConfirm={() => {
@@ -399,6 +407,18 @@ function GridEditor({ doc, onDeleted }: { doc: NineDoc; onDeleted: () => void })
                 abandoned.current = false;
                 showToast(err instanceof Error ? err.message : "Could not delete", true);
               });
+          }}
+        />
+      ) : confirmingClear !== null && cells[confirmingClear] ? (
+        <ConfirmDialog
+          title="Remove this tile?"
+          body={tileRemoveBody(cells[confirmingClear].caption)}
+          confirmLabel="Remove"
+          onCancel={() => setConfirmingClear(null)}
+          onConfirm={() => {
+            const index = confirmingClear;
+            setConfirmingClear(null);
+            setCell(index, null);
           }}
         />
       ) : null}
